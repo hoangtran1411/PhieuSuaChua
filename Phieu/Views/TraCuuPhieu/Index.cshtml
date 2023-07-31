@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Tra Cuu Phieu";
+    //Layout = "_Layout";
+}
+@using PhieuSuaChua.Controllers;
+@model IEnumerable<PhieuSuaChua.Domain_Model.ModelTraCuuPhieu>
+<div class="card-body">
+
+    <!-- Table with stripped rows -->
+
+    <div>
+        <table class="datatable">
+            <thead>
+                <tr>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter ">Số phiếu</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Ngày tạo phiếu</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Họ & Tên</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Đơn vị</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Máy tính</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Thiết bị khác</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Trạng thái phiếu</a>
+                    </th>
+                    <th data-sortable="true">
+                        <a href="#" class="datatable-sorter">Chức năng</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Ngaytaophieu</td>
+                            <td>@item.Hoten</td>
+                            <td>@item.Donvi</td>
+                            <td>@item.Maytinh</td>
+                            <td>@item.Thietbikhac</td>
+                            <td>@item.Trangthaiphieu</td>
+                            <td>#</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- End Table with stripped rows -->
