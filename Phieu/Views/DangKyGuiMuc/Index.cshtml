@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Dang Ky Gui Muc";
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Đăng ký gửi mực</li>
+
+            </ol>
+        </nav>
+
+        <section class="section">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Vertical Form -->
+                    <form class="row g-4">
+                        <div class="col-3">
+                            <label for="inputNanme4" class="form-label">MÃ NHÂN VIÊN</label>
+                            <input type="text" class="form-control" id="inputNanme4" placeholder="MÃ NHÂN VIÊN">
+                        </div>
+                        <div class="col-6">
+                            <label for="inputEmail4" class="form-label">HỌ VÀ TÊN</label>
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="HỌ VÀ TÊN">
+                        </div>
+                        <div class="col-3">
+                            <label for="inputPassword4" class="form-label">ĐƠN VỊ</label>
+                            <input type="text" class="form-control" id="inputPassword4" placeholder="ĐƠN VỊ">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label">Chọn máy in:</label>
+                            <select id="cbolistprint" class="form-select" se="">
+                                <option selected="" value="">=========</option>
+                                <option value="1">Canon 3300 (49A)</option>
+                                <option value="2">Canon 251DW (05A)</option>
+                                <option value="3">Canon 6230 (35A)</option>
+                                <option value="4">Canon 214 (26A)</option>
+                                <option value="5">Canon 223 (76A)</option>
+                                <option value="6">Canon 2900 (12A)</option>
+                                <option value="7">HP 402</option>
+                                <option value="8">HP 706</option>
+                                <option value="9">Ruy băng máy in kim 2190</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="inputAddress" class="form-label">TÊN HỘP MỰC</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="TÊN HỘP MỰC...">
+                        </div>
+                        <div class="col-4">
+                            <label for="inputAddress" class="form-label">MÔ TẢ TÌNH TRẠNG</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="HẾT MỰC,...">
+                        </div>
+
+
+
+
+                    </form><!-- Vertical Form -->
+                    <p>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" onclick="Success()">ĐĂNG KÝ</button>
+                            <button type="reset" class="btn btn-danger">CANCEL</button>
+                        </div>
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/modelscript/modelscript.js"></script>
+}
