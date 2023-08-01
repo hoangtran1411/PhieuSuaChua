@@ -35,7 +35,6 @@ namespace PhieuSuaChua.Controllers
             //    LoaiSuaChua = model.LoaiSuaChua,
             //    Sdt = model.Sdt,
                 
-            //};
             //db.ChiTietPhieus.Add(newmodel);
            int number = db.SaveChanges();
             if (number > 0)

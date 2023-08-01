@@ -7,6 +7,8 @@ namespace PhieuSuaChua.Controllers
     {
         private PhieusuachuaContext db;
         public DangKyGuiMucController(PhieusuachuaContext context)
+        private PhieuSuaChuaContext db;
+        public DangKyGuiMucController(PhieuSuaChuaContext context)
         {
             this.db = context;
         }
