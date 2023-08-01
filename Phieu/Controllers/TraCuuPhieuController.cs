@@ -46,6 +46,8 @@ namespace PhieuSuaChua.Controllers
                                  Trangthaiphieu = Phieusua.TrangThaiPhieu
                              }).ToList();
             //test
+                             select new );
+
             return View(listPhieu);
         }
     }

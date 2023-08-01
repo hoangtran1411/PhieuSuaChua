@@ -22,20 +22,7 @@ namespace PhieuSuaChua.Controllers
         [HttpPost]
         public async Task<IActionResult> DangKySuaChua(Chitietsua model)
         {
-            //Chitietsua newmodel = new Chitietsua()
-            //{
-            //    ma = model.MaNv,
-            //    TenMayTinh = model.TenMayTinh,
-            //    UserName = model.UserName,
-            //    Passwords = model.Passwords,
-            //    ThietBiKhac = model.ThietBiKhac,
-            //    TinhTrang = model.TinhTrang,
-            //    GhiChu = model.GhiChu,
-            //    TrangThaiPhieu = model.TrangThaiPhieu,
-            //    LoaiSuaChua = model.LoaiSuaChua,
-            //    Sdt = model.Sdt,
                 
-            //};
             //db.ChiTietPhieus.Add(newmodel);
            int number = db.SaveChanges();
             if (number > 0)

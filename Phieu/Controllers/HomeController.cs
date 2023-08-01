@@ -14,6 +14,8 @@ namespace WebBlog.Controllers
 
         private PhieusuachuaContext context ;
         public HomeController(ILogger<HomeController> logger, PhieusuachuaContext context)
+        private  PhieuSuaChuaContext context ;
+        public HomeController(ILogger<HomeController> logger, PhieuSuaChuaContext  context)
         {
             _logger = logger;
             this.context = context;
