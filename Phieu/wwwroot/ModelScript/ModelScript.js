@@ -32,23 +32,27 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
     var ghichu = document.getElementById('Ghichu').value;
     var trangThaiPhieu = "Chờ tiếp nhận";
     var loaiSuaChua = "Chưa xác định";
+    if (manv != "") {
         Swal.fire(
-            'Số phiếu là:' ,
+            'Số phiếu là:',
             'Chúc mừng bạn đã đăng ký thành công')
-       
-    $.ajax({
-        type: 'POST',
-        url: '/DangKySuaChua/DangKySuaChua',
-        //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        datatype: Text,
-        data: { manv, sdt, tenmaytinh, username, passwords, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
-        success: function (response) {
-            window.location.reload()
-        },
-        //{ manv: MaNV, hoten: Hoten, donvi: Donvi, chucdanh: Chucdanh, sdt: Sdt, Tenmaytinh: Tenmaytinh, Username: Username, Password: Password, Thietbikhac: Thietbikhac, Tinhtrang: Tinhtrang, Ghichu: Ghichu }
-    }
 
-    )
+        $.ajax({
+            type: 'POST',
+            url: '/DangKySuaChua/DangKySuaChua',
+            //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            datatype: Text,
+            data: { manv, sdt, tenmaytinh, username, passwords, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+            success: function (response) {
+                window.location.reload()
+            },
+        }
+
+        )
+    }
+    Swal.fire(
+        'Bạn chưa nhập mã nhân viên',
+        'Xin nhập đủ thông tin')
    
     }
 
