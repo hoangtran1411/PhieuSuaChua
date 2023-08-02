@@ -44,7 +44,9 @@ namespace PhieuSuaChua.Controllers
                                  Maytinh = Chitietsua.TenPc,
                                  Thietbikhac = Chitietsua.ThietBiKhac,
                                  Trangthaiphieu = Phieusua.TrangThaiPhieu
-                             });
+                             }).ToList();
+            //test
+                            
 
             return View(listPhieu);
         }

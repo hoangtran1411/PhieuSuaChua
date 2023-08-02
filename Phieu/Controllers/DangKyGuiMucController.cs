@@ -5,10 +5,8 @@ namespace PhieuSuaChua.Controllers
 {
     public class DangKyGuiMucController : Controller
     {
-        private PhieusuachuaContext db;
-        public DangKyGuiMucController(PhieusuachuaContext context)
-        private PhieuSuaChuaContext db;
-        public DangKyGuiMucController(PhieuSuaChuaContext context)
+      
+      
         private PhieusuachuaContext db;
         public DangKyGuiMucController(PhieusuachuaContext context)
         {

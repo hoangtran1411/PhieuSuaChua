@@ -13,6 +13,8 @@ namespace WebBlog.Controllers
 
 
         private PhieusuachuaContext context ;
+      
+      
         public HomeController(ILogger<HomeController> logger, PhieusuachuaContext context)
         {
             _logger = logger;
