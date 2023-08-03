@@ -54,6 +54,10 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
         'Bạn chưa nhập mã nhân viên',
         'Xin nhập đủ thông tin')
    
-    }
+}
+function cancel() {
+
+}
+
 
 

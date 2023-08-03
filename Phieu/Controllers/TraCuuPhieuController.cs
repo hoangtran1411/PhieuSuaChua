@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Phieu.Models;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
@@ -33,7 +34,6 @@ namespace PhieuSuaChua.Controllers
                              }).ToList();
             //test
                             
-
             return View(listPhieu);
         }
     }
