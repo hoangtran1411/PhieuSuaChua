@@ -22,26 +22,46 @@ namespace PhieuSuaChua.Controllers
        
         [HttpPost]
         public IActionResult DangKySuaChua(ModelDangKySua model)
-        { 
-            Phieusua sua = new Phieusua();
-            sua.MaNv = model.MaNv;
-            sua.TrangThaiPhieu = model.TrangThaiPhieu;
+        {
+            Phieusua sua = new()
+            {
+                MaNv = model.MaNv,
+                TrangThaiPhieu = model.TrangThaiPhieu
+            };
             db.Phieusuas.Add(sua);
             db.SaveChanges();
 
-            Chitietsua ct = new Chitietsua();
-            ct.IdPhieu = Convert.ToInt32(sua.IdPhieu);
-            ct.TenPc = model.TenPC;
-            ct.AccountNames = model.User;
-            ct.AccountPass = model.Pass;
-            ct.ThietBiKhac = model.Thietbikhac;
-            ct.TinhTrang = model.Tinhtrang;
-            ct.Sdt = model.Sdt;
-            ct.LoaiSuaChua = model.LoaiSuaChua;
+            Chitietsua ct = new()
+            {
+                IdPhieu = Convert.ToInt32(sua.IdPhieu),
+                TenPc = model.TenPC,
+                AccountNames = model.User,
+                AccountPass = model.Pass,
+                ThietBiKhac = model.Thietbikhac,
+                TinhTrang = model.Tinhtrang,
+                Sdt = model.Sdt,
+                LoaiSuaChua = model.LoaiSuaChua
+            };
             db.Chitietsuas.Add(ct);
             db.SaveChanges();   
           
             return View();
+        }
+        [HttpPost]
+        public JsonResult KiemtraMaNV(Nhanvien nv)
+        { 
+            var kt = (from Nhanvien in db.Nhanviens
+                     select Nhanvien).Where(k=>k.MaNv==nv.MaNv).First();
+            if (kt.MaNv != nv.MaNv)
+            {
+                return Json(false);
+               
+            }
+            else
+            {
+                return Json(true);
+            }
+
         }
     }
 }
