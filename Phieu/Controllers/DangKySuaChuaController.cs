@@ -29,7 +29,7 @@ namespace PhieuSuaChua.Controllers
             db.SaveChanges();
 
             Chitietsua ct = new Chitietsua();
-            sua.IdPhieu = Convert.ToInt32(ct.IdPhieu);
+            ct.IdPhieu = Convert.ToInt32(sua.IdPhieu);
             ct.TenPc = model.TenPC;
             ct.AccountNames = model.User;
             ct.AccountPass = model.Pass;
