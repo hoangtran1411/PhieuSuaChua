@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 using System.Data;
 
@@ -20,27 +21,24 @@ namespace PhieuSuaChua.Controllers
         }
        
         [HttpPost]
-        public async Task<IActionResult> DangKySuaChua(Chitietsua model)
-        {
-            //Chitietsua newmodel = new Chitietsua()
-            //{
-            //    ma = model.MaNv,
-            //    TenMayTinh = model.TenMayTinh,
-            //    UserName = model.UserName,
-            //    Passwords = model.Passwords,
-            //    ThietBiKhac = model.ThietBiKhac,
-            //    TinhTrang = model.TinhTrang,
-            //    GhiChu = model.GhiChu,
-            //    TrangThaiPhieu = model.TrangThaiPhieu,
-            //    LoaiSuaChua = model.LoaiSuaChua,
-            //    Sdt = model.Sdt,
-                
-            //db.ChiTietPhieus.Add(newmodel);
-           int number = db.SaveChanges();
-            if (number > 0)
-            {
-                ViewBag.Title = "Ok";
-            }
+        public IActionResult DangKySuaChua(ModelDangKySua model)
+        { 
+            Phieusua sua = new Phieusua();
+            sua.MaNv = model.MaNv;
+            db.Phieusuas.Add(sua);
+            db.SaveChanges();
+
+            Chitietsua ct = new Chitietsua();
+            sua.IdPhieu = Convert.ToInt32(ct.IdPhieu);
+            ct.TenPc = model.TenPC;
+            ct.AccountNames = model.User;
+            ct.AccountPass = model.Pass;
+            ct.ThietBiKhac = model.Thietbikhac;
+            ct.TinhTrang = model.Tinhtrang;
+            ct.Sdt = model.Sdt;
+            db.Chitietsuas.Add(ct);
+            db.SaveChanges();   
+          
             return View();
         }
     }

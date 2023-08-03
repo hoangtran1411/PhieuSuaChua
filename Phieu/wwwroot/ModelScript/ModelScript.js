@@ -32,7 +32,7 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
     var ghichu = document.getElementById('Ghichu').value;
     var trangThaiPhieu = "Chờ tiếp nhận";
     var loaiSuaChua = "Chưa xác định";
-    if (manv != "") {
+    if (manv != null) {
         Swal.fire(
             'Số phiếu là:',
             'Chúc mừng bạn đã đăng ký thành công')
@@ -56,7 +56,7 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
    
 }
 function cancel() {
-
+   
 }
 
 
