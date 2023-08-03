@@ -50,10 +50,10 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
 
         )
     }
-    Swal.fire(
-        'Bạn chưa nhập mã nhân viên',
-        'Xin nhập đủ thông tin')
-   
+    else {
+        Swal.fire(
+            'Bạn chưa nhập mã nhân viên',
+            'Xin nhập đủ thông tin')}
 }
 function cancel() {
    
