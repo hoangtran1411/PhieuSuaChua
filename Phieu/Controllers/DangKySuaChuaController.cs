@@ -25,6 +25,7 @@ namespace PhieuSuaChua.Controllers
         { 
             Phieusua sua = new Phieusua();
             sua.MaNv = model.MaNv;
+            sua.TrangThaiPhieu = model.TrangThaiPhieu;
             db.Phieusuas.Add(sua);
             db.SaveChanges();
 
@@ -36,6 +37,7 @@ namespace PhieuSuaChua.Controllers
             ct.ThietBiKhac = model.Thietbikhac;
             ct.TinhTrang = model.Tinhtrang;
             ct.Sdt = model.Sdt;
+            ct.LoaiSuaChua = model.LoaiSuaChua;
             db.Chitietsuas.Add(ct);
             db.SaveChanges();   
           

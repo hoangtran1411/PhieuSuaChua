@@ -24,9 +24,9 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
     //console.log(data);
     var manv = document.getElementById('MaNV').value;
     var sdt = document.getElementById('Sdt').value;
-    var tenmaytinh = document.getElementById('Tenmaytinh').value;
-    var username = document.getElementById('Username').value;
-    var passwords = document.getElementById('Password').value;
+    var tenpc = document.getElementById('Tenmaytinh').value;
+    var user = document.getElementById('Username').value;
+    var pass = document.getElementById('Password').value;
     var thietbikhac = document.getElementById('Thietbikhac').value;
     var tinhtrang = document.getElementById('Tinhtrang').value;
     var ghichu = document.getElementById('Ghichu').value;
@@ -42,7 +42,7 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
             url: '/DangKySuaChua/DangKySuaChua',
             //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             datatype: Text,
-            data: { manv, sdt, tenmaytinh, username, passwords, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+            data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
             success: function (response) {
                 window.location.reload()
             },

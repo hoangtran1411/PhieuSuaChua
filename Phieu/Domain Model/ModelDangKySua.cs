@@ -12,6 +12,9 @@ namespace PhieuSuaChua.Domain_Model
         public string?  Pass { get; set; }
         public string? Thietbikhac { get; set; }
         public string? Tinhtrang { get; set; }
+        public string? TrangThaiPhieu { get; set; }
+        public string? LoaiSuaChua { get; set; }
+
         public string? Ghichu { get; set; }
 
         public ModelDangKySua() { }
