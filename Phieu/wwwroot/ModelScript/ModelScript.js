@@ -72,8 +72,11 @@ function KiemTraManv(manv) {
         datatype: JSON,
         data: { manv },
         success: function (response) {
-            if (response) {
-                result = 1;
+            if (response.mesage == "OK") {
+                var item = response.model;
+                document.getElementById("#Hoten").innerHTML = model.hoten;
+
+
             }
             else {
                 result = 0

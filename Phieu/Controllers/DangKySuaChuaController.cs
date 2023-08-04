@@ -50,18 +50,17 @@ namespace PhieuSuaChua.Controllers
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)
         { 
-            var kt = (from Nhanvien in db.Nhanviens
-                     select Nhanvien).Where(k=>k.MaNv==nv.MaNv).First();
-            if (kt.MaNv != nv.MaNv)
+            var listnv = db.Nhanviens.ToList();
+            var check = listnv.Where(k => k.MaNv == nv.MaNv).Count();
+            if (check>1)
             {
-                return Json(false);
-               
+                return Json(new { mesage = "OK", model = listnv });
             }
             else
             {
-                return Json(true);
+                return Json(new {mesage = "NOT"});
             }
-
+           
         }
     }
 }
