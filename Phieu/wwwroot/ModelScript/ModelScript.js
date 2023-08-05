@@ -65,8 +65,9 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
 
    
 
-function CheckNV(MaNV) {
-    var manv = document.getElementById('MaNV').value;
+function CheckNV() {
+    //var manv = document.getElementById('MaNV').value;
+    var manv = $("#MaNV").val();
     $.ajax({
 
         url: '/DangKySuaChua/KiemtraMaNV',
@@ -83,23 +84,24 @@ function CheckNV(MaNV) {
             else {
                 Swal.fire(
                     'Mã nhân viên chưa chính xác',
-                    'Xin nhập lại')
+                    'Xin nhập lại');
+                ResetForm();
             }
         }
     });
 }
 function ResetForm() {
-    $("#MaNV").value("");
-    $("#Hoten").value("");
-    $("#Donvi").value("");
-    $("#Chucdanh").value("");
-    $("#Sdt").value("");
-    $("#Tenmaytinh").value("");
-    $("#Username").value("");
-    $("#Password").value("");
-    $("#Thietbikhac").value("");
-    $("#Tinhtrang").value("");
-    $("#Ghichu").value("");
+    $("#MaNV").val("");
+    $("#Hoten").val("");
+    $("#Donvi").val("");
+    $("#Chucdanh").val("");
+    $("#Sdt").val("");
+    $("#Tenmaytinh").val("");
+    $("#Username").val("");
+    $("#Password").val("");
+    $("#Thietbikhac").val("");
+    $("#Tinhtrang").val("");
+    $("#Ghichu").val("");
 
 }
 

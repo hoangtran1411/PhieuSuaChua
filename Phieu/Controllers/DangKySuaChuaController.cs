@@ -52,8 +52,6 @@ namespace PhieuSuaChua.Controllers
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)
         {
-            // anh đưa lên mỗi mã nhân viên mà nhận vào nguyên classs nhân viên dư á
-
             var result = db.Nhanviens.FirstOrDefault(x=>x.MaNv == nv.MaNv);
             string message;
             if( result != null)
