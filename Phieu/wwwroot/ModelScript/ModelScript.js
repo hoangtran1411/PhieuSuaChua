@@ -19,11 +19,13 @@
         })
     }
 
-function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghichu) {
+function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtrang, Ghichu) {
     var i = 0;
     var manv = document.getElementById('MaNV').value;
-    
-    if (KiemTraManv(manv) > 0) {
+
+    if (manv != null) {
+
+
         var sdt = document.getElementById('Sdt').value;
         var tenpc = document.getElementById('Tenmaytinh').value;
         var user = document.getElementById('Username').value;
@@ -33,57 +35,58 @@ function Success(MaNV,Sdt,Tenmaytinh,Username,Password,Thietbikhac,Tinhtrang,Ghi
         var ghichu = document.getElementById('Ghichu').value;
         var trangThaiPhieu = "Chờ tiếp nhận";
         var loaiSuaChua = "Chưa xác định";
-        if (manv != null) {
-            Swal.fire(
-                'Số phiếu là:',
-                'Chúc mừng bạn đã đăng ký thành công')
 
-            $.ajax({
-                type: 'POST',
-                url: '/DangKySuaChua/DangKySuaChua',
-                //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                datatype: Text,
-                data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
-                success: function (response) {
-                    //window.location.reload()
-                },
+        $.ajax({
+            type: 'POST',
+            url: '/DangKySuaChua/DangKySuaChua',
+            //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            datatype: Text,
+            data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+            success: function (response) {
+                window.location.reload();
+                Swal.fire(
+                    'Chúc mừng đăng ký thành công',
+                    'Số phiếu là:');
             }
+        });
 
-            )
-        }
-        else {
-            Swal.fire(
-                'Bạn chưa nhập mã nhân viên',
-                'Xin nhập đủ thông tin')
-        }
+
     }
+
+
+
     else {
         Swal.fire(
-            'Mã nhân viên chưa chính xác',
+            'Mời nhập mã nhân viên',
             'Xin nhập lại')
     }
-   
+
 }
-function KiemTraManv(manv) {
-    let result = 0;
+
+   
+
+function CheckNV(MaNV) {
+    var manv = document.getElementById('MaNV').value;
     $.ajax({
-        type: 'POST',
+
         url: '/DangKySuaChua/KiemtraMaNV',
-        datatype: JSON,
+        type: 'POST',
+       /* datatype: Text,*/
         data: { manv },
         success: function (response) {
             if (response.mesage == "OK") {
                 var item = response.model;
-                document.getElementById("#Hoten").innerHTML = model.hoten;
-
-
+                $("#Hoten").val(item.tenNv);
+                $("#Donvi").val(item.donVi);
+                $("#Chucdanh").val(item.chucDanh);
             }
             else {
-                result = 0
+                Swal.fire(
+                    'Mã nhân viên chưa chính xác',
+                    'Xin nhập lại')
             }
         }
-    })
-    return result;
+    });
 }
 function ResetForm() {
     $("#MaNV").value("");

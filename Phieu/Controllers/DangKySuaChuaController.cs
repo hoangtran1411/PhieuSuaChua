@@ -2,7 +2,9 @@
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 using System.Data;
-
+using System.Linq;
+using System.Threading.Tasks.Dataflow;
+using System.Web;
 
 namespace PhieuSuaChua.Controllers
 {
@@ -49,18 +51,22 @@ namespace PhieuSuaChua.Controllers
         }
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)
-        { 
-            var listnv = db.Nhanviens.ToList();
-            var check = listnv.Where(k => k.MaNv == nv.MaNv).Count();
-            if (check>1)
+        {
+            // anh đưa lên mỗi mã nhân viên mà nhận vào nguyên classs nhân viên dư á
+
+            var result = db.Nhanviens.FirstOrDefault(x=>x.MaNv == nv.MaNv);
+            string message;
+            if( result != null)
             {
-                return Json(new { mesage = "OK", model = listnv });
+                message = "OK";
             }
             else
             {
-                return Json(new {mesage = "NOT"});
+                message = "Wrong";
             }
-           
+            //var listnv = db.Nhanviens.Where(l=>l.MaNv==nv.MaNv).ToArray();
+            //var check = listnv.Where(k => k.MaNv == nv.MaNv).Count();
+            return Json(new { mesage = message, model = result });
         }
     }
 }
