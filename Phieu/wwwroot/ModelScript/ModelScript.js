@@ -102,8 +102,44 @@ function ResetForm() {
     $("#Thietbikhac").val("");
     $("#Tinhtrang").val("");
     $("#Ghichu").val("");
+    // enable form disble
+    $("#Thietbikhac").attr("disabled", false);
+    $("#Tenmaytinh").attr("disabled", false);
+    $("#Username").attr("disabled", false);
+    $("#Password").attr("disabled", false);
 
 }
+function CheckThietBi() {
+    var kt = $("#Tenmaytinh").val();
+    var tb = $("#Thietbikhac").val();
+    if (kt != "" && tb == "") {
+        $("#Thietbikhac").attr("disabled", true);
+    }
+    else {       
+        $("#Tenmaytinh").attr("disabled", true);
+        $("#Username").attr("disabled", true);
+        $("#Password").attr("disabled", true);
+    }
+
+}
+$(document).ready(function () {
+    //const list = document.getElementsByTagName("span");
+    //console.log(list);
+    //const boxlist = list[0];
+    //const boxes = boxlist.querySelectorAll("span");
+    //for (box of boxes) {
+    //    $('span').removeClass('badge bg-danger').addClass('badge bg-success');
+    //}
+    var iD = $('span').val();
+    if (iD == "Sửa xong") {
+        $('span').removeClass('badge bg-danger').addClass('badge bg-success');
+       
+    }
+    else {
+        $('#trangthai').removeClass('badge bg-success').addClass('badge bg-danger');
+    }
+    
+})
 
 
 
