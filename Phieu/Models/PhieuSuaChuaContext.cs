@@ -26,7 +26,7 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<Phieusua> Phieusuas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=10.14.12.253,1333;user=sasa;password=Bitis@123;database=PHIEUSUACHUA;Integrated security=True;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=10.14.12.253,1333;user=sasa;password=Bitis@123;database=PhieuSuaChua;Integrated security=True;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
