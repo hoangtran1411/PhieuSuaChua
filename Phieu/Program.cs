@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Server=10.14.12.253,1333;user=sasa;password=Bitis@123;database=PhieuSuaChua;Integrated security=True;Trusted_Connection=True;IntegratedSecurity=True;TrustServerCertificate=True")));
+builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Server=10.14.12.253,1333;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True")));
 
 var app = builder.Build();
 
