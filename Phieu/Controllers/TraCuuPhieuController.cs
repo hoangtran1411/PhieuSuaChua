@@ -17,11 +17,12 @@ namespace PhieuSuaChua.Controllers
         public IActionResult Index()
         {
            
-            var listPhieu = (from Chitietsua in context.Chitietsuas
-                             join Phieusua in context.Phieusuas
+            var listPhieu = (from Chitietsua in context.Chitietsuas 
+                             join Phieusua in context.Phieusuas 
                              on Chitietsua.IdPhieu equals Phieusua.IdPhieu
                              join Nhanvien in context.Nhanviens
                              on Phieusua.MaNv equals Nhanvien.MaNv
+                             orderby Phieusua.IdPhieu descending
                              select new ModelTraCuuPhieu
                              {
                                  Id = Phieusua.IdPhieu,
