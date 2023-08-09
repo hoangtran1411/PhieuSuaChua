@@ -16,7 +16,6 @@ namespace PhieuSuaChua.Controllers
 
         public IActionResult Index()
         {
-           
             var listPhieu = (from Chitietsua in context.Chitietsuas 
                              join Phieusua in context.Phieusuas 
                              on Chitietsua.IdPhieu equals Phieusua.IdPhieu
@@ -33,7 +32,6 @@ namespace PhieuSuaChua.Controllers
                                  Thietbikhac = Chitietsua.ThietBiKhac,
                                  Trangthaiphieu = Phieusua.TrangThaiPhieu
                              }).ToList();
-            //test
                             
             return View(listPhieu);
         }
