@@ -43,10 +43,11 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
             datatype: Text,
             data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
             success: function (response) {
-                window.location.reload();
+               
                 Swal.fire(
                     'Chúc mừng đăng ký thành công',
                     'Số phiếu là:');
+                ResetForm();
             }
         });
 
