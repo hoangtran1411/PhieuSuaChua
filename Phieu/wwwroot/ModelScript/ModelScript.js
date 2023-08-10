@@ -23,51 +23,50 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
     var i = 0;
     var manv = document.getElementById('MaNV').value;
 
-    if (manv != null) {
+    CheckNV(
+        function (manv) {
+            if (manv != "") {
+                console.log("Mã nhân viên hợp lệ: " + manv);
 
+                var sdt = document.getElementById('Sdt').value;
+                var tenpc = document.getElementById('Tenmaytinh').value;
+                var user = document.getElementById('Username').value;
+                var pass = document.getElementById('Password').value;
+                var thietbikhac = document.getElementById('Thietbikhac').value;
+                var tinhtrang = document.getElementById('Tinhtrang').value;
+                var ghichu = document.getElementById('Ghichu').value;
+                var trangThaiPhieu = "Chờ tiếp nhận";
+                var loaiSuaChua = "Chưa xác định";
 
-        var sdt = document.getElementById('Sdt').value;
-        var tenpc = document.getElementById('Tenmaytinh').value;
-        var user = document.getElementById('Username').value;
-        var pass = document.getElementById('Password').value;
-        var thietbikhac = document.getElementById('Thietbikhac').value;
-        var tinhtrang = document.getElementById('Tinhtrang').value;
-        var ghichu = document.getElementById('Ghichu').value;
-        var trangThaiPhieu = "Chờ tiếp nhận";
-        var loaiSuaChua = "Chưa xác định";
-
-        $.ajax({
-            type: 'POST',
-            url: '/DangKySuaChua/DangKySuaChua',
-            //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            datatype: Text,
-            data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
-            success: function (response) {
-               
-                Swal.fire(
-                    'Chúc mừng đăng ký thành công',
-                    'Số phiếu là:');
-                ResetForm();
+                $.ajax({
+                    type: 'POST',
+                    url: '/DangKySuaChua/DangKySuaChua',
+                    //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    datatype: Text,
+                    data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+                    success: function (response) {                      
+                        Swal.fire(
+                            'Chúc mừng đăng ký thành công',
+                            'Số phiếu là:');
+                        ResetForm();
+                    }
+                });
             }
-        });
-
-
-    }
-
-
-
-    else {
-        Swal.fire(
-            'Mời nhập mã nhân viên',
-            'Xin nhập lại')
-    }
-
+            else {
+                console.log("Mã nhân viên không hợp lệ");
+            }
+        },
+        function () {
+            console.log("Mã nhân viên không chính xác");
+           
+        }
+    );
 }
 
-   
+ 
 
-function CheckNV() {
-    //var manv = document.getElementById('MaNV').value;
+function CheckNV(successCallback, errorCallback) {
+   
     var manv = $("#MaNV").val();
     $.ajax({
 
@@ -81,12 +80,15 @@ function CheckNV() {
                 $("#Hoten").val(item.tenNv);
                 $("#Donvi").val(item.donVi);
                 $("#Chucdanh").val(item.chucDanh);
+                successCallback(item.maNv);
             }
             else {
                 Swal.fire(
                     'Mã nhân viên chưa chính xác',
                     'Xin nhập lại');
+                errorCallback();
                 ResetForm();
+                
             }
         }
     });
@@ -123,24 +125,7 @@ function CheckThietBi() {
     }
 
 }
-$(document).ready(function () {
-    //const list = document.getElementsByTagName("span");
-    //console.log(list);
-    //const boxlist = list[0];
-    //const boxes = boxlist.querySelectorAll("span");
-    //for (box of boxes) {
-    //    $('span').removeClass('badge bg-danger').addClass('badge bg-success');
-    //}
-    var iD = $('span').val();
-    if (iD == "Sửa xong") {
-        $('span').removeClass('badge bg-danger').addClass('badge bg-success');
-       
-    }
-    else {
-        $('#trangthai').removeClass('badge bg-success').addClass('badge bg-danger');
-    }
-    
-})
+
 
 
 
