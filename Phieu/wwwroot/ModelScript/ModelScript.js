@@ -21,7 +21,7 @@
 
 function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtrang, Ghichu) {
     var i = 0;
-    var manv = document.getElementById('MaNV').value;
+    var manv = $("#MaNV").val();;
 
     CheckNV(
         function (manv) {

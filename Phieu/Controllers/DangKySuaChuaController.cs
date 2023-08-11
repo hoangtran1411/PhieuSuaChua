@@ -23,7 +23,7 @@ namespace PhieuSuaChua.Controllers
         }
        
         [HttpPost]
-        public JsonResult DangKySuaChua(ModelDangKySua model)
+        public IActionResult DangKySuaChua(ModelDangKySua model)
         {
             Phieusua sua = new()
             {
@@ -47,7 +47,7 @@ namespace PhieuSuaChua.Controllers
             db.Chitietsuas.Add(ct);
             db.SaveChanges();   
           
-            return Json(new {info = Convert.ToInt32(sua.IdPhieu)});
+            return View();
         }
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)
