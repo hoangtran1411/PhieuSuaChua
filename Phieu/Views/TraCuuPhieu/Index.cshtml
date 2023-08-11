@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th data-sortable="true">
-                        <a href="#" class="datatable-sorter ">Số phiếu</a>
+                        <a href="#" class="datatable-sorter">Số phiếu</a>
                     </th>
                     <th data-sortable="true">
                         <a href="#" class="datatable-sorter">Ngày tạo phiếu</a>
@@ -53,8 +53,8 @@
                             <td>@item.Donvi</td>
                             <td>@item.Maytinh</td>
                             <td>@item.Thietbikhac</td>
-                            <td><span id="trangthai_@i">@item.Trangthaiphieu</span></td>
-                            <td><button class="btn btn-sm btn-success">In phiếu</button></td>
+                            <td><span class="badge bg-danger" id="trangthai_@i">@item.Trangthaiphieu</span></td>
+                            <td><button class="btn btn-sm btn-success">Xem phiếu</button></td>
                         </tr>
                         i= i+1;
                     }
@@ -67,7 +67,16 @@
 
 @section Scripts {
     <script src="~/modelscript/modelscript.js"></script>
-   
+   <script>
+        $(document).ready(function () {
+            $('[id^=trangthai_]').each(function () {
+                var spanText = $(this).text();
+                if (spanText.trim() === "Sửa xong") {
+                    $(this).removeClass('badge bg-danger').addClass('badge bg-success');
+                }
+            });
+        });
+   </script>
 }
 
 

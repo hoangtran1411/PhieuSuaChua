@@ -35,5 +35,10 @@ namespace PhieuSuaChua.Controllers
                             
             return View(listPhieu);
         }
+        public IActionResult ChiTietPhieuSua(Phieusua id) 
+        {
+            
+            return View(); 
+        }
     }
 }
