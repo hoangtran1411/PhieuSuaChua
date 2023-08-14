@@ -5,6 +5,7 @@
 }
 
 <section class="section">
+    <div class="card" style="background-color:ghostwhite">
 <div class="card-body">
     <h5 class="card-title">Thông tin chi tiết phiếu sửa</h5>
     <div class="row">
@@ -14,16 +15,93 @@
                     Mã nhân viên: 
                 </div>
                 <div class="col-6">
-                    b
+                    Đơn vị:
                  </div>
+                <div class="col-6">
+                    Họ và Tên:
+                </div>
+                <div class="col-6">
+                        Số điện thoại:
+                </div>
+                    <div class="col-4">
+                        Tên máy tính:
+                    </div>
+                    <div class="col-4">
+                        Username:
+                    </div>
+                    <div class="col-4">
+                        Password:
+                    </div>
+                    <div class="col-12">
+                        Thiết bị khác:
+                    </div>
+                    <div class="col-12">
+                        Tình trạng thiết bị:
+                    </div>
+                    <div class="col-12">
+                        Ghi chú:
+                    </div>
+                    <div class="col-12">
+                        Trạng thái phiếu:
+                    </div>
+                    <div class="col-12">
+                        Loại sửa chữa:
+                    </div>
 
             </form>
+                    <p></p>
+                    <div class="col-lg-12">
+                        <button type="reset" class="btn btn-success">In phiếu</button>
+                    </div>
 
         </div>
     </div>
 </div>
+    </div>
 <hr />
+    <div class="card" style="background-color:ghostwhite">
 <div class="card-body">
     <h5 class="card-title">Xác nhận của P.CNTT</h5>
+    <div class="row">
+                <div class="col-lg-12">
+                     <form class="row g-2">
+                        <div class="col-1">
+                            <label for="inputAddress" class="form-label">Ghi chú:</label>
+                        </div>
+                        <div class="col-5">                           
+                            <input type="text" class="form-control" id="ghichu" placeholder="Ví dụ: cần nâng cấp...">
+                        </div>
+                        <div class="col-3">
+                            <button type="reset" class="btn btn-success">Cập nhật ghi chú</button>
+                        </div>
+                     </form>
+                </div>
+                <p></p>
+                <div class="col-lg-12">
+                    <form class="row g-2">
+                        <div class="col-1">
+                            <label for="inputAddress" class="form-label">Loại sửa chữa:</label>
+                        </div>
+                        <div class="col-5">
+                            <select id="cbolistprint" class="form-select" name="Type">
+                                <option selected="selected" value="1">==============</option>
+                                <option value="2">Chưa xác định</option>
+                                <option value="3">Vệ sinh máy tính, cài đặt windows, chương trình</option>
+                                <option value="4">Thay thế linh kiện máy tính có hàng sẵn</option>
+                                <option value="5">Lắp ráp máy tính mới</option>
+                                <option value="6">Sửa chữa máy in lỗi nhẹ</option>
+                                <option value="7">Sửa chữa máy tính lỗi nặng</option>
+                                <option value="8">Sửa chữa máy in lỗi nặng</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <button type="reset" class="btn btn-success">Cập nhật loại sửa chữa</button>
+                        </div>
+                    </form>
+                </div>
+              
+                
+    </div>
+</div>
 </div>
 </section>
