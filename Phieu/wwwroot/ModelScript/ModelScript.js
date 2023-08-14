@@ -21,20 +21,20 @@
 
 function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtrang, Ghichu) {
     var i = 0;
-    var manv = document.getElementById('MaNV').value;
+    var manv = $('#MaNV').val();
 
     CheckNV(
         function (manv) {
             if (manv != "") {
                 console.log("Mã nhân viên hợp lệ: " + manv);
 
-                var sdt = document.getElementById('Sdt').value;
-                var tenpc = document.getElementById('Tenmaytinh').value;
-                var user = document.getElementById('Username').value;
-                var pass = document.getElementById('Password').value;
-                var thietbikhac = document.getElementById('Thietbikhac').value;
-                var tinhtrang = document.getElementById('Tinhtrang').value;
-                var ghichu = document.getElementById('Ghichu').value;
+                var sdt = $('#Sdt').val();
+                var tenpc = $('#Tenmaytinh').val();
+                var user = $('#Username').val();
+                var pass = $('#Password').val();
+                var thietbikhac = $('#Thietbikhac').val();
+                var tinhtrang = $('#Tinhtrang').val();
+                var ghichu = $('#Ghichu').val();
                 var trangThaiPhieu = "Chờ tiếp nhận";
                 var loaiSuaChua = "Chưa xác định";
 
@@ -44,11 +44,15 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
                     //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     datatype: Text,
                     data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
-                    success: function (response) {                      
-                        Swal.fire(
-                            'Chúc mừng đăng ký thành công',
-                            'Số phiếu là:');
-                        ResetForm();
+                    success: function (response) { 
+                        if (response.mesage == "OK") {
+                           console.log(response.model)
+                            Swal.fire(
+                                'Số phiếu là: ' + response.model,
+                                'Chúc mừng đăng ký thành công',);
+                            ResetForm();
+                        }
+                        
                     }
                 });
             }
