@@ -23,7 +23,7 @@ namespace PhieuSuaChua.Controllers
         }
           
         [HttpPost]
-        public JsonResult DangKySuaChua(ModelDangKySua model)
+        public IActionResult DangKySuaChua(ModelDangKySua model)
         {
             Phieusua sua = new()
             {
