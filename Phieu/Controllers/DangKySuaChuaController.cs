@@ -21,7 +21,7 @@ namespace PhieuSuaChua.Controllers
           
             return View();
         }
-       
+          
         [HttpPost]
         public IActionResult DangKySuaChua(ModelDangKySua model)
         {
@@ -45,9 +45,19 @@ namespace PhieuSuaChua.Controllers
                 LoaiSuaChua = model.LoaiSuaChua
             };
             db.Chitietsuas.Add(ct);
-            db.SaveChanges();   
-          
-            return View();
+            int number = 0;
+            number = db.SaveChanges();
+            string message;
+            if (number > 0)
+            {
+                message = "OK";
+            }
+            else
+            {
+                message = "Wrong";
+            }
+            int sophieu = Convert.ToInt32(sua.IdPhieu);
+            return Json(new { mesage = message, model =  sophieu});
         }
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)
