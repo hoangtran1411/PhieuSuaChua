@@ -2,60 +2,70 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Chi Tiet Phieu Sua";
+    Layout = "_Layout";
 }
-
+@using PhieuSuaChua.Controllers;
+@model IEnumerable<PhieuSuaChua.Domain_Model.ModelChiTietPhieuSua>;
 <section class="section">
     <div class="card" style="background-color:ghostwhite">
 <div class="card-body">
     <h5 class="card-title">Thông tin chi tiết phiếu sửa</h5>
-    <div class="row">
-        <div class="col-lg-12">
-            <form class="row g-3">
-                <div class="col-6">
-                    Mã nhân viên: 
-                </div>
-                <div class="col-6">
-                    Đơn vị:
-                 </div>
-                <div class="col-6">
-                    Họ và Tên:
-                </div>
-                <div class="col-6">
-                        Số điện thoại:
-                </div>
-                    <div class="col-4">
-                        Tên máy tính:
-                    </div>
-                    <div class="col-4">
-                        Username:
-                    </div>
-                    <div class="col-4">
-                        Password:
-                    </div>
-                    <div class="col-12">
-                        Thiết bị khác:
-                    </div>
-                    <div class="col-12">
-                        Tình trạng thiết bị:
-                    </div>
-                    <div class="col-12">
-                        Ghi chú:
-                    </div>
-                    <div class="col-12">
-                        Trạng thái phiếu:
-                    </div>
-                    <div class="col-12">
-                        Loại sửa chữa:
-                    </div>
+    @if (Model != null)
+    {
+           foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="row g-3">
+                                <div class="col-6">
+                                    Mã nhân viên: <label id="Manv"> @item.MaNV</label>
+                                </div>
+                                <div class="col-6">
+                                    Đơn vị: <label id="Donvi"> @item.DonVi</label>
+                                </div>
+                                <div class="col-6">
+                                    Họ và Tên: <label id="Hoten">@item.Hoten </label>
+                                </div>
+                                <div class="col-6">
+                                    Số điện thoại: <label id="Sdt">@item.Sdt </label>
+                                </div>
+                                <div class="col-4">
+                                    Tên máy tính: <label id="TenPC"> @item.TenMayTinh</label>
+                                </div>
+                                <div class="col-4">
+                                    Username: <label id="User">@item.UserName </label>
+                                </div>
+                                <div class="col-4">
+                                    Password: <label id="Pass"> @item.Password</label>
+                                </div>
+                                <div class="col-12">
+                                    Thiết bị khác: <label id="Thietbikhac">@item.Thietbikhac </label>
+                                </div>
+                                <div class="col-12">
+                                    Tình trạng thiết bị: <label id="Tinhtrang">@item.TinhTrang </label>
+                                </div>
+                                <div class="col-12">
+                                    Ghi chú: <label id="Ghichu">@item.GhiChu </label>
+                                </div>
+                                <div class="col-12">
+                                    Trạng thái phiếu: <label id="Trangthaiphieu">@item.Trangthaiphieu </label>
+                                </div>
+                                <div class="col-12">
+                                    Loại sửa chữa: <label id="Loaisuachua">@item.Trangthaiphieu </label>
+                                </div>
 
-            </form>
-                    <p></p>
-                    <div class="col-lg-12">
-                        <button type="reset" class="btn btn-success">In phiếu</button>
-                    </div>
+                            </form>
+                            <p></p>
+                            <div class="col-lg-12">
+                                <button type="reset" class="btn btn-success">In phiếu</button>
+                            </div>
 
-        </div>
-    </div>
+                        </div>
+                    </div>
+                }     
+    }
+  
 </div>
     </div>
 <hr />

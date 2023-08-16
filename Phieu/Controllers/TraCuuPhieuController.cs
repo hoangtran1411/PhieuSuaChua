@@ -35,10 +35,32 @@ namespace PhieuSuaChua.Controllers
                             
             return View(listPhieu);
         }
-        public IActionResult ChiTietPhieuSua(Phieusua id) 
+        public IActionResult ChiTietPhieuSua(int id) 
         {
-            
-            return View(); 
+            var chitietphieu = (from chitietsua in context.Chitietsuas
+                                join phieusua in context.Phieusuas
+                                on chitietsua.IdPhieu equals phieusua.IdPhieu
+                                join nhanvien in context.Nhanviens
+                                on phieusua.MaNv equals nhanvien.MaNv
+                                select new ModelChiTietPhieuSua
+                                {
+                                    Id = phieusua.IdPhieu,
+                                    MaNV = nhanvien.MaNv,
+                                    DonVi = nhanvien.DonVi,
+                                    Hoten = nhanvien.TenNv,
+                                    Sdt = chitietsua.Sdt,
+                                    TenMayTinh = chitietsua.TenPc,
+                                    UserName = chitietsua.AccountNames,
+                                    Password = chitietsua.AccountPass,
+                                    Thietbikhac = chitietsua.ThietBiKhac,
+                                    TinhTrang = chitietsua.TinhTrang,
+                                    GhiChu = chitietsua.GhiChu,
+                                    Trangthaiphieu = phieusua.TrangThaiPhieu,
+                                    LoaiSuaChua = chitietsua.LoaiSuaChua
+
+                                }).Where(x=>x.Id == id).ToList();
+
+            return View(chitietphieu); 
         }
     }
 }
