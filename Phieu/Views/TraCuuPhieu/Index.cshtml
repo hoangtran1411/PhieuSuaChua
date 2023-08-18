@@ -18,7 +18,7 @@
 
     <div>
        @* <table class="table-striped datatable table display" id="TraCuuPhieu">*@
-        <table class="table" style="width:100%" id="TraCuuPhieu">
+        <table class="display nowrap" style="width:100%" id="TraCuuPhieu">
       @*  <table id="example" class="display" style="width:100%">*@
             <thead>
                 <tr>
@@ -97,7 +97,11 @@
                 orderCellsTop: true,
                 "order": [[0, 'desc']],
                 responsive: true,
-                fixedHeader: true,
+                deferRender: true,
+                scrollCollapse: true,
+                scroller: true,
+                scrollY: 500,
+                fixedHeader: false,
                 initComplete: function () {
                     var api = this.api();
                     // For each column
@@ -105,7 +109,7 @@
                         // Set the header cell to contain the input element
                         var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
                         var title = $(cell).text();
-                        $(cell).html('<input type="text" style="text-align:left;" placeholder="'+ title +'" />');
+                        $(cell).html('<input  style="text-align:left;" class="form-control" placeholder="'+title+'" />');
                         //$(cell).html('<input style="text-align:left;" ></input>');
                         // On every keypress in this input
                         $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
