@@ -62,5 +62,9 @@ namespace PhieuSuaChua.Controllers
 
             return View(chitietphieu); 
         }
+        public IActionResult XacNhanPhieu()
+        {
+            return View(); 
+        }
     }
 }

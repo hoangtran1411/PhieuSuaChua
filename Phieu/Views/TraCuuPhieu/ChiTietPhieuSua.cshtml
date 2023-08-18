@@ -52,7 +52,7 @@
                                     <b>Trạng thái phiếu:</b> <label id="Trangthaiphieu">@item.Trangthaiphieu </label>
                                 </div>
                                 <div class="col-12">
-                                    <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.Trangthaiphieu </label>
+                                    <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.LoaiSuaChua </label>
                                 </div>
 
                             </form>
@@ -105,14 +105,16 @@
                             </select>
                         </div>
                         <div class="col-3">
-                            <button type="reset" class="btn btn-success">Cập nhật loại sửa chữa</button>
+                            <button type="submit" class="btn btn-success">Cập nhật loại sửa chữa</button>
                         </div>
                     </form>
                 </div>
                 <p></p>
                 <div class="col-lg-12">
-                    <button type="reset" class="btn btn-primary">Xác nhận chờ mua hàng </button>
-                    <button type="reset" class="btn btn-danger">Hủy phiếu</button>
+                    <button type="submit" class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu()">Xác nhận phiếu</button>
+                    <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
+                    <button type="button" class="btn btn-danger">Hủy phiếu</button>
+                    <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                   </div>
               
                 
@@ -120,3 +122,9 @@
 </div>
 </div>
 </section>
+<script>
+    function XacnhanPhieu()
+    {
+
+    }
+</script>
