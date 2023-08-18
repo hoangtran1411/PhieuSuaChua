@@ -6,13 +6,19 @@
 @using PhieuSuaChua.Controllers;
 @model IEnumerable<PhieuSuaChua.Domain_Model.ModelTraCuuPhieu>
 
+<style>
+    thead input {
+        width: 100%;
+    }
+</style>
 @*<div class="card-body">*@
 <div >
 
     <!-- Table with stripped rows -->
 
     <div>
-        <table class="table-striped datatable table display" id="TraCuuPhieu">
+       @* <table class="table-striped datatable table display" id="TraCuuPhieu">*@
+        <table class="table" style="width:100%" id="TraCuuPhieu">
       @*  <table id="example" class="display" style="width:100%">*@
             <thead>
                 <tr>
@@ -41,7 +47,7 @@
                         <a href="#" class="datatable-sorter">Chức năng</a>
                     </th>
                 </tr>
-                <tr class="filters"></tr>
+               
               
             </thead>
             <tbody>
@@ -59,7 +65,7 @@
                             <td>@item.Thietbikhac</td>
                             <td><span class="badge bg-danger" id="trangthai_@i">@item.Trangthaiphieu</span></td>
                             @*<td><button class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua">Xem phiếu</button></td>*@
-                            <td><a class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua/@item.Id">Xem phiếu</a></td>
+                            <td><a  class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua/@item.Id">Xem phiếu</a></td>
                         </tr>
                         i= i+1;
                     }
@@ -71,7 +77,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/modelscript/modelscript.js"></script>
+    @*<script src="~/modelscript/modelscript.js"></script>*@
    @*<script>
         $(document).ready(function () {
             $('[id^=trangthai_]').each(function () {
@@ -83,12 +89,13 @@
         });
    </script>*@
   
-   @*<script>
+   <script>
         $(document).ready(function () {
             // Setup - add a text input to each footer cell
-            $('#example thead tr').clone(true).addClass('filters').appendTo('#example thead');
-            var table = $('#example').DataTable({
+            $('#TraCuuPhieu thead tr').clone(true).addClass('filters').appendTo('#TraCuuPhieu thead');
+            var table = $('#TraCuuPhieu').DataTable({
                 orderCellsTop: true,
+                "order": [[0, 'desc']],
                 fixedHeader: true,
                 initComplete: function () {
                     var api = this.api();
@@ -97,7 +104,8 @@
                         // Set the header cell to contain the input element
                         var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
                         var title = $(cell).text();
-                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+                        $(cell).html('<input type="text" style="text-align:left;" placeholder="'+ title +'" />');
+                        //$(cell).html('<input style="text-align:left;" ></input>');
                         // On every keypress in this input
                         $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
                             .off('keyup change')
@@ -118,11 +126,9 @@
                 }
             });
         });
-   </script>*@
+   </script>
   
-    
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+   
 }
 
 
