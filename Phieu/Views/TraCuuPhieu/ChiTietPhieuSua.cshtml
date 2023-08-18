@@ -8,13 +8,14 @@
 @using PhieuSuaChua.Controllers;
 @model IEnumerable<PhieuSuaChua.Domain_Model.ModelChiTietPhieuSua>;
 <section class="section">
-    <div class="card" style="background-color:ghostwhite">
-<div class="card-body">
-    <h5 class="card-title">Thông tin chi tiết phiếu sửa</h5>
+
     @if (Model != null)
     {
            foreach (var item in Model)
                 {
+                    <div class="card" style="background-color:ghostwhite">
+                    <div class="card-body">
+                    <h5 class="card-title">Thông tin chi tiết phiếu sửa</h5>
                     <div class="row">
                         <div class="col-lg-12">
                             <form class="row g-3">
@@ -63,68 +64,92 @@
 
                         </div>
                     </div>
+                    </div>
+                    </div>
+                    <hr />
+
+            <div class="card" style="background-color:ghostwhite">
+                <div class="card-body">
+                    <h5 class="card-title">Xác nhận của P.CNTT</h5>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="row g-2">
+                                <div class="col-1">
+                                    <label for="inputAddress" class="form-label">Ghi chú:</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" id="ghichu" placeholder="Ví dụ: cần nâng cấp...">
+                                </div>
+                                <div class="col-3">
+                                    <button type="reset" class="btn btn-success">Cập nhật ghi chú</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p></p>
+                        <div class="col-lg-12">
+                            <form class="row g-2">
+                                <div class="col-1">
+                                    <label for="inputAddress" class="form-label">Loại sửa chữa:</label>
+                                </div>
+                                <div class="col-5">
+                                    <select id="cbolistprint" class="form-select" name="Type">
+                                        <option selected="selected" value="1">==============</option>
+                                        <option value="2">Chưa xác định</option>
+                                        <option value="3">Vệ sinh máy tính, cài đặt windows, chương trình</option>
+                                        <option value="4">Thay thế linh kiện máy tính có hàng sẵn</option>
+                                        <option value="5">Lắp ráp máy tính mới</option>
+                                        <option value="6">Sửa chữa máy in lỗi nhẹ</option>
+                                        <option value="7">Sửa chữa máy tính lỗi nặng</option>
+                                        <option value="8">Sửa chữa máy in lỗi nặng</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-success">Cập nhật loại sửa chữa</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p></p>
+                        <div class="col-lg-12">
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu()">@item.Trangthaiphieu</a>
+                            <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
+                            <button type="button" class="btn btn-danger">Hủy phiếu</button>
+                            <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
                 }     
     }
   
-</div>
-    </div>
-<hr />
-    <div class="card" style="background-color:ghostwhite">
-<div class="card-body">
-    <h5 class="card-title">Xác nhận của P.CNTT</h5>
-    <div class="row">
-                <div class="col-lg-12">
-                     <form class="row g-2">
-                        <div class="col-1">
-                            <label for="inputAddress" class="form-label">Ghi chú:</label>
-                        </div>
-                        <div class="col-5">                           
-                            <input type="text" class="form-control" id="ghichu" placeholder="Ví dụ: cần nâng cấp...">
-                        </div>
-                        <div class="col-3">
-                            <button type="reset" class="btn btn-success">Cập nhật ghi chú</button>
-                        </div>
-                     </form>
-                </div>
-                <p></p>
-                <div class="col-lg-12">
-                    <form class="row g-2">
-                        <div class="col-1">
-                            <label for="inputAddress" class="form-label">Loại sửa chữa:</label>
-                        </div>
-                        <div class="col-5">
-                            <select id="cbolistprint" class="form-select" name="Type">
-                                <option selected="selected" value="1">==============</option>
-                                <option value="2">Chưa xác định</option>
-                                <option value="3">Vệ sinh máy tính, cài đặt windows, chương trình</option>
-                                <option value="4">Thay thế linh kiện máy tính có hàng sẵn</option>
-                                <option value="5">Lắp ráp máy tính mới</option>
-                                <option value="6">Sửa chữa máy in lỗi nhẹ</option>
-                                <option value="7">Sửa chữa máy tính lỗi nặng</option>
-                                <option value="8">Sửa chữa máy in lỗi nặng</option>
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <button type="submit" class="btn btn-success">Cập nhật loại sửa chữa</button>
-                        </div>
-                    </form>
-                </div>
-                <p></p>
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu()">Xác nhận phiếu</button>
-                    <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
-                    <button type="button" class="btn btn-danger">Hủy phiếu</button>
-                    <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
-                  </div>
-              
-                
-    </div>
-</div>
-</div>
+
 </section>
 <script>
-    function XacnhanPhieu()
-    {
-
-    }
+    //$(document).ready(function () {
+        var i =  1;
+        //$('#xacnhanphieu').on('click', function(){
+        function XacnhanPhieu(){
+            var bttext = $('#xacnhanphieu').text();
+            switch (bttext){
+                case "Chờ tiếp nhận":
+                $('#xacnhanphieu').text('Đang sửa');
+                $('#Trangthaiphieu').text('Đang sửa');
+                    break;
+                case "Đang sửa":
+                $('#xacnhanphieu').text('Đã sửa xong');
+                $('#Trangthaiphieu').text('Đã sửa xong');
+                    break;
+                case "Đã sửa xong":
+                $('#xacnhanphieu').text('Đã trả máy');
+                $('#Trangthaiphieu').text('Đã trả máy');
+                    break;               
+                default:
+                $('#xacnhanphieu').text('Xác nhận phiếu');
+                $('#Trangthaiphieu').text('Xác nhận phiếu');
+                    break;
+            }}
+        //});
+    //});
+    
 </script>
