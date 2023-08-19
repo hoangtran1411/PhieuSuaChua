@@ -10,7 +10,7 @@ namespace PhieuSuaChua.Controllers
 {
     public class DangKySuaChuaController : Controller
     {
-        private PhieusuachuaContext db;
+        private readonly PhieusuachuaContext db;
         public DangKySuaChuaController(PhieusuachuaContext context)
         {
             this.db = context;
@@ -45,9 +45,10 @@ namespace PhieuSuaChua.Controllers
                 LoaiSuaChua = model.LoaiSuaChua
             };
             db.Chitietsuas.Add(ct);
-            int number = 0;
-            number = db.SaveChanges();
+            int number = db.SaveChanges();
+
             string message;
+
             if (number > 0)
             {
                 message = "OK";

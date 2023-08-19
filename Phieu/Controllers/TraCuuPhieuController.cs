@@ -60,13 +60,24 @@ namespace PhieuSuaChua.Controllers
 
             return View(chitietphieu);
         }
+        [HttpPost]
         public IActionResult XacNhanPhieu(int id, string trangthai)
         {
             var update = context.Phieusuas.Find(id);
             if (update != null)
             {
-                update.TrangThaiPhieu = trangthai;
-                context.SaveChanges();
+                if (trangthai == "Đã trả máy")
+                {
+                    update.TrangThaiPhieu = trangthai;
+                    update.NgayTra = DateTime.Now;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    update.TrangThaiPhieu = trangthai;
+                    context.SaveChanges();
+                }
+                
             }
 
             return View();

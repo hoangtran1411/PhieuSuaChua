@@ -7,11 +7,11 @@ namespace PhieuSuaChua.Controllers
     {
       
       
-        private PhieusuachuaContext db;
-        public DangKyGuiMucController(PhieusuachuaContext context)
-        {
-            this.db = context;
-        }
+        //private readonly PhieusuachuaContext db;
+        //public DangKyGuiMucController(PhieusuachuaContext context)
+        //{
+        //    this.db = context;
+        //}
         public IActionResult Index()
         {
             return View();

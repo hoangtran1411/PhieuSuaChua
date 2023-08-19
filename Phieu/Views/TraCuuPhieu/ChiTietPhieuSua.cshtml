@@ -110,7 +110,7 @@
                         </div>
                         <p></p>
                         <div class="col-lg-12">
-                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id','@item.Trangthaiphieu')">Tiếp nhận phiếu</a>
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id','@item.Trangthaiphieu')"></a>
                             <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
                             <button type="button" class="btn btn-danger">Hủy phiếu</button>
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
@@ -125,31 +125,62 @@
   
 
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    //$(document).ready(function () {
-        var i =  1;
-        //$('#xacnhanphieu').on('click', function(){
-        function XacnhanPhieu(id, trangthai){
 
-        switch (trangthai) {
-            case "Chờ tiếp nhận":
-                $('#xacnhanphieu').text('Đang sửa');
-                $('#Trangthaiphieu').text('Đang sửa');
-                    break;
-                case "Đang sửa":
-                $('#xacnhanphieu').text('Đã sửa xong');
-                $('#Trangthaiphieu').text('Đã sửa xong');
-                    break;
-                case "Đã sửa xong":
-                $('#xacnhanphieu').text('Đã trả máy');
-                $('#Trangthaiphieu').text('Đã trả máy');
-                    break;               
-                default:
-                $('#xacnhanphieu').text('Xác nhận phiếu');
-                $('#Trangthaiphieu').text('Xác nhận phiếu');
-                    break;
-            }}
-        //});
-    //});
+    $(document).ready(function () {
+        var btxacnhan = $('#Trangthaiphieu').text().trim();
+        switch (btxacnhan) {
+           
+            case "Đang sửa":
+                $('#xacnhanphieu').html('Xác nhận sửa xong');
+             
+                break;
+            case "Đã sửa xong":
+                $('#xacnhanphieu').html('Xác nhận trả máy');
+               
+                break;
+            case "Đã trả máy":
+                $('#xacnhanphieu').html('');
+              
+                break;
+            default:
+                $('#xacnhanphieu').html('Tiếp nhận phiếu');
+              
+                break;
+        }
+    });
+</script>
+<script>
+ 
     
+        function XacnhanPhieu(id, trangthai){
+        
+        switch (trangthai.trim()) {
+            case "Chờ tiếp nhận":               
+                UpdateTrangThai(id,'Đang sửa');
+                window.location.reload();               
+                break;
+
+            case "Đang sửa":              
+                UpdateTrangThai(id, 'Đã sửa xong');
+                window.location.reload();               
+                break;
+            case "Đã sửa xong":              
+                UpdateTrangThai(id, 'Đã trả máy');
+                window.location.reload();                      
+                 break;
+            
+            }};  
+        function UpdateTrangThai(id, trangthai)
+        {
+            $.ajax({
+                    url: '/TraCuuPhieu/XacNhanPhieu',
+                    type:'POST',
+                    data:{id,trangthai},
+                    success: function(response){
+                    window.location.reload();
+                    }
+            });
+        }
 </script>
