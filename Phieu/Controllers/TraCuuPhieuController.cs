@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Phieu.Models;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 
@@ -8,7 +6,7 @@ namespace PhieuSuaChua.Controllers
 {
     public class TraCuuPhieuController : Controller
     {
-        private PhieusuachuaContext context;
+        private readonly PhieusuachuaContext context;
         public TraCuuPhieuController(PhieusuachuaContext context)
         {
             this.context = context;
@@ -16,8 +14,8 @@ namespace PhieuSuaChua.Controllers
 
         public IActionResult Index()
         {
-            var listPhieu = (from Chitietsua in context.Chitietsuas 
-                             join Phieusua in context.Phieusuas 
+            var listPhieu = (from Chitietsua in context.Chitietsuas
+                             join Phieusua in context.Phieusuas
                              on Chitietsua.IdPhieu equals Phieusua.IdPhieu
                              join Nhanvien in context.Nhanviens
                              on Phieusua.MaNv equals Nhanvien.MaNv
@@ -32,10 +30,10 @@ namespace PhieuSuaChua.Controllers
                                  Thietbikhac = Chitietsua.ThietBiKhac,
                                  Trangthaiphieu = Phieusua.TrangThaiPhieu
                              }).ToList();
-                            
+
             return View(listPhieu);
         }
-        public IActionResult ChiTietPhieuSua(int id) 
+        public IActionResult ChiTietPhieuSua(int id)
         {
             var chitietphieu = (from chitietsua in context.Chitietsuas
                                 join phieusua in context.Phieusuas
@@ -58,13 +56,20 @@ namespace PhieuSuaChua.Controllers
                                     Trangthaiphieu = phieusua.TrangThaiPhieu,
                                     LoaiSuaChua = chitietsua.LoaiSuaChua
 
-                                }).Where(x=>x.Id == id).ToList();
+                                }).Where(x => x.Id == id).ToList();
 
-            return View(chitietphieu); 
+            return View(chitietphieu);
         }
-        public IActionResult XacNhanPhieu()
+        public IActionResult XacNhanPhieu(int id, string trangthai)
         {
-            return View(); 
+            var update = context.Phieusuas.Find(id);
+            if (update != null)
+            {
+                update.TrangThaiPhieu = trangthai;
+                context.SaveChanges();
+            }
+
+            return View();
         }
     }
 }

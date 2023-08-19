@@ -110,7 +110,7 @@
                         </div>
                         <p></p>
                         <div class="col-lg-12">
-                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu()">@item.Trangthaiphieu</a>
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id','@item.Trangthaiphieu')">Tiếp nhận phiếu</a>
                             <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
                             <button type="button" class="btn btn-danger">Hủy phiếu</button>
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
@@ -129,10 +129,10 @@
     //$(document).ready(function () {
         var i =  1;
         //$('#xacnhanphieu').on('click', function(){
-        function XacnhanPhieu(){
-            var bttext = $('#xacnhanphieu').text();
-            switch (bttext){
-                case "Chờ tiếp nhận":
+        function XacnhanPhieu(id, trangthai){
+
+        switch (trangthai) {
+            case "Chờ tiếp nhận":
                 $('#xacnhanphieu').text('Đang sửa');
                 $('#Trangthaiphieu').text('Đang sửa');
                     break;
