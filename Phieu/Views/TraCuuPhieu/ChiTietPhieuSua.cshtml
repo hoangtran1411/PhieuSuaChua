@@ -49,8 +49,14 @@
                                 <div class="col-12">
                                     <b>Ghi chú:</b> <label id="Ghichu">@item.GhiChu </label>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-4">
                                     <b>Trạng thái phiếu:</b> <label id="Trangthaiphieu">@item.Trangthaiphieu </label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Ngày nhận:</b> <label id="Ngaynhan">@item.Ngaynhan </label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Ngày trả:</b> <label id="Ngaytra">@item.Ngaytra </label>
                                 </div>
                                 <div class="col-12">
                                     <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.LoaiSuaChua </label>
@@ -110,9 +116,9 @@
                         </div>
                         <p></p>
                         <div class="col-lg-12">
-                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id','@item.Trangthaiphieu')"></a>
-                            <button type="submit" class="btn btn-primary">Xác nhận chờ mua hàng </button>
-                            <button type="button" class="btn btn-danger">Hủy phiếu</button>
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id')"></a>
+                            <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.Id')">Xác nhận chờ mua hàng </a>
+                            <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.Id')">Hủy phiếu</a>
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                         </div>
 
@@ -142,6 +148,13 @@
                 break;
             case "Đã trả máy":
                 $('#xacnhanphieu').html('');
+                $('#xacnhanmuahang').html('');
+                $('#huyphieu').html('');
+
+            case "Phiếu đã hủy":
+                $('#xacnhanphieu').html('');
+                $('#xacnhanmuahang').html('');
+                $('#huyphieu').html('');
               
                 break;
             default:
@@ -154,9 +167,9 @@
 <script>
  
     
-        function XacnhanPhieu(id, trangthai){
-        
-        switch (trangthai.trim()) {
+        function XacnhanPhieu(id){
+        var trangthai = $('#Trangthaiphieu').text().trim();
+        switch (trangthai) {
             case "Chờ tiếp nhận":               
                 UpdateTrangThai(id,'Đang sửa');
                 window.location.reload();               
@@ -171,7 +184,13 @@
                 window.location.reload();                      
                  break;
             
-            }};  
+            }};
+    function XacnhanMuaHang(id){
+        UpdateTrangThai(id, 'Chờ mua hàng');
+    };
+    function xacnhanhuy(id) {
+        UpdateTrangThai(id, 'Phiếu đã hủy');
+    }
         function UpdateTrangThai(id, trangthai)
         {
             $.ajax({

@@ -54,8 +54,9 @@ namespace PhieuSuaChua.Controllers
                                     TinhTrang = chitietsua.TinhTrang,
                                     GhiChu = chitietsua.GhiChu,
                                     Trangthaiphieu = phieusua.TrangThaiPhieu,
-                                    LoaiSuaChua = chitietsua.LoaiSuaChua
-
+                                    LoaiSuaChua = chitietsua.LoaiSuaChua,
+                                    Ngaynhan = phieusua.NgayTao,
+                                    Ngaytra = phieusua.NgayTra
                                 }).Where(x => x.Id == id).ToList();
 
             return View(chitietphieu);

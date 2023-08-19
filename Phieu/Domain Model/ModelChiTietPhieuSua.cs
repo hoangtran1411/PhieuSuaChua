@@ -16,6 +16,8 @@
         public string? GhiChu { get; set; }
         public string? Trangthaiphieu { get; set; }
         public string? LoaiSuaChua { get; set; }
+        public DateTime? Ngaynhan { get; set; }
+        public DateTime? Ngaytra { get; set; }
         public ModelChiTietPhieuSua()
         {
 
