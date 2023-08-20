@@ -83,5 +83,29 @@ namespace PhieuSuaChua.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult UpdateGhiChu(int id, string ghichu)
+        {
+            var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
+            if (update != null)
+            {
+                update.GhiChu = ghichu;
+                context.SaveChanges();
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateLoaiSuaChua(int id, string loaisuachua)
+        {
+            var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
+            if (update != null)
+            {
+                update.LoaiSuaChua = loaisuachua;
+                context.SaveChanges();
+            }
+            return View();
+        }
     }
 }

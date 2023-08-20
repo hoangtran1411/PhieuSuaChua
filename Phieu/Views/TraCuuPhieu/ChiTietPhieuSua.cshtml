@@ -84,10 +84,10 @@
                                     <b class="form-label">Ghi chú:</b>
                                 </div>
                                 <div class="col-5">
-                                    <input type="text" class="form-control" id="ghichu" placeholder="Ví dụ: cần nâng cấp...">
+                                    <input type="text" class="form-control" id="txtghichu" placeholder="Ví dụ: cần nâng cấp...">
                                 </div>
                                 <div class="col-3">
-                                    <button type="reset" class="btn btn-success">Cập nhật ghi chú</button>
+                                    <a class="btn btn-success" onclick="UpdateGhiChu('@item.Id')" id="updateghichu">Cập nhật ghi chú</a>
                                 </div>
                             </form>
                         </div>
@@ -110,7 +110,7 @@
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <button type="submit" class="btn btn-success">Cập nhật loại sửa chữa</button>
+                                    <a class="btn btn-success" id="updateloaisuachua" onclick="LoaiSuaChua('@item.Id')">Cập nhật loại sửa chữa</a>
                                 </div>
                             </form>
                         </div>
@@ -187,12 +187,13 @@
             }};
     function XacnhanMuaHang(id){
         UpdateTrangThai(id, 'Chờ mua hàng');
+        window.location.reload();
     };
     function xacnhanhuy(id) {
         UpdateTrangThai(id, 'Phiếu đã hủy');
+        window.location.reload();
     }
-        function UpdateTrangThai(id, trangthai)
-        {
+    function UpdateTrangThai(id, trangthai){
             $.ajax({
                     url: '/TraCuuPhieu/XacNhanPhieu',
                     type:'POST',
@@ -201,5 +202,69 @@
                     window.location.reload();
                     }
             });
+        window.location.reload();
+    }
+    function UpdateGhiChu(id){
+        var ghichu = $('#txtghichu').val();
+        $.ajax({
+            url: '/TraCuuPhieu/UpdateGhiChu',
+            type: 'POST',
+            data: {id,ghichu},
+            success: function (response) {
+                window.location.reload();
+            }
+        });
+        $('#txtghichu').val('');
+        window.location.reload();
+    }
+    function LoaiSuaChua(id){
+        var idloai = parseInt($('#cbolistprint').val());
+        var loaisuachua = $('#cbolistprint option:selected').text();
+        switch (idloai) {
+            case 1:
+                UpdateLoaiSuaChua(id, loaisuachua);
+                
+                break;
+            case 2:
+                UpdateLoaiSuaChua(id, loaisuachua);
+               
+                break;
+            case 3:
+                UpdateLoaiSuaChua(id, loaisuachua);
+                
+                break;
+            case 4:
+                UpdateLoaiSuaChua(id, loaisuachua);
+               
+                break;
+            case 5:
+                UpdateLoaiSuaChua(id, loaisuachua);
+                
+                break;
+            case 6:
+                UpdateLoaiSuaChua(id, loaisuachua);
+               
+                break;
+            case 7:
+                UpdateLoaiSuaChua(id, loaisuachua);
+               
+                break;
+            case 8:
+                UpdateLoaiSuaChua(id, loaisuachua);
+               
+                break;
         }
+        window.location.reload();
+    }
+    function UpdateLoaiSuaChua(id, loaisuachua) {
+        $.ajax({
+            url: '/TraCuuPhieu/UpdateLoaiSuaChua',
+            type: 'POST',
+            data: { id, loaisuachua },
+            success: function (response) {
+                window.location.reload();
+            }
+        });
+        window.location.reload();
+    }
 </script>
