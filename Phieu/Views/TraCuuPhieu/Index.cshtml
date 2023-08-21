@@ -17,9 +17,8 @@
     <!-- Table with stripped rows -->
 
     <div>
-       @* <table class="table-striped datatable table display" id="TraCuuPhieu">*@
-        <table class="display nowrap" style="width:100%" id="TraCuuPhieu">
-      @*  <table id="example" class="display" style="width:100%">*@
+      
+        <table class="display cell-border table-striped" style="width:100%" id="TraCuuPhieu">
             <thead>
                 <tr>
                     <th data-sortable="true">
@@ -90,18 +89,23 @@
    </script>*@
   
    <script>
+        //new DataTable('#TraCuuPhieu', {
+        //    dom: 'Bfrtip',
+        //    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+        //});
         $(document).ready(function () {
+           
             // Setup - add a text input to each footer cell
             $('#TraCuuPhieu thead tr').clone(true).addClass('filters').appendTo('#TraCuuPhieu thead');
             var table = $('#TraCuuPhieu').DataTable({
                 orderCellsTop: true,
                 "order": [[0, 'desc']],
-                responsive: true,
-                deferRender: false,
+                deferRender: true,
                 scrollCollapse: true,
                 scroller: true,
-                scrollY: 500,
-                fixedHeader: false,
+                scrollY: 450,
+                responsive: true,
+                fixedHeader: true,
                 initComplete: function () {
                     var api = this.api();
                     // For each column
@@ -109,7 +113,7 @@
                         // Set the header cell to contain the input element
                         var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
                         var title = $(cell).text();
-                        $(cell).html('<input  style="text-align:left;" class="form-control" />');
+                        $(cell).html('<input type="text" />');
                         //$(cell).html('<input style="text-align:left;" ></input>');
                         // On every keypress in this input
                         $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
