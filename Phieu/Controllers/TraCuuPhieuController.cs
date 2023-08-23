@@ -15,6 +15,7 @@ namespace PhieuSuaChua.Controllers
 
         public IActionResult Index()
         {
+            // LinQ
             //var listPhieu = (from Chitietsua in context.Chitietsuas
             //                 join Phieusua in context.Phieusuas
             //                 on Chitietsua.IdPhieu equals Phieusua.IdPhieu
@@ -31,35 +32,38 @@ namespace PhieuSuaChua.Controllers
             //                     Thietbikhac = Chitietsua.ThietBiKhac,
             //                     Trangthaiphieu = Phieusua.TrangThaiPhieu
             //                 }).ToList();
+
+            // Procedure
             var listPhieu = context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToList();
             
             return View(listPhieu);
         }
         public IActionResult ChiTietPhieuSua(int id)
         {
-            var chitietphieu = (from chitietsua in context.Chitietsuas
-                                join phieusua in context.Phieusuas
-                                on chitietsua.IdPhieu equals phieusua.IdPhieu
-                                join nhanvien in context.Nhanviens
-                                on phieusua.MaNv equals nhanvien.MaNv
-                                select new ModelChiTietPhieuSua
-                                {
-                                    Id = phieusua.IdPhieu,
-                                    MaNV = nhanvien.MaNv,
-                                    DonVi = nhanvien.DonVi,
-                                    Hoten = nhanvien.TenNv,
-                                    Sdt = chitietsua.Sdt,
-                                    TenMayTinh = chitietsua.TenPc,
-                                    UserName = chitietsua.AccountNames,
-                                    Password = chitietsua.AccountPass,
-                                    Thietbikhac = chitietsua.ThietBiKhac,
-                                    TinhTrang = chitietsua.TinhTrang,
-                                    GhiChu = chitietsua.GhiChu,
-                                    Trangthaiphieu = phieusua.TrangThaiPhieu,
-                                    LoaiSuaChua = chitietsua.LoaiSuaChua,
-                                    Ngaynhan = phieusua.NgayTao,
-                                    Ngaytra = phieusua.NgayTra
-                                }).Where(x => x.Id == id).ToList();
+            //var chitietphieu = (from chitietsua in context.Chitietsuas
+            //                    join phieusua in context.Phieusuas
+            //                    on chitietsua.IdPhieu equals phieusua.IdPhieu
+            //                    join nhanvien in context.Nhanviens
+            //                    on phieusua.MaNv equals nhanvien.MaNv
+            //                    select new ModelChiTietPhieuSua
+            //                    {
+            //                        Id = phieusua.IdPhieu,
+            //                        MaNV = nhanvien.MaNv,
+            //                        DonVi = nhanvien.DonVi,
+            //                        Hoten = nhanvien.TenNv,
+            //                        Sdt = chitietsua.Sdt,
+            //                        TenMayTinh = chitietsua.TenPc,
+            //                        UserName = chitietsua.AccountNames,
+            //                        Password = chitietsua.AccountPass,
+            //                        Thietbikhac = chitietsua.ThietBiKhac,
+            //                        TinhTrang = chitietsua.TinhTrang,
+            //                        GhiChu = chitietsua.GhiChu,
+            //                        Trangthaiphieu = phieusua.TrangThaiPhieu,
+            //                        LoaiSuaChua = chitietsua.LoaiSuaChua,
+            //                        Ngaynhan = phieusua.NgayTao,
+            //                        Ngaytra = phieusua.NgayTra
+            //                    }).Where(x => x.Id == id).ToList();
+            var chitietphieu = context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToList();
 
             return View(chitietphieu);
         }

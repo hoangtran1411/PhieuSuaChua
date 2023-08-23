@@ -20,46 +20,46 @@
                         <div class="col-lg-12">
                             <form class="row g-3">
                                 <div class="col-6">
-                                    <b>Mã nhân viên:</b> <label id="Manv"> @item.MaNV</label>
+                                    <b>Mã nhân viên:</b> <label id="Manv"> @item.MA_NV</label>
                                 </div>
                                 <div class="col-6">
-                                    <b>Đơn vị: </b><label id="Donvi"> @item.DonVi</label>
+                                    <b>Đơn vị: </b><label id="Donvi"> @item.DON_VI</label>
                                 </div>
                                 <div class="col-6">
-                                    <b>Họ và Tên:</b> <label id="Hoten">@item.Hoten </label>
+                                    <b>Họ và Tên:</b> <label id="Hoten">@item.TEN_NV </label>
                                 </div>
                                 <div class="col-6">
-                                    <b>Số điện thoại:</b> <label id="Sdt">@item.Sdt </label>
+                                    <b>Số điện thoại:</b> <label id="Sdt">@item.SDT </label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Tên máy tính:</b> <label id="TenPC"> @item.TenMayTinh</label>
+                                    <b>Tên máy tính:</b> <label id="TenPC"> @item.TEN_PC</label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Username:</b> <label id="User">@item.UserName </label>
+                                    <b>Username:</b> <label id="User">@item.ACCOUNT_NAMES </label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Password:</b> <label id="Pass"> @item.Password</label>
+                                    <b>Password:</b> <label id="Pass"> @item.ACCOUNT_PASS</label>
                                 </div>
                                 <div class="col-12">
-                                    <b>Thiết bị khác:</b> <label id="Thietbikhac">@item.Thietbikhac </label>
+                                    <b>Thiết bị khác:</b> <label id="Thietbikhac">@item.THIET_BI_KHAC </label>
                                 </div>
                                 <div class="col-12">
-                                    <b>Tình trạng thiết bị:</b> <label id="Tinhtrang">@item.TinhTrang </label>
+                                    <b>Tình trạng thiết bị:</b> <label id="Tinhtrang">@item.TINH_TRANG </label>
                                 </div>
                                 <div class="col-12">
-                                    <b>Ghi chú:</b> <label id="Ghichu">@item.GhiChu </label>
+                                    <b>Ghi chú:</b> <label id="Ghichu">@item.GHI_CHU </label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Trạng thái phiếu:</b> <label id="Trangthaiphieu">@item.Trangthaiphieu </label>
+                                    <b>Trạng thái phiếu:</b> <label id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Ngày nhận:</b> <label id="Ngaynhan">@item.Ngaynhan </label>
+                                    <b>Ngày nhận:</b> <label id="Ngaynhan">@item.NGAY_TAO </label>
                                 </div>
                                 <div class="col-4">
-                                    <b>Ngày trả:</b> <label id="Ngaytra">@item.Ngaytra </label>
+                                    <b>Ngày trả:</b> <label id="Ngaytra">@item.NGAY_TRA </label>
                                 </div>
                                 <div class="col-12">
-                                    <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.LoaiSuaChua </label>
+                                    <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.LOAI_SUA_CHUA </label>
                                 </div>
 
                             </form>
@@ -87,7 +87,7 @@
                                     <input type="text" class="form-control" id="txtghichu" placeholder="Ví dụ: cần nâng cấp...">
                                 </div>
                                 <div class="col-3">
-                                    <a class="btn btn-success" onclick="UpdateGhiChu('@item.Id')" id="updateghichu">Cập nhật ghi chú</a>
+                                    <a class="btn btn-success" onclick="UpdateGhiChu('@item.ID_PHIEU')" id="updateghichu">Cập nhật ghi chú</a>
                                 </div>
                             </form>
                         </div>
@@ -110,15 +110,15 @@
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <a class="btn btn-success" id="updateloaisuachua" onclick="LoaiSuaChua('@item.Id')">Cập nhật loại sửa chữa</a>
+                                    <a class="btn btn-success" id="updateloaisuachua" onclick="LoaiSuaChua('@item.ID_PHIEU')">Cập nhật loại sửa chữa</a>
                                 </div>
                             </form>
                         </div>
                         <p></p>
                         <div class="col-lg-12">
-                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.Id')"></a>
-                            <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.Id')">Xác nhận chờ mua hàng </a>
-                            <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.Id')">Hủy phiếu</a>
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.ID_PHIEU')"></a>
+                            <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.ID_PHIEU')">Xác nhận chờ mua hàng </a>
+                            <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.ID_PHIEU')">Hủy phiếu</a>
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                         </div>
 
