@@ -15,7 +15,7 @@ namespace PhieuSuaChua.Controllers
 
         public IActionResult Index()
         {
-            // LinQ
+            // Phuong phap LinQ
             //var listPhieu = (from Chitietsua in context.Chitietsuas
             //                 join Phieusua in context.Phieusuas
             //                 on Chitietsua.IdPhieu equals Phieusua.IdPhieu
@@ -33,13 +33,21 @@ namespace PhieuSuaChua.Controllers
             //                     Trangthaiphieu = Phieusua.TrangThaiPhieu
             //                 }).ToList();
 
-            // Procedure
+            //Phuong phap Procedure
             var listPhieu = context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToList();
-            
-            return View(listPhieu);
+            var listMuc = context.ModelTraCuuPhieuMucs.FromSqlRaw("EXEC GetTraCuuPhieuMuc").ToList();
+
+            var list = new ModelTraCuu()
+            {
+                TraCuuPhieus = listPhieu,
+                TraCuuPhieuMucs = listMuc
+            };
+
+            return View(list);
         }
         public IActionResult ChiTietPhieuSua(int id)
         {
+            // Phuong phap LinQ
             //var chitietphieu = (from chitietsua in context.Chitietsuas
             //                    join phieusua in context.Phieusuas
             //                    on chitietsua.IdPhieu equals phieusua.IdPhieu
@@ -63,6 +71,8 @@ namespace PhieuSuaChua.Controllers
             //                        Ngaynhan = phieusua.NgayTao,
             //                        Ngaytra = phieusua.NgayTra
             //                    }).Where(x => x.Id == id).ToList();
+
+            //Phuong phap Procedure
             var chitietphieu = context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToList();
 
             return View(chitietphieu);

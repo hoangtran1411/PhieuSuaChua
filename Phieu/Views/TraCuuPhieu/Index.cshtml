@@ -4,97 +4,164 @@
     //Layout = "_Layout";
 }
 @using PhieuSuaChua.Controllers;
-@model IEnumerable<PhieuSuaChua.Domain_Model.ModelTraCuuPhieu>
+@using PhieuSuaChua.Domain_Model;
+@*@model IEnumerable<PhieuSuaChua.Domain_Model.ModelTraCuu>*@
+@model PhieuSuaChua.Domain_Model.ModelTraCuu;
 
 <style>
     thead input {
         width: 100%;
     }
 </style>
-@*<div class="card-body">*@
-<div >
 
-    <!-- Table with stripped rows -->
+<div class="card-body">
+    <!-- Bordered Tabs Justified -->
+    <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+        <li class="nav-item flex-fill" role="presentation">
+            <button class="nav-link w-100 active" id="phieusua-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true"><b>Tra cứu phiếu sửa chữa</b></button>
+        </li>
+        <li class="nav-item flex-fill" role="presentation">
+            <button class="nav-link w-100" id="phieumuc-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1"><b>Tra cứu gửi mực</b></button>
+        </li>
+    </ul>
+    <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+        <div class="tab-pane fade active show" id="bordered-justified-home" role="tabpanel" aria-labelledby="phieusua-tab">
+            <div>
+                <!-- Table with stripped rows -->
+                <div>
+                    <table class="display cell-border table-striped" style="width:100%" id="TraCuuPhieu">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Số phiếu</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Ngày tạo phiếu</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Họ & Tên</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Đơn vị</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Máy tính</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Thiết bị khác</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Trạng thái phiếu</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Chức năng</a>
+                                </th>
+                            </tr>
 
-    <div>
-      
-        <table class="display cell-border table-striped" style="width:100%" id="TraCuuPhieu">
-            <thead>
-                <tr>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Số phiếu</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Ngày tạo phiếu</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Họ & Tên</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Đơn vị</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Máy tính</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Thiết bị khác</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Trạng thái phiếu</a>
-                    </th>
-                    <th data-sortable="true">
-                        <a href="#" class="datatable-sorter">Chức năng</a>
-                    </th>
-                </tr>
-               
-              
-            </thead>
-            <tbody>
-                @if (Model != null)
-                {
-                    int i = 1;
-                    foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.ID_PHIEU</td>
-                            <td>@item.NGAY_TAO</td>
-                            <td>@item.TEN_NV</td>
-                            <td>@item.DON_VI</td>
-                            <td>@item.TEN_PC</td>
-                            <td>@item.THIET_BI_KHAC</td>
-                            <td><span class="badge bg-danger" id="trangthai_@i">@item.TRANG_THAI_PHIEU</span></td>
-                            @*<td><button class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua">Xem phiếu</button></td>*@
-                            <td><a class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua/@item.ID_PHIEU">Xem phiếu</a></td>
-                        </tr>
-                        i= i+1;
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
+
+                        </thead>
+                        <tbody>
+                            @if (Model.TraCuuPhieus != null)
+                            {
+                                int i = 1;
+                                foreach (var item in Model.TraCuuPhieus)
+                                {
+                                    <tr>
+                                        <td>@item.ID_PHIEU</td>
+                                        <td>@item.NGAY_TAO</td>
+                                        <td>@item.TEN_NV</td>
+                                        <td>@item.DON_VI</td>
+                                        <td>@item.TEN_PC</td>
+                                        <td>@item.THIET_BI_KHAC</td>
+                                        <td><span class="badge bg-danger" id="trangthai_@i">@item.TRANG_THAI_PHIEU</span></td>
+                                        <td><a class="btn btn-sm btn-success" href="/TraCuuPhieu/chitietphieusua/@item.ID_PHIEU">Xem phiếu</a></td>
+                                    </tr>
+                                    i = i + 1;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="tab-pane fade"  id="bordered-justified-profile" role="tabpanel" aria-labelledby="phieumuc-tab">
+            <div>
+                <!-- Table with stripped rows -->
+                <div>
+                    <table class="display cell-border table-striped" style="width:100%" id="TraCuuPhieuMuc">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Số phiếu</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Tên máy in</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Ngày gửi</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Ngày sửa xong</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Ngày lấy</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Đơn vị</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Họ&Tên người gửi</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Tên hộp mực</a>
+                                </th>
+                                <th data-sortable="true">
+                                    <a href="#" class="datatable-sorter">Trạng thái</a>
+                                </th>
+                            </tr>
+
+
+                        </thead>
+                        <tbody>
+                            @if (Model.TraCuuPhieuMucs != null)
+                            {
+                                
+                                foreach (var item in Model.TraCuuPhieuMucs)
+                                {
+                                    <tr>
+                                        <td>@item.ID_MUC</td>
+                                        <td>@item.LOAI_MAY_IN</td>
+                                        <td>@item.NGAY_GUI</td>
+                                        <td>@item.NGAY_SUA_XONG</td>
+                                        <td>@item.NGAY_TRA</td>
+                                        <td>@item.DON_VI</td>
+                                        <td>@item.TEN_NV</td>
+                                        <td>@item.TEN_HOP_MUC</td>
+                                        <td>@item.TRANG_THAI_PHIEU</td>
+                                    </tr>
+
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div><!-- End Bordered Tabs Justified -->
 
 </div>
 
+
+
+
 @section Scripts {
-    @*<script src="~/modelscript/modelscript.js"></script>*@
-   @*<script>
-        $(document).ready(function () {
-            $('[id^=trangthai_]').each(function () {
-                var spanText = $(this).text();
-                if (spanText.trim() === "Sửa xong") {
-                    $(this).removeClass('badge bg-danger').addClass('badge bg-success');
-                }
-            });
-        });
-   </script>*@
-  
+    
    <script>
-        //new DataTable('#TraCuuPhieu', {
-        //    dom: 'Bfrtip',
-        //    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-        //});
+       
         $(document).ready(function () {
-           
             // Setup - add a text input to each footer cell
             $('#TraCuuPhieu thead tr').clone(true).addClass('filters').appendTo('#TraCuuPhieu thead');
             var table = $('#TraCuuPhieu').DataTable({
@@ -114,7 +181,7 @@
                         var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
                         var title = $(cell).text();
                         $(cell).html('<input type="text" />');
-                        //$(cell).html('<input style="text-align:left;" ></input>');
+                       
                         // On every keypress in this input
                         $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
                             .off('keyup change')
@@ -135,6 +202,49 @@
                 }
             });
         });
+
+        $('#TraCuuPhieuMuc').DataTable();
+        //$(document).ready(function () {
+        //    // Setup - add a text input to each footer cell
+        //    $('#TraCuuPhieuMuc thead tr').clone(true).addClass('filters').appendTo('#TraCuuPhieuMuc thead');
+        //    var table = $('#TraCuuPhieuMuc').DataTable({
+        //        orderCellsTop: true,
+        //        "order": [[0, 'desc']],
+        //        deferRender: true,
+        //        scrollCollapse: true,
+        //        scroller: true,
+        //        scrollY: 450,
+        //        responsive: true,
+        //        fixedHeader: true,
+        //        initComplete: function () {
+        //            var api = this.api();
+        //            // For each column
+        //            api.columns().eq(0).each(function (colIdx) {
+        //                // Set the header cell to contain the input element
+        //                var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
+        //                var title = $(cell).text();
+        //                $(cell).html('<input type="text" />');
+                        
+        //                // On every keypress in this input
+        //                $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
+        //                    .off('keyup change')
+        //                    .on('keyup change', function (e) {
+        //                        e.stopPropagation();
+        //                        // Get the search value
+        //                        $(this).attr('title', $(this).val());
+        //                        var regexr = '({search})'; //$(this).parents('th').find('select').val();
+        //                        var cursorPosition = this.selectionStart;
+        //                        // Search the column for that value
+        //                        api
+        //                            .column(colIdx)
+        //                            .search((this.value != "") ? regexr.replace('{search}', '(((' + this.value + ')))') : "", this.value != "", this.value == "")
+        //                            .draw();
+        //                        $(this).focus()[0].setSelectionRange(cursorPosition, cursorPosition);
+        //                    });
+        //            });
+        //        }
+        //    });
+        //});
    </script>
   
    

@@ -42,7 +42,9 @@ namespace PhieuSuaChua.Controllers
                 ThietBiKhac = model.Thietbikhac,
                 TinhTrang = model.Tinhtrang,
                 Sdt = model.Sdt,
-                LoaiSuaChua = model.LoaiSuaChua
+                LoaiSuaChua = model.LoaiSuaChua,
+                GhiChu = model.Ghichu
+                
             };
             db.Chitietsuas.Add(ct);
             int number = db.SaveChanges();
