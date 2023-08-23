@@ -1,0 +1,120 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Chi Tiet Phieu Muc";
+    Layout = "_Layout";
+}
+@using PhieuSuaChua.Controllers;
+@model IEnumerable<PhieuSuaChua.Domain_Model.ModelChiTietPhieuMuc>;
+<section class="section">
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="card" style="background-color:ghostwhite">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin chi tiết mực in</h5>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="row g-3">
+                                <div class="col-4">
+                                    <b>Mã nhân viên người gửi:</b> <label id="Manv_gui"> @item.MA_NV_GUI</label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Họ và tên người gửi:</b> <label id="Hoten">@item.TEN_NV_GUI </label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Đơn vị: </b><label id="Donvi"> @item.DON_VI</label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Mã nhân viên người nhận:</b> <label id="Manv_gui"> @item.MA_NV_NHAN</label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Họ và tên người nhận:</b> <label id="Hoten">@item.TEN_NV_NHAN </label>
+                                </div>
+                                <div class="col-12">
+                                    <b>Tên hộp mực:</b> <label id="TenPC"> @item.TEN_HOP_MUC</label>
+                                </div>
+                                <div class="col-12">
+                                    <b>Tình trạng:</b> <label id="User">@item.TINH_TRANG </label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Ngày gửi:</b> <label id="Pass"> @item.NGAY_GUI</label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Ngày sửa xong:</b> <label id="Thietbikhac">@item.NGAY_SUA_XONG </label>
+                                </div>
+                                <div class="col-4">
+                                    <b>Ngày trả:</b> <label id="Tinhtrang">@item.NGAY_TRA </label>
+                                </div>
+                                <div class="col-6">
+                                    <b>Ghi chú:</b> <input id="Ghichu" value="@item.GHI_CHU">
+                                </div>
+                                <div class="col-12">
+                                    <b>Trạng thái hộp mực:</b> <label id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </label>
+                                </div>
+
+                            </form>
+                            <p></p>
+                            <div class="col-lg-12">
+                                <a  class="btn btn-primary">Cập nhật ghi chú</a>
+                                <a  class="btn btn-success">Xác nhận sửa xong</a>
+                                <a  class="btn btn-danger">Xác nhận hộp mực hư</a>
+                                <a class="btn btn-secondary">Hủy phiếu</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="card" style="background-color:ghostwhite">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin người lấy hộp mực</h5>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="row g-2">
+                                <div class="col-4">
+                                    <b class="form-label">Mã nhân viên:</b>
+                                    <input type="text" class="form-control" id="txt_manv_nhan" placeholder="BH1905000">
+                                </div>
+                               
+                                <div class="col-4">
+                                    <b class="form-label">Họ tên:</b>
+                                    <input type="text" class="form-control" id="txt_hoten_nhan" disabled>
+                                </div>
+                                <div class="col-4">
+                                    <b class="form-label">Đơn vị:</b>
+                                    <input type="text" class="form-control" id="txt_donvi" disabled>
+                                </div>
+                                                                
+                                
+                            </form>
+                        </div>
+                        <p></p>
+                    
+                        <p></p>
+                        <div class="col-lg-12">
+
+                            <a class="btn btn-success" id="xacnhan_tramuc">Xác nhận trả hộp mực </a>
+                            
+                            <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+  
+</script>

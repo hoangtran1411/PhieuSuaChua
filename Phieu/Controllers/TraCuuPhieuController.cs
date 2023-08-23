@@ -123,5 +123,12 @@ namespace PhieuSuaChua.Controllers
             }
             return View();
         }
+       
+        public IActionResult ChiTietPhieuMuc(int id)
+        {
+            var chitietmuc = context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToList();
+
+            return View(chitietmuc);
+        }
     }
 }
