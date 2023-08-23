@@ -20,15 +20,15 @@
                     <!-- Vertical Form -->
                     <form class="row g-4">
                         <div class="col-3">
-                            <label for="inputNanme4" class="form-label">MÃ NHÂN VIÊN</label>
+                            <label class="form-label">MÃ NHÂN VIÊN</label>
                             <input type="text" class="form-control" id="manvmuc" placeholder="MÃ NHÂN VIÊN">
                         </div>
                         <div class="col-6">
-                            <label for="inputEmail4" class="form-label">HỌ VÀ TÊN</label>
+                            <label  class="form-label">HỌ VÀ TÊN</label>
                             <input type="email" class="form-control" id="hotenmuc" placeholder="HỌ VÀ TÊN" disabled>
                         </div>
                         <div class="col-3">
-                            <label for="inputNanme4" class="form-label">ĐƠN VỊ</label>
+                            <label  class="form-label">ĐƠN VỊ</label>
                             <input type="text" class="form-control" id="donvimuc" placeholder="ĐƠN VỊ" disabled>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -47,22 +47,19 @@
                             </select>
                         </div>
                         <div class="col-4">
-                            <label for="inputAddress" class="form-label">TÊN HỘP MỰC</label>
+                            <label  class="form-label">TÊN HỘP MỰC</label>
                             <input type="text" class="form-control" id="tenhopmuc" placeholder="TÊN HỘP MỰC...">
                         </div>
                         <div class="col-4">
-                            <label for="inputAddress" class="form-label">MÔ TẢ TÌNH TRẠNG</label>
+                            <label  class="form-label">MÔ TẢ TÌNH TRẠNG</label>
                             <input type="text" class="form-control" id="tinhtrangmuc" placeholder="HẾT MỰC,...">
                         </div>
-
-
-
 
                     </form><!-- Vertical Form -->
                     <p>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</button>
-                            <button type="reset" class="btn btn-danger">CANCEL</button>
+                            <a class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</a>
+                            <a class="btn btn-danger">CANCEL</a>
                         </div>
                     </p>
                 </div>
@@ -71,11 +68,65 @@
 
         </section>
 
-
     </div>
 
 </div>
 
 @section Scripts {
-    <script src="~/modelscript/modelscript.js"></script>
+   <script>
+
+        function DangKy() {
+           var MaNV = $('#manvmuc').val();
+           var TenHopMuc = $('#tenhopmuc').val();
+           var TinhTrangMuc = $('#tinhtrangmuc').val();
+           //var IDLoaiHopMuc = parseInt($('#cbolistprint').val());
+           var LoaiHopMuc = $('#cbolistprint option:selected').val();
+           
+       }
+
+
+       //Kiem Tra Ma Nhan Vien xem co ton tai
+        function CheckNV(successCallback, errorCallback) {
+
+            var manv = $("#manvmuc").val();
+            $.ajax({
+
+                url: '/DangKyGuiMuc/KiemtraMaNV',
+                type: 'POST',
+                data: { manv },
+                success: function (response) {
+                    if (response.mesage == "OK") {
+                        var item = response.model;
+                        $("#hotenmuc").val(item.tenNv);
+                        $("#donvimuc").val(item.donVi);
+                        successCallback(item.maNv);
+                    }
+                    else {
+                        Swal.fire(
+                            'Mã nhân viên chưa chính xác',
+                            'Xin nhập lại');
+                        errorCallback();
+                        ResetForm();
+
+                    }
+                }
+            });
+        }
+
+        // Reset form da nhap
+        function ResetForm() {
+            $("#manvmuc").val("");
+            $("#hotenmuc").val("");
+            $("#donvimuc").val("");
+            $("#tenhopmuc").val("");
+            $("#tinhtrangmuc").val("");
+
+            // enable form disble
+            $("#Thietbikhac").attr("disabled", false);
+            $("#Tenmaytinh").attr("disabled", false);
+            $("#Username").attr("disabled", false);
+            $("#Password").attr("disabled", false);
+
+        }
+   </script>
 }

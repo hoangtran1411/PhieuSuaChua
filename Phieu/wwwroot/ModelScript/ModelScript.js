@@ -20,7 +20,7 @@
     }
 
 function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtrang, Ghichu) {
-    var i = 0;
+   /* var i = 0;*/
     var manv = $('#MaNV').val();
 
     CheckNV(
@@ -41,7 +41,6 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
                 $.ajax({
                     type: 'POST',
                     url: '/DangKySuaChua/DangKySuaChua',
-                    //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     datatype: Text,
                     data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
                     success: function (response) { 

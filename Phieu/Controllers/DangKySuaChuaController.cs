@@ -75,8 +75,6 @@ namespace PhieuSuaChua.Controllers
             {
                 message = "Wrong";
             }
-            //var listnv = db.Nhanviens.Where(l=>l.MaNv==nv.MaNv).ToArray();
-            //var check = listnv.Where(k => k.MaNv == nv.MaNv).Count();
             return Json(new { mesage = message, model = result });
         }
     }
