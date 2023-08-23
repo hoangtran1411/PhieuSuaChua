@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 
 namespace PhieuSuaChua.Controllers
@@ -16,9 +17,39 @@ namespace PhieuSuaChua.Controllers
         {
             return View();
         }
-        public IActionResult DangKyGuiMuc()
+        public IActionResult DangKyGuiMuc(ModelDangKyMuc model)
         {
-            return View();
+            Phieumuc phieumuc = new()
+            {
+                MaNvGui = model.MA_NV,
+                TrangThaiPhieu = model.TRANG_THAI_PHIEU
+
+            };
+            context.Phieumucs.Add(phieumuc);
+            context.SaveChanges();
+
+            Chitietmuc chitietmuc = new() 
+            {
+                IdMuc = Convert.ToInt32(phieumuc.IdMuc),
+                TenHopMuc = model.TEN_HOP_MUC,
+                LoaiMayIn = model.MAY_IN,
+                TinhTrang = model.TINH_TRANG
+            };
+            context.Chitietmucs.Add(chitietmuc);
+            int number = context.SaveChanges();
+
+            string message;
+
+            if (number > 0)
+            {
+                message = "OK";
+            }
+            else
+            {
+                message = "Wrong";
+            }
+            int sophieu = Convert.ToInt32(phieumuc.IdMuc);
+            return Json(new { mesage = message, model = sophieu });
         }
         [HttpPost]
         public JsonResult KiemtraMaNV(Nhanvien nv)

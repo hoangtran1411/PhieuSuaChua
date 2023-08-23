@@ -21,7 +21,7 @@
                     <form class="row g-4">
                         <div class="col-3">
                             <label class="form-label">MÃ NHÂN VIÊN</label>
-                            <input type="text" class="form-control" id="manvmuc" placeholder="MÃ NHÂN VIÊN">
+                            <input type="text" class="form-control" id="manvmuc" onblur="CheckNV()" placeholder="MÃ NHÂN VIÊN">
                         </div>
                         <div class="col-6">
                             <label  class="form-label">HỌ VÀ TÊN</label>
@@ -58,8 +58,8 @@
                     </form><!-- Vertical Form -->
                     <p>
                         <div class="text-center">
-                            <a class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</a>
-                            <a class="btn btn-danger">CANCEL</a>
+                            <a class="btn btn-primary" onclick="DangKy()">ĐĂNG KÝ</a>
+                            <a class="btn btn-danger" onclick="ResetForm()">CANCEL</a>
                         </div>
                     </p>
                 </div>
@@ -76,12 +76,35 @@
    <script>
 
         function DangKy() {
-           var MaNV = $('#manvmuc').val();
-           var TenHopMuc = $('#tenhopmuc').val();
-           var TinhTrangMuc = $('#tinhtrangmuc').val();
-           //var IDLoaiHopMuc = parseInt($('#cbolistprint').val());
-           var LoaiHopMuc = $('#cbolistprint option:selected').val();
-           
+            var MA_NV = $('#manvmuc').val();
+          
+          CheckNV(
+                function (MA_NV) {
+                    var TEN_HOP_MUC = $('#tenhopmuc').val();
+                    var TINH_TRANG = $('#tinhtrangmuc').val();
+                    var TRANG_THAI_PHIEU ="Đang sửa"
+                    
+                    //var IDLoaiHopMuc = parseInt($('#cbolistprint').val());
+                    var MAY_IN = $('#cbolistprint option:selected').text();
+                    $.ajax({
+                        url: '/DangKyGuiMuc/DangKyGuiMuc',
+                        type:'POST',
+                        data: { MA_NV, MAY_IN, TEN_HOP_MUC, TINH_TRANG, TRANG_THAI_PHIEU },
+                        success: function(response){
+                            if (response.mesage == "OK") {
+                                Swal.fire(
+                                    'Số phiếu là: ' + response.model,
+                                    'Chúc mừng đăng ký thành công',);
+                                ResetForm();
+                            }
+                        }
+                    });
+              },
+                function () {
+                    console.log("Mã nhân viên không chính xác");
+
+                }
+          );
        }
 
 
@@ -120,13 +143,6 @@
             $("#donvimuc").val("");
             $("#tenhopmuc").val("");
             $("#tinhtrangmuc").val("");
-
-            // enable form disble
-            $("#Thietbikhac").attr("disabled", false);
-            $("#Tenmaytinh").attr("disabled", false);
-            $("#Username").attr("disabled", false);
-            $("#Password").attr("disabled", false);
-
         }
    </script>
 }
