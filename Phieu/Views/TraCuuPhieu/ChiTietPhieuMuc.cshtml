@@ -80,18 +80,22 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form class="row g-2">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <b class="form-label">Mã nhân viên:</b>
-                                    <input type="text" class="form-control" id="txt_manv_nhan" placeholder="BH1905000" onblur="">
+                                    <input type="text" class="form-control" id="txt_manv_nhan" placeholder="BH1905000" onblur="CheckNV()">
                                 </div>
                                
-                                <div class="col-4">
+                                <div class="col-3">
                                     <b class="form-label">Họ tên:</b>
                                     <input type="text" class="form-control" id="txt_hoten_nhan" disabled>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <b class="form-label">Đơn vị:</b>
                                     <input type="text" class="form-control" id="txt_donvi" disabled>
+                                </div>
+                                <div class="col-3">
+                                    <b class="form-label">Chức vụ:</b>
+                                    <input type="text" class="form-control" id="txt_chucvu" disabled>
                                 </div>
                                                                 
                             </form>
@@ -101,7 +105,7 @@
                         <p></p>
                         <div class="col-lg-12">
 
-                            <a class="btn btn-success" id="xacnhan_tramuc" onclick="">Xác nhận trả hộp mực </a>
+                            <a class="btn btn-success" id="xacnhan_tramuc" onclick="XacNhanTraHopMuc('@item.ID_MUC')">Xác nhận trả hộp mực </a>
                             
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                         </div>
@@ -179,6 +183,7 @@
                     var item = response.model;
                     $("#txt_hoten_nhan").val(item.tenNv);
                     $("#txt_donvi").val(item.donVi);
+                    $("#txt_chucvu").val(item.chucDanh);
                     successCallback(item.maNv);
                 }
                 else {
@@ -198,8 +203,21 @@
 
     function XacNhanTraHopMuc(id){
         var manv = $('#txt_manv_nhan').val();
+        var trangthai ="Đã trả";
         CheckNV(function(manv){
             $.ajax({
+                url: '/TraCuuPhieu/XacNhanTraHopMuc',
+                type:'POST',
+                dataType: 'json',
+                data: { id, trangthai , manv},
+                success: function(response){
+                    if (response.model > 0) {
+                        window.location.reload();
+                        Swal.fire(
+                            'Thông báo ',
+                            'Xác nhận thành công');
+                    }
+                }
 
             });
         });

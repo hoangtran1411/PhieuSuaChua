@@ -90,16 +90,13 @@ namespace PhieuSuaChua.Controllers
                 {
                     update.TrangThaiPhieu = trangthai;
                     update.NgayTra = DateTime.Now;
-                    //context.SaveChanges();
-                    message = "OK";
                 }
                 else
                 {
                     update.TrangThaiPhieu = trangthai;                    
-                    message = "OK";
                 }
-
-                 i = await context.SaveChangesAsync();
+                i = await context.SaveChangesAsync();
+                message = "OK";
             }
            
             return Json(new { mesage = message, model = i});
@@ -152,12 +149,17 @@ namespace PhieuSuaChua.Controllers
                 {
                     update.TrangThaiPhieu = trangthai;
                     update.NgaySuaXong = DateTime.Now;
-                    message = "OK";
+                   
                 }
-                else
+                else if (trangthai == "Đã trả")
                 {
                     update.TrangThaiPhieu = trangthai;
-                    message = "OK";
+                    update.NgaySuaXong = DateTime.Now;
+                    update.NgayTra = DateTime.Now;
+                }
+                else 
+                {
+                    update.TrangThaiPhieu = trangthai;
                 }
                 i = await context.SaveChangesAsync();
                 message = "OK";
@@ -179,6 +181,22 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model = i });
 
         }
-        
+        public async Task<JsonResult> XacNhanTraHopMuc(int id, string trangthai, string manv)
+        {
+            string message = "NOT";
+            int i = 0;
+            var update = await context.Phieumucs.Where(idmuc => idmuc.IdMuc == id).FirstOrDefaultAsync();
+            if (update != null)
+            {
+                update.TrangThaiPhieu = trangthai;
+                update.MaNvNhan = manv;
+                update.NgayTra = DateTime.Now;
+                i = await context.SaveChangesAsync();
+                message = "OK";
+            }
+            return Json(new { mesage = message, model = i });
+
+        }
+
     }
 }
