@@ -18,7 +18,7 @@
                     <h5 class="card-title">Thông tin chi tiết mực in</h5>
                     <div class="row">
                         <div class="col-lg-12">
-                            <form class="row g-3">
+                            <form class="row g-2">
                                 <div class="col-4">
                                     <b>Mã nhân viên người gửi:</b> <label id="Manv_gui"> @item.MA_NV_GUI</label>
                                 </div>
@@ -49,8 +49,11 @@
                                 <div class="col-4">
                                     <b>Ngày trả:</b> <label id="Tinhtrang">@item.NGAY_TRA </label>
                                 </div>
+                                <div class="col-12">
+                                    <b>Ghi chú:</b>
+                                </div>
                                 <div class="col-6">
-                                    <b>Ghi chú:</b> <input id="Ghichu" value="@item.GHI_CHU">
+                                    <input type="text" class="form-control" id="txtGhichu" value="@item.GHI_CHU">
                                 </div>
                                 <div class="col-12">
                                     <b>Trạng thái hộp mực:</b> <label id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </label>
@@ -59,10 +62,10 @@
                             </form>
                             <p></p>
                             <div class="col-lg-12">
-                                <button class="btn btn-primary">Cập nhật ghi chú</button>
-                                <button class="btn btn-success">Xác nhận sửa xong</button>
-                                <button class="btn btn-danger">Xác nhận hộp mực hư</button>
-                                <button class="btn btn-secondary">Hủy phiếu</button>
+                                <a class="btn btn-primary" onclick="UpdateGhiChu('@item.ID_MUC')">Cập nhật ghi chú</a>
+                                <a class="btn btn-success" onclick="XacNhanSuaXong('@item.ID_MUC')">Xác nhận sửa xong</a>
+                                <a class="btn btn-danger" onclick="XacNhanHopMucHu('@item.ID_MUC')">Xác nhận hộp mực hư</a>
+                                <a class="btn btn-secondary" onclick="XacNhanHuyPhieu('@item.ID_MUC')">Hủy phiếu</a>
                             </div>
 
                         </div>
@@ -79,7 +82,7 @@
                             <form class="row g-2">
                                 <div class="col-4">
                                     <b class="form-label">Mã nhân viên:</b>
-                                    <input type="text" class="form-control" id="txt_manv_nhan" placeholder="BH1905000">
+                                    <input type="text" class="form-control" id="txt_manv_nhan" placeholder="BH1905000" onblur="">
                                 </div>
                                
                                 <div class="col-4">
@@ -98,7 +101,7 @@
                         <p></p>
                         <div class="col-lg-12">
 
-                            <button class="btn btn-success" id="xacnhan_tramuc">Xác nhận trả hộp mực </button>
+                            <a class="btn btn-success" id="xacnhan_tramuc" onclick="">Xác nhận trả hộp mực </a>
                             
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                         </div>
@@ -113,6 +116,93 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function UpdateTrangThaiMuc(id, trangthai){
+        $.ajax({
+        url: '/TraCuuPhieu/UpdateTrangThaiMuc',
+        type:'POST',
+        dataType:'json',
+        data: {id, trangthai},
+        success: function(response){
+            if(response.model >0){
+                    window.location.reload();
+                    Swal.fire(
+                        'Thông báo ',
+                        'Xác nhận thành công');
+            }
+        }
+        });
+    }
 
+    function XacNhanSuaXong(id){
+        var trangthai ="Sửa xong";
+        UpdateTrangThaiMuc(id, trangthai);
+    }
+
+    function XacNhanHuyPhieu(id){
+        var trangthai = "Phiếu đã hủy";
+        UpdateTrangThaiMuc(id, trangthai);
+    }
+
+    function XacNhanHopMucHu(id) {
+        var trangthai = "Hộp mực hư";
+        UpdateTrangThaiMuc(id, trangthai);
+    }
+
+    function UpdateGhiChu(id){
+        var ghichu = $('#txtGhichu').val().trim();
+        $.ajax({
+            url: '/TraCuuPhieu/UpdateGhiChuMuc',
+            type: 'POST',
+            dataType: 'json',
+            data: { id, ghichu },
+            success: function (response) {
+                if (response.model > 0) {
+                    window.location.reload();
+                    Swal.fire(
+                        'Thông báo ',
+                        'Xác nhận thành công');
+                }
+            }
+        });
+    }
+    function CheckNV(successCallback, errorCallback) {
+
+        var manv = $("#txt_manv_nhan").val().trim();
+        $.ajax({
+
+            url: '/DangKySuaChua/KiemtraMaNV',
+            type: 'POST',
+            /* datatype: Text,*/
+            data: { manv },
+            success: function (response) {
+                if (response.mesage == "OK") {
+                    var item = response.model;
+                    $("#txt_hoten_nhan").val(item.tenNv);
+                    $("#txt_donvi").val(item.donVi);
+                    successCallback(item.maNv);
+                }
+                else {
+                    Swal.fire(
+                        'Mã nhân viên chưa chính xác',
+                        'Xin nhập lại');
+                    errorCallback();
+                    ResetForm();
+
+                }
+            }
+        });
+    }
+    function ResetForm(){
+        $('#txt_manv_nhan').val('');
+    }
+
+    function XacNhanTraHopMuc(id){
+        var manv = $('#txt_manv_nhan').val();
+        CheckNV(function(manv){
+            $.ajax({
+
+            });
+        });
+    }
   
 </script>

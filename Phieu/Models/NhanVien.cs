@@ -15,9 +15,7 @@ public partial class Nhanvien
 
     public int? Quyen { get; set; }
 
-    public virtual ICollection<Phieumuc> PhieumucMaNvGuiNavigations { get; set; } = new List<Phieumuc>();
-
-    public virtual ICollection<Phieumuc> PhieumucMaNvNhanNavigations { get; set; } = new List<Phieumuc>();
+    public virtual ICollection<Phieumuc> Phieumucs { get; set; } = new List<Phieumuc>();
 
     public virtual ICollection<Phieusua> Phieusuas { get; set; } = new List<Phieusua>();
 }

@@ -17,9 +17,9 @@ public partial class Phieumuc
 
     public string? TrangThaiPhieu { get; set; }
 
+    public DateTime? NgaySuaXong { get; set; }
+
     public virtual ICollection<Chitietmuc> Chitietmucs { get; set; } = new List<Chitietmuc>();
 
     public virtual Nhanvien? MaNvGuiNavigation { get; set; }
-
-    public virtual Nhanvien? MaNvNhanNavigation { get; set; }
 }

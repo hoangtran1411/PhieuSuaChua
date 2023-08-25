@@ -37,7 +37,7 @@ public partial class PhieusuachuaContext : DbContext
     {
         modelBuilder.Entity<Chitietmuc>(entity =>
         {
-            entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETM__727EE3085D8CB3A8");
+            entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETM__727EE30841992857");
 
             entity.ToTable("CHITIETMUC");
 
@@ -58,12 +58,12 @@ public partial class PhieusuachuaContext : DbContext
 
             entity.HasOne(d => d.IdMucNavigation).WithMany(p => p.Chitietmucs)
                 .HasForeignKey(d => d.IdMuc)
-                .HasConstraintName("FK__CHITIETMU__TINH___33D4B598");
+                .HasConstraintName("FK__CHITIETMU__TINH___0D7A0286");
         });
 
         modelBuilder.Entity<Chitietsua>(entity =>
         {
-            entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETS__727EE308743817E1");
+            entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETS__727EE308F5F17C3C");
 
             entity.ToTable("CHITIETSUA");
 
@@ -99,7 +99,7 @@ public partial class PhieusuachuaContext : DbContext
 
             entity.HasOne(d => d.IdPhieuNavigation).WithMany(p => p.Chitietsuas)
                 .HasForeignKey(d => d.IdPhieu)
-                .HasConstraintName("FK__CHITIETSUA__SDT__2C3393D0");
+                .HasConstraintName("FK__CHITIETSUA__SDT__05D8E0BE");
         });
 
         modelBuilder.Entity<Nhanvien>(entity =>
@@ -129,7 +129,7 @@ public partial class PhieusuachuaContext : DbContext
 
         modelBuilder.Entity<Phieumuc>(entity =>
         {
-            entity.HasKey(e => e.IdMuc).HasName("PK__PHIEUMUC__276E66D0B7A8A2B2");
+            entity.HasKey(e => e.IdMuc).HasName("PK__PHIEUMUC__276E66D0E300830C");
 
             entity.ToTable("PHIEUMUC");
 
@@ -146,6 +146,9 @@ public partial class PhieusuachuaContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_GUI");
+            entity.Property(e => e.NgaySuaXong)
+                .HasColumnType("datetime")
+                .HasColumnName("NGAY_SUA_XONG");
             entity.Property(e => e.NgayTra)
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_TRA");
@@ -153,18 +156,14 @@ public partial class PhieusuachuaContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("TRANG_THAI_PHIEU");
 
-            entity.HasOne(d => d.MaNvGuiNavigation).WithMany(p => p.PhieumucMaNvGuiNavigations)
+            entity.HasOne(d => d.MaNvGuiNavigation).WithMany(p => p.Phieumucs)
                 .HasForeignKey(d => d.MaNvGui)
-                .HasConstraintName("FK__PHIEUMUC__MA_NV___300424B4");
-
-            entity.HasOne(d => d.MaNvNhanNavigation).WithMany(p => p.PhieumucMaNvNhanNavigations)
-                .HasForeignKey(d => d.MaNvNhan)
-                .HasConstraintName("FK__PHIEUMUC__MA_NV___30F848ED");
+                .HasConstraintName("FK__PHIEUMUC__MA_NV___0A9D95DB");
         });
 
         modelBuilder.Entity<Phieusua>(entity =>
         {
-            entity.HasKey(e => e.IdPhieu).HasName("PK__PHIEUSUA__C8DC3DA7B7A5571F");
+            entity.HasKey(e => e.IdPhieu).HasName("PK__PHIEUSUA__C8DC3DA745F7693A");
 
             entity.ToTable("PHIEUSUA");
 
@@ -186,7 +185,7 @@ public partial class PhieusuachuaContext : DbContext
 
             entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.Phieusuas)
                 .HasForeignKey(d => d.MaNv)
-                .HasConstraintName("FK__PHIEUSUA__TRANG___29572725");
+                .HasConstraintName("FK__PHIEUSUA__TRANG___02FC7413");
         });
 
         OnModelCreatingPartial(modelBuilder);

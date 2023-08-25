@@ -140,62 +140,54 @@
            
             case "Đang sửa":
                 $('#xacnhanphieu').html('Xác nhận sửa xong');
-             
                 break;
+
             case "Đã sửa xong":
                 $('#xacnhanphieu').html('Xác nhận trả máy');
-               
                 break;
+
             case "Đã trả máy":
                 $('#xacnhanphieu').html('');
                 $('#xacnhanmuahang').html('');
                 $('#huyphieu').html('');
+                break;
 
             case "Phiếu đã hủy":
                 $('#xacnhanphieu').html('');
                 $('#xacnhanmuahang').html('');
                 $('#huyphieu').html('');
-              
                 break;
+
             default:
                 $('#xacnhanphieu').html('Tiếp nhận phiếu');
-              
                 break;
         }
     });
 </script>
 <script>
- 
     
         function XacnhanPhieu(id){
         var trangthai = $('#Trangthaiphieu').text().trim();
         switch (trangthai) {
             case "Chờ tiếp nhận":               
                 UpdateTrangThai(id,'Đang sửa');
-                //window.location.reload();               
                 break;
 
             case "Đang sửa":              
                 UpdateTrangThai(id, 'Đã sửa xong');
-                //window.location.reload();               
                 break;
             case "Đã sửa xong":              
                 UpdateTrangThai(id, 'Đã trả máy');
-                //window.location.reload();                      
                  break;
             }
-        //location.reload(true);
-        //window.location.reload();
         };
 
     function XacnhanMuaHang(id){
         UpdateTrangThai(id, 'Chờ mua hàng');
-        window.location.reload();
-    };
+    }
 
     function xacnhanhuy(id) {
         UpdateTrangThai(id, 'Phiếu đã hủy');
-        window.location.reload();
     }
 
     function UpdateTrangThai(id, trangthai){
@@ -211,7 +203,6 @@
                   
                     }
             });
-        //window.location.reload();
     }
     function UpdateGhiChu(id){
         var ghichu = $('#txtghichu').val();
@@ -221,11 +212,12 @@
             dataType:'json',
             data: {id,ghichu},
             success: function (response) {
-                //window.location.reload();
-            }
+                if (response.model > 0) {
+                    window.location.reload();
+            }}
         });
         $('#txtghichu').val('');
-        window.location.reload();
+       
     }
     function LoaiSuaChua(id){
         var idloai = parseInt($('#cbolistprint').val());
@@ -270,11 +262,12 @@
         $.ajax({
             url: '/TraCuuPhieu/UpdateLoaiSuaChua',
             type: 'POST',
+            dataType: 'json',
             data: { id, loaisuachua },
             success: function (response) {
-               // window.location.reload();
-            }
+                if (response.model > 0) {
+                    window.location.reload();
+            }}
         });
-        //window.location.reload();
     }
 </script>

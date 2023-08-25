@@ -81,7 +81,7 @@ namespace PhieuSuaChua.Controllers
         [HttpPost]
         public async Task<JsonResult> XacNhanPhieu(int id, string trangthai)
         {
-            string message ="KO";
+            string message ="NOT";
             int i = 0;
             var update = context.Phieusuas.Find(id);
             if (update != null)
@@ -106,34 +106,79 @@ namespace PhieuSuaChua.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateGhiChu(int id, string ghichu)
+        public async Task<JsonResult> UpdateGhiChu(int id, string ghichu)
         {
-            var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
+            string message = "NOT";
+            int i = 0;
+            var update = await context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefaultAsync();
             if (update != null)
             {
                 update.GhiChu = ghichu;
-                await context.SaveChangesAsync();
+                i = await context.SaveChangesAsync();
+                message = "OK";
             }
-            return View();
+            return Json(new { mesage = message, model = i });
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateLoaiSuaChua(int id, string loaisuachua)
+        public async Task<JsonResult> UpdateLoaiSuaChua(int id, string loaisuachua)
         {
-            var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
+            string message = "NOT";
+            int i = 0;
+            var update = await context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefaultAsync();
             if (update != null)
             {
                 update.LoaiSuaChua = loaisuachua;
-                await context.SaveChangesAsync();
+                i = await context.SaveChangesAsync();
+                message = "OK";
             }
-            return View();
+            return Json(new { mesage = message, model = i });
         }
        
-        public IActionResult ChiTietPhieuMuc(int id)
+        public  IActionResult ChiTietPhieuMuc(int id)
         {
-            var chitietmuc = context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToList();
+            var  chitietmuc = context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToList();
 
-            return View(chitietmuc);
+            return  View(chitietmuc);
         }
+        public async Task<JsonResult> UpdateTrangThaiMuc(int id, string trangthai)
+        {
+            string message = "NOT";
+            int i = 0;
+            var update  = await context.Phieumucs.Where(idmuc => idmuc.IdMuc == id).FirstOrDefaultAsync();
+            if (update != null)
+            {
+                if (trangthai == "Sửa xong")
+                {
+                    update.TrangThaiPhieu = trangthai;
+                    update.NgaySuaXong = DateTime.Now;
+                    message = "OK";
+                }
+                else
+                {
+                    update.TrangThaiPhieu = trangthai;
+                    message = "OK";
+                }
+                i = await context.SaveChangesAsync();
+                message = "OK";
+            }
+            return Json(new { mesage = message, model = i });
+        }
+
+        public async Task<JsonResult> UpdateGhiChuMuc(int id, string ghichu)
+        {
+            string message = "NOT";
+            int i = 0;
+            var update = await context.Chitietmucs.Where(idchitiet => idchitiet.IdMuc == id).FirstOrDefaultAsync();
+            if(update != null)
+            {
+                update.GhiChu = ghichu;
+                i = await context.SaveChangesAsync();
+                message = "OK";
+            }
+            return Json(new { mesage = message, model = i });
+
+        }
+        
     }
 }
