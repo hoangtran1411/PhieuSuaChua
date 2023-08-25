@@ -149,7 +149,6 @@ namespace PhieuSuaChua.Controllers
                 {
                     update.TrangThaiPhieu = trangthai;
                     update.NgaySuaXong = DateTime.Now;
-                   
                 }
                 else if (trangthai == "Đã trả")
                 {
