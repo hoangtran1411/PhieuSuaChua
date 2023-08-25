@@ -13,7 +13,7 @@ namespace PhieuSuaChua.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // Phuong phap LinQ
             //var listPhieu = (from Chitietsua in context.Chitietsuas
@@ -34,8 +34,8 @@ namespace PhieuSuaChua.Controllers
             //                 }).ToList();
 
             //Phuong phap Procedure
-            var listPhieu = context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToList();
-            var listMuc = context.ModelTraCuuPhieuMucs.FromSqlRaw("EXEC GetTraCuuPhieuMuc").ToList();
+            var listPhieu = await context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToListAsync();
+            var listMuc = await context.ModelTraCuuPhieuMucs.FromSqlRaw("EXEC GetTraCuuPhieuMuc").ToListAsync();
 
             var list = new ModelTraCuu()
             {
@@ -45,7 +45,7 @@ namespace PhieuSuaChua.Controllers
 
             return View(list);
         }
-        public IActionResult ChiTietPhieuSua(int id)
+        public async Task<IActionResult> ChiTietPhieuSua(int id)
         {
             // Phuong phap LinQ
             //var chitietphieu = (from chitietsua in context.Chitietsuas
@@ -73,7 +73,7 @@ namespace PhieuSuaChua.Controllers
             //                    }).Where(x => x.Id == id).ToList();
 
             //Phuong phap Procedure
-            var chitietphieu = context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToList();
+            var chitietphieu = await context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToListAsync();
 
             return View(chitietphieu);
         }
@@ -132,9 +132,9 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model = i });
         }
        
-        public  IActionResult ChiTietPhieuMuc(int id)
+        public  async Task<IActionResult> ChiTietPhieuMuc(int id)
         {
-            var  chitietmuc = context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToList();
+            var  chitietmuc = await context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToListAsync();
 
             return  View(chitietmuc);
         }
