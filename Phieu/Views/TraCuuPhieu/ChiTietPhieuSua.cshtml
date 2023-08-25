@@ -20,46 +20,46 @@
                         <div class="col-lg-12">
                             <form class="row g-3">
                                 <div class="col-6">
-                                    <b>Mã nhân viên:</b> <label id="Manv"> @item.MA_NV</label>
+                                    <b>Mã nhân viên:</b> <span id="Manv"> @item.MA_NV</span>
                                 </div>
                                 <div class="col-6">
-                                    <b>Đơn vị: </b><label id="Donvi"> @item.DON_VI</label>
+                                    <b>Đơn vị: </b><span id="Donvi"> @item.DON_VI</span>
                                 </div>
                                 <div class="col-6">
-                                    <b>Họ và Tên:</b> <label id="Hoten">@item.TEN_NV </label>
+                                    <b>Họ và Tên:</b> <span id="Hoten">@item.TEN_NV </span>
                                 </div>
                                 <div class="col-6">
-                                    <b>Số điện thoại:</b> <label id="Sdt">@item.SDT </label>
+                                    <b>Số điện thoại:</b> <span id="Sdt">@item.SDT </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Tên máy tính:</b> <label id="TenPC"> @item.TEN_PC</label>
+                                    <b>Tên máy tính:</b> <span id="TenPC"> @item.TEN_PC</span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Username:</b> <label id="User">@item.ACCOUNT_NAMES </label>
+                                    <b>Username:</b> <span id="User">@item.ACCOUNT_NAMES </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Password:</b> <label id="Pass"> @item.ACCOUNT_PASS</label>
+                                    <b>Password:</b> <span id="Pass"> @item.ACCOUNT_PASS</span>
                                 </div>
                                 <div class="col-12">
-                                    <b>Thiết bị khác:</b> <label id="Thietbikhac">@item.THIET_BI_KHAC </label>
+                                    <b>Thiết bị khác:</b> <span id="Thietbikhac">@item.THIET_BI_KHAC </span>
                                 </div>
                                 <div class="col-12">
-                                    <b>Tình trạng thiết bị:</b> <label id="Tinhtrang">@item.TINH_TRANG </label>
+                                    <b>Tình trạng thiết bị:</b> <span id="Tinhtrang">@item.TINH_TRANG </span>
                                 </div>
                                 <div class="col-12">
-                                    <b>Ghi chú:</b> <label id="Ghichu">@item.GHI_CHU </label>
+                                    <b>Ghi chú:</b> <span id="Ghichu">@item.GHI_CHU </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Trạng thái phiếu:</b> <label id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </label>
+                                    <b>Trạng thái phiếu:</b> <span id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Ngày nhận:</b> <label id="Ngaynhan">@item.NGAY_TAO </label>
+                                    <b>Ngày nhận:</b> <span id="Ngaynhan">@item.NGAY_TAO </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Ngày trả:</b> <label id="Ngaytra">@item.NGAY_TRA </label>
+                                    <b>Ngày trả:</b> <span id="Ngaytra">@item.NGAY_TRA </span>
                                 </div>
                                 <div class="col-12">
-                                    <b>Loại sửa chữa:</b> <label id="Loaisuachua">@item.LOAI_SUA_CHUA </label>
+                                    <b>Loại sửa chữa:</b> <span id="Loaisuachua">@item.LOAI_SUA_CHUA </span>
                                 </div>
 
                             </form>
@@ -81,7 +81,7 @@
                         <div class="col-lg-12">
                             <form class="row g-2">
                                 <div class="col-1">
-                                    <b class="form-label">Ghi chú:</b>
+                                    <b class="form-span">Ghi chú:</b>
                                 </div>
                                 <div class="col-5">
                                     <input type="text" class="form-control" id="txtghichu" placeholder="Ví dụ: cần nâng cấp...">
@@ -95,7 +95,7 @@
                         <div class="col-lg-12">
                             <form class="row g-2">
                                 <div class="col-1">
-                                    <b class="form-label">Loại sửa chữa:</b>
+                                    <b class="form-span">Loại sửa chữa:</b>
                                 </div>
                                 <div class="col-5">
                                     <select id="cbolistprint" class="form-select" name="Type">
@@ -116,9 +116,9 @@
                         </div>
                         <p></p>
                         <div class="col-lg-12">
-                            <button class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.ID_PHIEU')"></button>
-                            <button class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.ID_PHIEU')">Xác nhận chờ mua hàng </button>
-                            <button class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.ID_PHIEU')">Hủy phiếu</button>
+                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.ID_PHIEU')"></a>
+                            <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.ID_PHIEU')">Xác nhận chờ mua hàng </a>
+                            <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.ID_PHIEU')">Hủy phiếu</a>
                             <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
                         </div>
 
@@ -172,49 +172,56 @@
         switch (trangthai) {
             case "Chờ tiếp nhận":               
                 UpdateTrangThai(id,'Đang sửa');
-                window.location.reload();               
+                //window.location.reload();               
                 break;
 
             case "Đang sửa":              
                 UpdateTrangThai(id, 'Đã sửa xong');
-                window.location.reload();               
+                //window.location.reload();               
                 break;
             case "Đã sửa xong":              
                 UpdateTrangThai(id, 'Đã trả máy');
-                window.location.reload();                      
+                //window.location.reload();                      
                  break;
-            
             }
-        window.location.reload();
+        //location.reload(true);
+        //window.location.reload();
         };
 
     function XacnhanMuaHang(id){
         UpdateTrangThai(id, 'Chờ mua hàng');
         window.location.reload();
     };
+
     function xacnhanhuy(id) {
         UpdateTrangThai(id, 'Phiếu đã hủy');
         window.location.reload();
     }
+
     function UpdateTrangThai(id, trangthai){
             $.ajax({
                     url: '/TraCuuPhieu/XacNhanPhieu',
                     type:'POST',
+                    dataType: 'json',
                     data:{id,trangthai},
-                    success: function(response){
-                    window.location.reload();
+                    success: function (response) {
+                        if(response.model >0){
+                        window.location.reload();
+                        }
+                  
                     }
             });
-        window.location.reload();
+        //window.location.reload();
     }
     function UpdateGhiChu(id){
         var ghichu = $('#txtghichu').val();
         $.ajax({
             url: '/TraCuuPhieu/UpdateGhiChu',
             type: 'POST',
+            dataType:'json',
             data: {id,ghichu},
             success: function (response) {
-                window.location.reload();
+                //window.location.reload();
             }
         });
         $('#txtghichu').val('');
@@ -265,9 +272,9 @@
             type: 'POST',
             data: { id, loaisuachua },
             success: function (response) {
-                window.location.reload();
+               // window.location.reload();
             }
         });
-        window.location.reload();
+        //window.location.reload();
     }
 </script>

@@ -77,9 +77,12 @@ namespace PhieuSuaChua.Controllers
 
             return View(chitietphieu);
         }
+
         [HttpPost]
-        public IActionResult XacNhanPhieu(int id, string trangthai)
+        public async Task<JsonResult> XacNhanPhieu(int id, string trangthai)
         {
+            string message ="KO";
+            int i = 0;
             var update = context.Phieusuas.Find(id);
             if (update != null)
             {
@@ -87,39 +90,41 @@ namespace PhieuSuaChua.Controllers
                 {
                     update.TrangThaiPhieu = trangthai;
                     update.NgayTra = DateTime.Now;
-                    context.SaveChanges();
+                    //context.SaveChanges();
+                    message = "OK";
                 }
                 else
                 {
-                    update.TrangThaiPhieu = trangthai;
-                    context.SaveChanges();
+                    update.TrangThaiPhieu = trangthai;                    
+                    message = "OK";
                 }
-                
-            }
 
-            return View();
+                 i = await context.SaveChangesAsync();
+            }
+           
+            return Json(new { mesage = message, model = i});
         }
 
         [HttpPost]
-        public IActionResult UpdateGhiChu(int id, string ghichu)
+        public async Task<IActionResult> UpdateGhiChu(int id, string ghichu)
         {
             var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
             if (update != null)
             {
                 update.GhiChu = ghichu;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             return View();
         }
 
         [HttpPost]
-        public IActionResult UpdateLoaiSuaChua(int id, string loaisuachua)
+        public async Task<IActionResult> UpdateLoaiSuaChua(int id, string loaisuachua)
         {
             var update = context.Chitietsuas.Where(idSua => idSua.IdPhieu == id).FirstOrDefault();
             if (update != null)
             {
                 update.LoaiSuaChua = loaisuachua;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             return View();
         }
