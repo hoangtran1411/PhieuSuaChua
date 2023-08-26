@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 using System.Data;
@@ -10,10 +11,10 @@ namespace PhieuSuaChua.Controllers
 {
     public class DangKySuaChuaController : Controller
     {
-        private readonly PhieusuachuaContext db;
+        private readonly PhieusuachuaContext context;
         public DangKySuaChuaController(PhieusuachuaContext context)
         {
-            this.db = context;
+            this.context = context;
         }
       
         public IActionResult Index()
@@ -23,15 +24,15 @@ namespace PhieuSuaChua.Controllers
         }
           
         [HttpPost]
-        public IActionResult DangKySuaChua(ModelDangKySua model)
+        public async Task<IActionResult> DangKySuaChua(ModelDangKySua model)
         {
             Phieusua sua = new()
             {
                 MaNv = model.MaNv,
                 TrangThaiPhieu = model.TrangThaiPhieu
             };
-            db.Phieusuas.Add(sua);
-            db.SaveChanges();
+            await context.Phieusuas.AddAsync(sua);
+            await context.SaveChangesAsync();
 
             Chitietsua ct = new()
             {
@@ -46,8 +47,8 @@ namespace PhieuSuaChua.Controllers
                 GhiChu = model.Ghichu
                 
             };
-            db.Chitietsuas.Add(ct);
-            int number = db.SaveChanges();
+            await context.Chitietsuas.AddAsync(ct);
+            int number = await context.SaveChangesAsync();
 
             string message;
 
@@ -63,9 +64,9 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model =  sophieu});
         }
         [HttpPost]
-        public JsonResult KiemtraMaNV(Nhanvien nv)
+        public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
         {
-            var result = db.Nhanviens.FirstOrDefault(x=>x.MaNv == nv.MaNv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv == nv.MaNv);
             string message;
             if( result != null)
             {

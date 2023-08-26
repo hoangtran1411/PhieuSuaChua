@@ -17,13 +17,7 @@ namespace WebBlog.Controllers
         {
             _logger = logger;
         }
-        //private readonly PhieusuachuaContext context;
-        //public HomeController(PhieusuachuaContext context)
-        //{
-        //    this.context = context;
-        //}
-
-        //[Route("Trang-chu.html", Name ="Index")]
+       
         public IActionResult Index()
         {
             return View();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 
@@ -17,7 +18,7 @@ namespace PhieuSuaChua.Controllers
         {
             return View();
         }
-        public IActionResult DangKyGuiMuc(ModelDangKyMuc model)
+        public async Task<IActionResult> DangKyGuiMuc(ModelDangKyMuc model)
         {
             Phieumuc phieumuc = new()
             {
@@ -25,8 +26,8 @@ namespace PhieuSuaChua.Controllers
                 TrangThaiPhieu = model.TRANG_THAI_PHIEU
 
             };
-            context.Phieumucs.Add(phieumuc);
-            context.SaveChanges();
+            await context.Phieumucs.AddAsync(phieumuc);
+            await context.SaveChangesAsync();
 
             Chitietmuc chitietmuc = new() 
             {
@@ -35,8 +36,8 @@ namespace PhieuSuaChua.Controllers
                 LoaiMayIn = model.MAY_IN,
                 TinhTrang = model.TINH_TRANG
             };
-            context.Chitietmucs.Add(chitietmuc);
-            int number = context.SaveChanges();
+            await context.Chitietmucs.AddAsync(chitietmuc);
+            int number = await context.SaveChangesAsync();
 
             string message;
 
@@ -52,9 +53,9 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model = sophieu });
         }
         [HttpPost]
-        public JsonResult KiemtraMaNV(Nhanvien nv)
+        public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
         {
-            var result = context.Nhanviens.FirstOrDefault(x => x.MaNv == nv.MaNv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x => x.MaNv == nv.MaNv);
             string message;
             if (result != null)
             {
