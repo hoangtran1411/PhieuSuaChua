@@ -141,6 +141,9 @@
             case "Đang sửa":
                 $('#xacnhanphieu').html('Xác nhận sửa xong');
                 break;
+            case "Chờ mua hàng":
+                $('#xacnhanphieu').html('Xác nhận sửa xong');
+                break;
 
             case "Đã sửa xong":
                 $('#xacnhanphieu').html('Xác nhận trả máy');
@@ -179,6 +182,9 @@
             case "Đã sửa xong":              
                 UpdateTrangThai(id, 'Đã trả máy');
                  break;
+            case "Chờ mua hàng":
+                UpdateTrangThai(id, 'Đã sửa xong');
+                break;
             }
         };
 
