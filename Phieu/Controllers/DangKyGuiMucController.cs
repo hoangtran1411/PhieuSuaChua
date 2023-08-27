@@ -3,8 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+
 namespace PhieuSuaChua.Controllers
 {
+    [Authorize]
     public class DangKyGuiMucController : Controller
     {
 
@@ -17,6 +22,11 @@ namespace PhieuSuaChua.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login","Access");
         }
         public async Task<IActionResult> DangKyGuiMuc(ModelDangKyMuc model)
         {
@@ -50,6 +60,7 @@ namespace PhieuSuaChua.Controllers
                 message = "Wrong";
             }
             int sophieu = Convert.ToInt32(phieumuc.IdMuc);
+            
             return Json(new { mesage = message, model = sophieu });
         }
         [HttpPost]

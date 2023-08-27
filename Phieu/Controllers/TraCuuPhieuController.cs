@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PhieuSuaChua.Controllers
 {
@@ -77,7 +80,7 @@ namespace PhieuSuaChua.Controllers
 
             return View(chitietphieu);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<JsonResult> XacNhanPhieu(int id, string trangthai)
         {
@@ -101,7 +104,7 @@ namespace PhieuSuaChua.Controllers
            
             return Json(new { mesage = message, model = i});
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<JsonResult> UpdateGhiChu(int id, string ghichu)
         {
@@ -116,7 +119,7 @@ namespace PhieuSuaChua.Controllers
             }
             return Json(new { mesage = message, model = i });
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<JsonResult> UpdateLoaiSuaChua(int id, string loaisuachua)
         {
@@ -138,6 +141,7 @@ namespace PhieuSuaChua.Controllers
 
             return  View(chitietmuc);
         }
+        [Authorize]
         public async Task<JsonResult> UpdateTrangThaiMuc(int id, string trangthai)
         {
             string message = "NOT";
@@ -165,7 +169,7 @@ namespace PhieuSuaChua.Controllers
             }
             return Json(new { mesage = message, model = i });
         }
-
+        [Authorize]
         public async Task<JsonResult> UpdateGhiChuMuc(int id, string ghichu)
         {
             string message = "NOT";
@@ -180,6 +184,7 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model = i });
 
         }
+        [Authorize]
         public async Task<JsonResult> XacNhanTraHopMuc(int id, string trangthai, string manv)
         {
             string message = "NOT";
@@ -197,5 +202,10 @@ namespace PhieuSuaChua.Controllers
 
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login","Access");
+        }
     }
 }
