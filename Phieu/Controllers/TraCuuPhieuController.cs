@@ -134,7 +134,7 @@ namespace PhieuSuaChua.Controllers
             }
             return Json(new { mesage = message, model = i });
         }
-       
+        [Authorize]
         public  async Task<IActionResult> ChiTietPhieuMuc(int id)
         {
             var  chitietmuc = await context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToListAsync();

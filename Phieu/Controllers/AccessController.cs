@@ -38,10 +38,10 @@ namespace PhieuSuaChua.Controllers
                 {
                     
                     List<Claim> claims = new()
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.MaNv),
-                    new Claim("Other","Role")
-                };
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.MaNv),
+                        new Claim("Other","Role")
+                    };
                     
                     ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -53,8 +53,18 @@ namespace PhieuSuaChua.Controllers
                     if (claimsIdentity != null)
                     {
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+                        if (user.TenNv != null)
+                        {
+                            ViewBag.UserName = user.TenNv.ToString();
+                        }
+                        
                     }
-                   
+
+                    //if (user.TenNv != null)
+                    //{
+                    //    ViewData["user"] = user.TenNv.ToString();
+                    //}
+                  
                     return RedirectToAction("Index", "DangKyGuiMuc");
                 }
                 else
