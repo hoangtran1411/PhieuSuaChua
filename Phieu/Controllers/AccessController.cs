@@ -39,7 +39,7 @@ namespace PhieuSuaChua.Controllers
             var user = await context.Nhanviens.Where(nv => nv.MaNv ==username && nv.MaNv.ToUpper()== password).FirstOrDefaultAsync();
             if (user != null )
             {
-                HttpContext.Session.SetString("Login",user.TenNv);
+                
                 if (user.Quyen <= 1 && user.DonVi == "P.CNTT")
                 {
                     
@@ -63,10 +63,8 @@ namespace PhieuSuaChua.Controllers
                         {
                             ViewBag.UserName = user.TenNv.ToString();
                         }
-                        
+                        HttpContext.Session.SetString("Login", user.TenNv);
                     }
-
-                  
                   
                     return RedirectToAction("Index", "DangKyGuiMuc");
                 }

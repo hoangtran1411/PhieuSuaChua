@@ -73,24 +73,20 @@
         <nav class="header-nav ms-auto">
             <div>
                     @{
-                    if (@contxt.HttpContext.Session.GetString("Login") != null)
-                    {
+                        if (@contxt.HttpContext.Session.GetString("Login") != null)
+                        {
+                            <span>Xin chào<a class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</a></span>
+                            <a class="btn btn-primary" href="/TraCuuPhieu/LogOut">
+                                <span>Log Out</span>
+                            </a>
 
-                        <span>Xin chào<a class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</a></span>
-                        <a class="btn btn-primary" href="/TraCuuPhieu/LogOut">
-                            <span>Log Out</span>
-                        </a>
-
-                    }
-                    else
-                    {
-                        <a class="btn btn-success" href="/Access/Login">
-                            <span>Log In</span>
-                        </a>
-                    }
-                  
-
-                    
+                        }
+                        else
+                        {
+                            <a class="btn btn-success" href="/Access/Login">
+                                <span>Log In</span>
+                            </a>
+                        }
                     }
              
             </div>
