@@ -72,7 +72,11 @@
 
         <nav class="header-nav ms-auto">
             <div>
+
                 @if (@contxt.HttpContext.Session.GetString("Login") != null)
+
+                @if (@contxt.HttpContext != null )
+
                 {
 
                     <span>Xin chào<a class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</a></span>
