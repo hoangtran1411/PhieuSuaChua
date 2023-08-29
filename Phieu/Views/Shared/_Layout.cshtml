@@ -1,4 +1,4 @@
-﻿
+﻿@inject IHttpContextAccessor contxt;
    
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +72,13 @@
 
         <nav class="header-nav ms-auto">
             <div>
+                @if (@contxt.HttpContext.Session.GetString("Login") != null)
+                {
+
+                    <span>Xin chào<a class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</a></span>
+                   
+                }
+                
 
                 <a class="btn btn-success" href="/Access/Login">
                         <span>Log In</span>

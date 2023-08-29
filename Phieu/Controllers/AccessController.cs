@@ -10,11 +10,16 @@ namespace PhieuSuaChua.Controllers
 {
     public class AccessController : Controller
     {
+        private readonly IHttpContextAccessor _contextAccessor;
         private readonly PhieusuachuaContext context;
         public AccessController(PhieusuachuaContext context)
         {
             this.context = context;
         }
+        //public AccessController(IHttpContextAccessor _contextAccessor)
+        //{
+        //    this._contextAccessor = _contextAccessor;
+        //}
         public IActionResult Login()
         {
             ClaimsPrincipal claimsUser = HttpContext.User;
@@ -32,8 +37,9 @@ namespace PhieuSuaChua.Controllers
         public async Task<IActionResult> Login(string username, string password)
         {
             var user = await context.Nhanviens.Where(nv => nv.MaNv ==username && nv.MaNv.ToUpper()== password).FirstOrDefaultAsync();
-            if (user != null)
+            if (user != null )
             {
+                HttpContext.Session.SetString("Login",user.TenNv);
                 if (user.Quyen <= 1 && user.DonVi == "P.CNTT")
                 {
                     
@@ -60,10 +66,7 @@ namespace PhieuSuaChua.Controllers
                         
                     }
 
-                    //if (user.TenNv != null)
-                    //{
-                    //    ViewData["user"] = user.TenNv.ToString();
-                    //}
+                  
                   
                     return RedirectToAction("Index", "DangKyGuiMuc");
                 }
