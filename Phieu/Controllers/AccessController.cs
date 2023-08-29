@@ -61,9 +61,9 @@ namespace PhieuSuaChua.Controllers
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
                         if (user.TenNv != null)
                         {
-                            ViewBag.UserName = user.TenNv.ToString();
+                            HttpContext.Session.SetString("Login", user.TenNv);
                         }
-                        HttpContext.Session.SetString("Login", user.TenNv);
+                       
                     }
                   
                     return RedirectToAction("Index", "DangKyGuiMuc");

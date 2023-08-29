@@ -75,7 +75,7 @@
                     @{
                         if (@contxt.HttpContext.Session.GetString("Login") != null)
                         {
-                            <span>Xin chào<a class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</a></span>
+                            <span>Xin chào <b class="badge bg-success">@contxt.HttpContext.Session.GetString("Login")</b></span>
                             <a class="btn btn-primary" href="/TraCuuPhieu/LogOut">
                                 <span>Log Out</span>
                             </a>

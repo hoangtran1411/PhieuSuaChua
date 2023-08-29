@@ -1,10 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     ViewData["Title"] = "Chi Tiet Phieu Sua";
     Layout = "_Layout";
+    
 }
+@inject IHttpContextAccessor contxt;
 @using PhieuSuaChua.Controllers;
 @model IEnumerable<PhieuSuaChua.Domain_Model.ModelChiTietPhieuSua>;
 <section class="section">
@@ -65,7 +65,7 @@
                             </form>
                             <p></p>
                             <div class="col-lg-12">
-                                <button type="reset" class="btn btn-success">In phiếu</button>
+                                <a class="btn btn-success">In phiếu</a>
                             </div>
 
                         </div>
@@ -73,59 +73,62 @@
                     </div>
                     </div>
                     <hr />
+                    @if (contxt.HttpContext.Session.GetString("Login")!= null)
+            {
+                <div class="card" style="background-color:ghostwhite">
+                    <div class="card-body">
+                        <h5 class="card-title">Xác nhận của P.CNTT</h5>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="row g-2">
+                                    <div class="col-1">
+                                        <b class="form-span">Ghi chú:</b>
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="text" class="form-control" id="txtghichu" placeholder="Ví dụ: cần nâng cấp...">
+                                    </div>
+                                    <div class="col-3">
+                                        <a class="btn btn-success" onclick="UpdateGhiChu('@item.ID_PHIEU')" id="updateghichu">Cập nhật ghi chú</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <p></p>
+                            <div class="col-lg-12">
+                                <form class="row g-2">
+                                    <div class="col-1">
+                                        <b class="form-span">Loại sửa chữa:</b>
+                                    </div>
+                                    <div class="col-5">
+                                        <select id="cbolistprint" class="form-select" name="Type">
+                                            <option selected="selected" value="1">==============</option>
+                                            <option value="2">Chưa xác định</option>
+                                            <option value="3">Vệ sinh máy tính, cài đặt windows, chương trình</option>
+                                            <option value="4">Thay thế linh kiện máy tính có hàng sẵn</option>
+                                            <option value="5">Lắp ráp máy tính mới</option>
+                                            <option value="6">Sửa chữa máy in lỗi nhẹ</option>
+                                            <option value="7">Sửa chữa máy tính lỗi nặng</option>
+                                            <option value="8">Sửa chữa máy in lỗi nặng</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <a class="btn btn-success" id="updateloaisuachua" onclick="LoaiSuaChua('@item.ID_PHIEU')">Cập nhật loại sửa chữa</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <p></p>
+                            <div class="col-lg-12">
+                                <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.ID_PHIEU')"></a>
+                                <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.ID_PHIEU')">Xác nhận chờ mua hàng </a>
+                                <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.ID_PHIEU')">Hủy phiếu</a>
+                                <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
+                            </div>
 
-            <div class="card" style="background-color:ghostwhite">
-                <div class="card-body">
-                    <h5 class="card-title">Xác nhận của P.CNTT</h5>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form class="row g-2">
-                                <div class="col-1">
-                                    <b class="form-span">Ghi chú:</b>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control" id="txtghichu" placeholder="Ví dụ: cần nâng cấp...">
-                                </div>
-                                <div class="col-3">
-                                    <a class="btn btn-success" onclick="UpdateGhiChu('@item.ID_PHIEU')" id="updateghichu">Cập nhật ghi chú</a>
-                                </div>
-                            </form>
-                        </div>
-                        <p></p>
-                        <div class="col-lg-12">
-                            <form class="row g-2">
-                                <div class="col-1">
-                                    <b class="form-span">Loại sửa chữa:</b>
-                                </div>
-                                <div class="col-5">
-                                    <select id="cbolistprint" class="form-select" name="Type">
-                                        <option selected="selected" value="1">==============</option>
-                                        <option value="2">Chưa xác định</option>
-                                        <option value="3">Vệ sinh máy tính, cài đặt windows, chương trình</option>
-                                        <option value="4">Thay thế linh kiện máy tính có hàng sẵn</option>
-                                        <option value="5">Lắp ráp máy tính mới</option>
-                                        <option value="6">Sửa chữa máy in lỗi nhẹ</option>
-                                        <option value="7">Sửa chữa máy tính lỗi nặng</option>
-                                        <option value="8">Sửa chữa máy in lỗi nặng</option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <a class="btn btn-success" id="updateloaisuachua" onclick="LoaiSuaChua('@item.ID_PHIEU')">Cập nhật loại sửa chữa</a>
-                                </div>
-                            </form>
-                        </div>
-                        <p></p>
-                        <div class="col-lg-12">
-                            <a class="btn btn-info" id="xacnhanphieu" onclick="XacnhanPhieu('@item.ID_PHIEU')"></a>
-                            <a class="btn btn-primary" id="xacnhanmuahang" onclick="XacnhanMuaHang('@item.ID_PHIEU')">Xác nhận chờ mua hàng </a>
-                            <a class="btn btn-danger" id="huyphieu" onclick="xacnhanhuy('@item.ID_PHIEU')">Hủy phiếu</a>
-                            <a class="btn btn-secondary" asp-controller="TraCuuPhieu" asp-action="Index">Back...</a>
-                        </div>
 
-
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+            
                 }     
     }
   
