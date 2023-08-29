@@ -10,7 +10,7 @@ namespace PhieuSuaChua.Controllers
 {
     public class AccessController : Controller
     {
-        private readonly IHttpContextAccessor _contextAccessor;
+        //private readonly IHttpContextAccessor _contextAccessor;
         private readonly PhieusuachuaContext context;
         public AccessController(PhieusuachuaContext context)
         {
@@ -66,7 +66,7 @@ namespace PhieuSuaChua.Controllers
                        
                     }
                   
-                    return RedirectToAction("Index", "DangKyGuiMuc");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

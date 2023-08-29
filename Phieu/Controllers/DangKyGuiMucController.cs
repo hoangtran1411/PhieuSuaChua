@@ -27,7 +27,7 @@ namespace PhieuSuaChua.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Login");
-            return RedirectToAction("Login","Access");
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> DangKyGuiMuc(ModelDangKyMuc model)
         {

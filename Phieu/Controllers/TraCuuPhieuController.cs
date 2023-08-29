@@ -206,7 +206,7 @@ namespace PhieuSuaChua.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Login");
-            return RedirectToAction("Login","Access");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
