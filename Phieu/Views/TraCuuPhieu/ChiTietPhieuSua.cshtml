@@ -177,23 +177,46 @@
 <script>
     
         function XacnhanPhieu(id){
+        var loaisuachua = $('#cbolistprint option:selected').text();
         var trangthai = $('#Trangthaiphieu').text().trim();
-        switch (trangthai) {
-            case "Chờ tiếp nhận":               
-                UpdateTrangThai(id,'Đang sửa');
-                break;
-
-            case "Đang sửa":              
-                UpdateTrangThai(id, 'Đã sửa xong');
-                break;
-            case "Đã sửa xong":              
-                UpdateTrangThai(id, 'Đã trả máy');
-                 break;
-            case "Chờ mua hàng":
-                UpdateTrangThai(id, 'Đã sửa xong');
-                break;
+            if (loaisuachua == "=============="){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Chưa chọn loại sửa chữa!',
+                
+                });
             }
+            else{
+                switch (trangthai) {
+                    case "Chờ tiếp nhận":
+                        UpdateTrangThai(id, 'Đang sửa');
+                        LoaiSuaChua(id);
+                        window.location.reload();
+                        break;
+
+                    case "Đang sửa":
+                        UpdateTrangThai(id, 'Đã sửa xong');
+                        break;
+                    case "Đã sửa xong":
+                        UpdateTrangThai(id, 'Đã trả máy');
+                        break;
+                    case "Chờ mua hàng":
+                        UpdateTrangThai(id, 'Đã sửa xong');
+                        break;
+                };
+            Thongbao();
+            }
+     
         };
+
+    function Thongbao(){
+            Swal.fire(
+                'Xong!',
+                'Xác nhận xong!',
+                'success'
+            )
+    }
 
     function XacnhanMuaHang(id){
         UpdateTrangThai(id, 'Chờ mua hàng');

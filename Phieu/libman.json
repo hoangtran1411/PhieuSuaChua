@@ -16,6 +16,14 @@
         "js/jquery.dataTables.min.js",
         "css/jquery.dataTables.min.css"
       ]
+    },
+    {
+      "library": "sweetalert2@11.7.27",
+      "destination": "wwwroot/sweetalert2/",
+      "files": [
+        "sweetalert2.min.css",
+        "sweetalert2.all.min.js"
+      ]
     }
   ]
 }
