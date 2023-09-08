@@ -31,38 +31,43 @@ namespace PhieuSuaChua.Controllers
         }
         public async Task<IActionResult> DangKyGuiMuc(ModelDangKyMuc model)
         {
-            Phieumuc phieumuc = new()
+            string message ="";
+            if (model != null)
             {
-                MaNvGui = model.MA_NV,
-                TrangThaiPhieu = model.TRANG_THAI_PHIEU
+                Phieumuc phieumuc = new()
+                {
+                    MaNvGui = model.MA_NV,
+                    TrangThaiPhieu = model.TRANG_THAI_PHIEU
 
-            };
-            await context.Phieumucs.AddAsync(phieumuc);
-            await context.SaveChangesAsync();
+                };
+                await context.Phieumucs.AddAsync(phieumuc);
+                await context.SaveChangesAsync();
 
-            Chitietmuc chitietmuc = new() 
-            {
-                IdMuc = Convert.ToInt32(phieumuc.IdMuc),
-                TenHopMuc = model.TEN_HOP_MUC,
-                LoaiMayIn = model.MAY_IN,
-                TinhTrang = model.TINH_TRANG
-            };
-            await context.Chitietmucs.AddAsync(chitietmuc);
-            int number = await context.SaveChangesAsync();
+                Chitietmuc chitietmuc = new()
+                {
+                    IdMuc = Convert.ToInt32(phieumuc.IdMuc),
+                    TenHopMuc = model.TEN_HOP_MUC,
+                    LoaiMayIn = model.MAY_IN,
+                    TinhTrang = model.TINH_TRANG
+                };
+                await context.Chitietmucs.AddAsync(chitietmuc);
+                int number = await context.SaveChangesAsync();
 
-            string message;
+                
 
-            if (number > 0)
-            {
-                message = "OK";
+                if (number > 0)
+                {
+                    message = "OK";
+                }
+                else
+                {
+                    message = "Wrong";
+                }
+                int sophieu = Convert.ToInt32(phieumuc.IdMuc);
+
+                return Json(new { mesage = message, model = sophieu });
             }
-            else
-            {
-                message = "Wrong";
-            }
-            int sophieu = Convert.ToInt32(phieumuc.IdMuc);
-            
-            return Json(new { mesage = message, model = sophieu });
+            return Json(new { mesage = message});
         }
         [HttpPost]
         public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
