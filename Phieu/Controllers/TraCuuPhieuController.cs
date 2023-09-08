@@ -86,7 +86,7 @@ namespace PhieuSuaChua.Controllers
         {
             string message ="NOT";
             int i = 0;
-            var update = context.Phieusuas.Find(id);
+            var update = await context.Phieusuas.FindAsync(id);
             if (update != null)
             {
                 if (trangthai == "Đã trả máy")
