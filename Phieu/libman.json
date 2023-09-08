@@ -24,6 +24,17 @@
         "sweetalert2.min.css",
         "sweetalert2.all.min.js"
       ]
+    },
+    {
+      "library": "datatables.net-scroller@2.2.0",
+      "destination": "wwwroot/datatables",
+      "files": [
+        "dataTables.scroller.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-fixedheader@3.4.0",
+      "destination": "wwwroot/datatables/"
     }
   ]
 }
