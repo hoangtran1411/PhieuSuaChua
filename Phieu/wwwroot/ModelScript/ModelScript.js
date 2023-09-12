@@ -56,7 +56,7 @@ function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtra
                 });
             }
             else {
-                console.log("Mã nhân viên không hợp lệ");
+                CheckSdt();
             }
         },
         function () {
@@ -84,6 +84,7 @@ function CheckNV(successCallback, errorCallback) {
                 $("#Donvi").val(item.donVi);
                 $("#Chucdanh").val(item.chucDanh);
                 successCallback(item.maNv);
+                //item.maNv;
             }
             else {
                 Swal.fire(
@@ -114,6 +115,14 @@ function ResetForm() {
     $("#Username").attr("disabled", false);
     $("#Password").attr("disabled", false);
 
+}
+function CheckSdt() {
+    var sdt = $('#Sdt').val();
+    if (sdt == "") {
+        Swal.fire(
+            'Chưa nhập SĐT',
+            'Vui lòng nhập SĐT');
+    }
 }
 function CheckThietBi() {
     var kt = $("#Tenmaytinh").val();
