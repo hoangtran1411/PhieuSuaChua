@@ -1,40 +1,38 @@
 ﻿
-    function Dangky() {
+    //function Dangky() {
 
-        Swal.fire({
-            title: 'Bạn có chắc chắn?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
-    }
+    //    Swal.fire({
+    //        title: 'Bạn có chắc chắn?',
+    //        icon: 'warning',
+    //        showCancelButton: true,
+    //        confirmButtonColor: '#3085d6',
+    //        cancelButtonColor: '#d33',
+    //        confirmButtonText: 'Yes'
+    //    }).then((result) => {
+    //        if (result.isConfirmed) {
+    //            Swal.fire(
+    //                'Deleted!',
+    //                'Your file has been deleted.',
+    //                'success'
+    //            )
+    //        }
+    //    })
+    //}
 
-function Success(MaNV, Sdt, Tenmaytinh, Username, Password, Thietbikhac, Tinhtrang, Ghichu) {
+function Dangky() {
    /* var i = 0;*/
     var manv = $('#MaNV').val();
-
+    var sdt = $('#Sdt').val();
+    var tenpc = $('#Tenmaytinh').val();
+    var user = $('#Username').val();
+    var pass = $('#Password').val();
+    var thietbikhac = $('#Thietbikhac').val();
+    var tinhtrang = $('#Tinhtrang').val();
+    var ghichu = $('#Ghichu').val();
     CheckNV(
         function (manv) {
-            if (manv != "") {
-                console.log("Mã nhân viên hợp lệ: " + manv);
-
-                var sdt = $('#Sdt').val();
-                var tenpc = $('#Tenmaytinh').val();
-                var user = $('#Username').val();
-                var pass = $('#Password').val();
-                var thietbikhac = $('#Thietbikhac').val();
-                var tinhtrang = $('#Tinhtrang').val();
-                var ghichu = $('#Ghichu').val();
+            if (manv != "" && sdt != "") {
+                console.log("Mã nhân viên hợp lệ: " + manv);                               
                 var trangThaiPhieu = "Chờ tiếp nhận";
                 var loaiSuaChua = "Chưa xác định";
 
@@ -124,11 +122,21 @@ function CheckSdt() {
             'Vui lòng nhập SĐT');
     }
 }
+function CheckUserPass() {
+    var user = $('#Username').val();
+    var pass = $('#Password').val();
+    if (user == "" || pass == "") {
+        Swal.fire(
+            'Chưa nhập UserName hoặc Password',
+            'Vui lòng nhập đủ thông tin');
+    }
+}
 function CheckThietBi() {
     var kt = $("#Tenmaytinh").val();
     var tb = $("#Thietbikhac").val();
     if (kt != "" && tb == "") {
         $("#Thietbikhac").attr("disabled", true);
+        
     }
     else {       
         $("#Tenmaytinh").attr("disabled", true);
