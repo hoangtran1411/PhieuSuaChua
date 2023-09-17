@@ -28,52 +28,87 @@ function Dangky() {
     var pass = $('#Password').val();
     var thietbikhac = $('#Thietbikhac').val();
     var tinhtrang = $('#Tinhtrang').val();
-    var ghichu = $('#Ghichu').val();
-    CheckNV(
-        function (manv) {
-            if (manv != "" && sdt != "") {
-                console.log("Mã nhân viên hợp lệ: " + manv);                               
-                var trangThaiPhieu = "Chờ tiếp nhận";
-                var loaiSuaChua = "Chưa xác định";
+    var ghichu = $('#Ghichu').val();  
+    var hoten = $('#Hoten').val();
+    var donvi = $('#Donvi').val();
+    var chucdanh = $('#Chucdanh').val();
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/DangKySuaChua/DangKySuaChua',
-                    datatype: Text,
-                    data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
-                    success: function (response) { 
-                        if (response.mesage == "OK") {
-                           console.log(response.model)
-                            Swal.fire(
-                                'Số phiếu là: ' + response.model,
-                                'Chúc mừng đăng ký thành công',);
-                            ResetForm();
-                        }
-                        
+        if (manv != "" && sdt != "" && hoten != "" && donvi != "" && chucdanh != "") {
+            //console.log("Mã nhân viên hợp lệ: " + manv);
+            var trangThaiPhieu = "Chờ tiếp nhận";
+            var loaiSuaChua = "Chưa xác định";
+
+            $.ajax({
+                type: 'POST',
+                url: '/DangKySuaChua/DangKySuaChua',
+                dataType: 'json',
+                data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+                success: function (response) {
+                    if (response.mesage == "OK") {
+                        console.log(response.model)
+                        Swal.fire(
+                            'Số phiếu là: ' + response.model,
+                            'Chúc mừng đăng ký thành công',);
+                        ResetForm();
                     }
-                });
-            }
-            else {
-                CheckSdt();
-            }
-        },
-        function () {
-            console.log("Mã nhân viên không chính xác");
-           
+
+                }
+            });
         }
-    );
-}
+        else {
+            Swal.fire(
+                'Vui lòng nhập đủ thông tin',
+                'Xin nhập lại');
+            //CheckSdt();
+        }
+    }
+   
+    //CheckNV(
+    //    function (manv) {
+    //        if (manv != "" && sdt != "") {
+    //            console.log("Mã nhân viên hợp lệ: " + manv);                               
+    //            var trangThaiPhieu = "Chờ tiếp nhận";
+    //            var loaiSuaChua = "Chưa xác định";
+
+    //            $.ajax({
+    //                type: 'POST',
+    //                url: '/DangKySuaChua/DangKySuaChua',
+    //                datatype: Text,
+    //                data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+    //                success: function (response) { 
+    //                    if (response.mesage == "OK") {
+    //                       console.log(response.model)
+    //                        Swal.fire(
+    //                            'Số phiếu là: ' + response.model,
+    //                            'Chúc mừng đăng ký thành công',);
+    //                        ResetForm();
+    //                    }
+                        
+    //                }
+    //            });
+    //        }
+    //        else {
+    //            CheckSdt();
+    //        }
+    //    },
+    //    function () {
+    //        console.log("Mã nhân viên không chính xác");
+           
+    //    }
+    //);
 
  
 
-function CheckNV(successCallback, errorCallback) {
-   
+function CheckNV() {
+
+    //successCallback, errorCallback
     var manv = $("#MaNV").val();
+    var result;
     $.ajax({
 
         url: '/DangKySuaChua/KiemtraMaNV',
         type: 'POST',
-       /* datatype: Text,*/
+        dataType: 'json',
         data: { manv },
         success: function (response) {
             if (response.mesage == "OK") {
@@ -81,19 +116,22 @@ function CheckNV(successCallback, errorCallback) {
                 $("#Hoten").val(item.tenNv);
                 $("#Donvi").val(item.donVi);
                 $("#Chucdanh").val(item.chucDanh);
-                successCallback(item.maNv);
+                result = true;
+                
+                //successCallback(item.maNv);
                 //item.maNv;
             }
             else {
                 Swal.fire(
-                    'Mã nhân viên chưa chính xác',
+                    'Mã nhân viên chưa chính xác hoặc còn trống',
                     'Xin nhập lại');
-                errorCallback();
-                ResetForm();
-                
+                //errorCallback();
+                result = false;
+                ResetForm();               
             }
         }
     });
+    return result;
 }
 function ResetForm() {
     $("#MaNV").val("");

@@ -64,9 +64,9 @@ namespace PhieuSuaChua.Controllers
             return Json(new { mesage = message, model =  sophieu});
         }
         [HttpPost]
-        public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
+        public async Task<IActionResult> KiemtraMaNV(string maNv)
         {
-            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv == nv.MaNv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv == maNv);
             string message;
             if( result != null)
             {
