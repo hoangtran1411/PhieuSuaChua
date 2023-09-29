@@ -31,7 +31,7 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=10.14.12.253,1333;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=10.90.39.62,1433;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
