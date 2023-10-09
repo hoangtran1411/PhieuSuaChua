@@ -65,7 +65,7 @@
                             </form>
                             <p></p>
                             <div class="col-lg-12">
-                                <a class="btn btn-success">In phiếu</a>
+                                <a class="btn btn-success" href="/Print/PrintPhieu/@item.ID_PHIEU">In phiếu</a>
                             </div>
 
                         </div>
@@ -176,6 +176,20 @@
 </script>
 <script>
     
+    //function InPhieu(id){
+        
+    //    $.ajax({
+    //        url: "/Print/PrintPhieu",
+    //        type: "POST",
+    //        datatype:"json",
+    //        data:{id},
+    //        success: function(reponse){
+
+    //        }
+    //    });
+    //}
+
+
         function XacnhanPhieu(id){
         var loaisuachua = $('#cbolistprint option:selected').text();
         var trangthai = $('#Trangthaiphieu').text().trim();
