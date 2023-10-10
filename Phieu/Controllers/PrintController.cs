@@ -21,7 +21,7 @@ namespace PhieuSuaChua.Controllers
         public IActionResult PrintPhieu(string id)
         {
             var dataPrint = _context.ModelPrintPhieus.FromSqlRaw($"EXEC Proc_In_PhieuSua {id}").ToList();
-            string filePath = Path.Join(@"\\10.90.39.62\Report\", "rpt_Phieu_Sua.rdl");
+            string filePath = Path.Join(@"\\10.90.39.62\Report$\", "rpt_Phieu_Sua.rdl");
             using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
 

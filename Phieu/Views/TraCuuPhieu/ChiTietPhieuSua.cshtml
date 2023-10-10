@@ -38,7 +38,21 @@
                                     <b>Username:</b> <span id="User">@item.ACCOUNT_NAMES </span>
                                 </div>
                                 <div class="col-4">
-                                    <b>Password:</b> <span id="Pass"> @item.ACCOUNT_PASS</span>
+                                    <b>Password:</b>
+                                    @{
+                                        if (@contxt.HttpContext != null)
+                                        {
+                                            if (@contxt.HttpContext.Session.GetString("Login") != null)
+                                            {
+                                                <span id="Pass"> @item.ACCOUNT_PASS</span>
+                                            }
+                                            else
+                                            {
+                                                <span>********</span>
+                                            }
+                                        }
+                                    }
+                                    
                                 </div>
                                 <div class="col-12">
                                     <b>Thiết bị khác:</b> <span id="Thietbikhac">@item.THIET_BI_KHAC </span>
