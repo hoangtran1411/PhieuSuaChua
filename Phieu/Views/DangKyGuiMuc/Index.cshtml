@@ -77,22 +77,21 @@
 @section Scripts {
    <script>
 
-        function DangKy() {
-            var MA_NV = $('#manvmuc').val();
-          
-          CheckNV(
-                function (MA_NV) {
-                    var TEN_HOP_MUC = $('#tenhopmuc').val();
-                    var TINH_TRANG = $('#tinhtrangmuc').val();
-                    var TRANG_THAI_PHIEU ="Đang sửa"
-                    
-                    //var IDLoaiHopMuc = parseInt($('#cbolistprint').val());
-                    var MAY_IN = $('#cbolistprint option:selected').text();
+async function DangKy() {
+    var MA_NV = $('#manvmuc').val();          
+    var TEN_HOP_MUC = $('#tenhopmuc').val();
+    var TINH_TRANG = $('#tinhtrangmuc').val();
+    var TRANG_THAI_PHIEU = "Đang sửa";
+    var MAY_IN = $('#cbolistprint option:selected').text();
+    var checkNV = await CheckNV();
+    var checkHopMuc = CheckHopMuc();
+    if (checkHopMuc) {
+                if (checkNV) {
                     $.ajax({
                         url: '/DangKyGuiMuc/DangKyGuiMuc',
-                        type:'POST',
+                        type: 'POST',
                         data: { MA_NV, MAY_IN, TEN_HOP_MUC, TINH_TRANG, TRANG_THAI_PHIEU },
-                        success: function(response){
+                        success: function (response) {
                             if (response.mesage == "OK") {
                                 Swal.fire(
                                     'Số phiếu là: ' + response.model,
@@ -101,50 +100,66 @@
                             }
                         }
                     });
-              },
-                function () {
-                    console.log("Mã nhân viên không chính xác");
-
                 }
-          );
-       }
+    }  
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: 'Bạn chưa chọn loại hộp mực máy in!',
+           
+        })
+    }
+          
+    }
 
 
-       //Kiem Tra Ma Nhan Vien xem co ton tai
-        function CheckNV(successCallback, errorCallback) {
+//Kiem Tra Ma Nhan Vien xem co ton tai
+        //successCallback, errorCallback
+async  function CheckNV() {
 
-            var manv = $("#manvmuc").val();
-            $.ajax({
+    var manv = $("#manvmuc").val();
+    var response  = await  $.ajax({
 
-                url: '/DangKyGuiMuc/KiemtraMaNV',
-                type: 'POST',
-                data: { manv },
-                success: function (response) {
-                    if (response.mesage == "OK") {
-                        var item = response.model;
-                        $("#hotenmuc").val(item.tenNv);
-                        $("#donvimuc").val(item.donVi);
-                        successCallback(item.maNv);
-                    }
-                    else {
-                        Swal.fire(
-                            'Mã nhân viên chưa chính xác',
-                            'Xin nhập lại');
-                        errorCallback();
-                        ResetForm();
+        url: '/DangKyGuiMuc/KiemtraMaNV',
+        type: 'POST',
+        data: { manv }      
+    });          
+    if (response.mesage == "OK") {
+        var item = response.model;
+        $("#hotenmuc").val(item.tenNv);
+        $("#donvimuc").val(item.donVi);
+        return true;
+        //successCallback(item.maNv);
+    }
+    else {
+        Swal.fire(
+            'Mã nhân viên chưa chính xác',
+            'Xin nhập lại');
+        //errorCallback();
+        return false;
+        ResetForm();
 
-                    }
-                }
-            });
-        }
+    }
+
+}
 
         // Reset form da nhap
-        function ResetForm() {
-            $("#manvmuc").val("");
-            $("#hotenmuc").val("");
-            $("#donvimuc").val("");
-            $("#tenhopmuc").val("");
-            $("#tinhtrangmuc").val("");
-        }
+function ResetForm() {
+    $("#manvmuc").val("");
+    $("#hotenmuc").val("");
+    $("#donvimuc").val("");
+    $("#tenhopmuc").val("");
+    $("#tinhtrangmuc").val("");
+}
+       function CheckHopMuc() {
+            var hopmuc = $('#cbolistprint option:selected').text();
+           if (hopmuc == '=========') {
+               return false;
+           }
+           else{
+               return true;
+           }
+       }
    </script>
 }
