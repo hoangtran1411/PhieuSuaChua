@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhieuSuaChua.Models;
 
@@ -22,7 +23,7 @@ public partial class Chitietsua
     public string? GhiChu { get; set; }
 
     public string? LoaiSuaChua { get; set; }
-
+    
     public string? Sdt { get; set; }
 
     public virtual Phieusua? IdPhieuNavigation { get; set; }

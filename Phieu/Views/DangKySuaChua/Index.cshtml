@@ -2,7 +2,8 @@
     ViewData["Title"] = "Dang Ky Sua Chua";
     Layout = "_Layout";
 }
-@*@ViewBag.Title*@
+@model PhieuSuaChua.Domain_Model.ModelDangKySua
+
 <div class="card">
     <div class="card-body">
         <div class="pagetitle">
@@ -23,14 +24,16 @@
 
 
                     <!-- Vertical Form -->
-                    <form class="row g-3" id="DangKySuaChua">
+                    <form class="row g-3 needs-validation" id="DangKySuaChua" novalidate>
+                        @* novalidate asp-controller="DangKySuaChua" asp-action="DangKySuaChua" method="post" *@
                         <div class="col-3">
                             <label for="inputNanme4" class="form-label">MÃ NHÂN VIÊN</label>
-                            <input type="text" class="form-control" id="MaNV" placeholder="MÃ NHÂN VIÊN"  onblur="CheckNV()" required>
+                            <input name="MaNv" type="text" class="form-control" id="MaNV" placeholder="MÃ NHÂN VIÊN" onblur="CheckNV()" required>
+                            <div class="invalid-feedback">Mời nhập mã nhân viên!</div>
                         </div>
                         <div class="col-6">
                             <label for="inputEmail4" class="form-label">HỌ VÀ TÊN</label>
-                            <input type="email" class="form-control" id="Hoten" placeholder="HỌ VÀ TÊN" disabled>
+                            <input  type="text" class="form-control" id="Hoten" placeholder="HỌ VÀ TÊN" disabled>
                         </div>
                         <div class="col-3">
                             <label for="inputPassword4" class="form-label">ĐƠN VỊ</label>
@@ -42,41 +45,43 @@
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">SỐ ĐIỆN THOẠI</label>
-                            <input type="text" class="form-control" id="Sdt" placeholder="SỐ ĐIỆN THOẠI NỘI BỘ " required>
+                            <input name="Sdt" type="text" class="form-control" id="Sdt" placeholder="SỐ ĐIỆN THOẠI NỘI BỘ" required>
+                            <div class="invalid-feedback">Mời nhập số điện thoại!</div>
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">TÊN MÁY TÍNH</label>
-                            <input type="text" class="form-control" id="Tenmaytinh" placeholder="TÊN MÁY TÍNH" onblur="CheckThietBi()" required>
+                            <input name="TenPC" type="text" class="form-control" id="Tenmaytinh" placeholder="TÊN MÁY TÍNH" onblur="CheckThietBi()" >
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">USER NAME</label>
-                            <input type="text" class="form-control" id="Username" placeholder="TÊN ĐĂNG NHẬP MÁY TÍNH" required>
+                            <input name="User" type="text" class="form-control" id="Username" placeholder="TÊN ĐĂNG NHẬP MÁY TÍNH" >
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">PASSWORD</label>
-                            <input type="text" class="form-control" id="Password" placeholder="NHẬP PASSWORD" required>
+                            <input name="Pass" type="text" class="form-control" id="Password" placeholder="NHẬP PASSWORD" >
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">THIẾT BỊ KHÁC</label>
-                            <input type="text" class="form-control" id="Thietbikhac" placeholder="VD: MÁY IN, SCAN...." onblur="CheckThietBi()">
+                            <input name="Thietbikhac" type="text" class="form-control" id="Thietbikhac" placeholder="VD: MÁY IN, SCAN...." onblur="CheckThietBi()">
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">MÔ TẢ TÌNH TRẠNG</label>
-                            <input type="text" class="form-control" id="Tinhtrang" placeholder="KHÔNG MỞ NGUỒN ĐƯỢC" required>
+                            <input name="Tinhtrang" type="text" class="form-control" id="Tinhtrang" placeholder="KHÔNG MỞ NGUỒN ĐƯỢC" required>
+                            <div class="invalid-feedback">Mời nhập tình trạng!</div>
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">GHI CHÚ</label>
-                            <input type="text" class="form-control" id="Ghichu" placeholder="CẦN HỖ TRỢ THÊM..." >
+                            <input name="Ghichu" type="text" class="form-control" id="Ghichu" placeholder="CẦN HỖ TRỢ THÊM...">
                         </div>
-
+                        <p>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</button>
+                                <button type="reset"  class="btn btn-danger">CANCEL</button>
+                            </div>
+                        </p>
                     </form><!-- Vertical Form -->
 
-                    <p>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</button>
-                            <button type="reset" onclick="ResetForm()" class="btn btn-danger">CANCEL</button>
-                        </div>
-                    </p>
+                   
 
                    
 
