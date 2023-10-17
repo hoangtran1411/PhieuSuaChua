@@ -23,7 +23,7 @@ namespace PhieuSuaChua.Controllers
             return View();
         }
           
-        [HttpPost]
+       
         public async Task<IActionResult> DangKySuaChua(ModelDangKySua model)
         {
             string message = "";
@@ -70,9 +70,9 @@ namespace PhieuSuaChua.Controllers
 
         }
         [HttpPost]
-        public async Task<JsonResult> KiemtraMaNV(string manv)
+        public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
         {
-            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv == manv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv.Equals(nv.MaNv) );
             string message;
             if( result != null)
             {

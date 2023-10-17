@@ -30,12 +30,14 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
     public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
     public virtual DbSet<ModelPrintPhieu> ModelPrintPhieus { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=10.90.39.62,1433;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=10.14.12.253,1433;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("Chinese_PRC_CI_AS");
+
         modelBuilder.Entity<Chitietmuc>(entity =>
         {
             entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETM__727EE30841992857");
@@ -169,14 +171,23 @@ public partial class PhieusuachuaContext : DbContext
             entity.ToTable("PHIEUSUA");
 
             entity.Property(e => e.IdPhieu).HasColumnName("ID_PHIEU");
+            entity.Property(e => e.KtvNhan)
+                .HasMaxLength(50)
+                .HasColumnName("KTV_NHAN");
             entity.Property(e => e.MaNv)
                 .HasMaxLength(15)
                 .IsUnicode(false)
                 .HasColumnName("MA_NV");
+            entity.Property(e => e.NgaySuaXong)
+                .HasColumnType("datetime")
+                .HasColumnName("NGAY_SUA_XONG");
             entity.Property(e => e.NgayTao)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_TAO");
+            entity.Property(e => e.NgayTiepNhan)
+                .HasColumnType("datetime")
+                .HasColumnName("NGAY_TIEP_NHAN");
             entity.Property(e => e.NgayTra)
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_TRA");
