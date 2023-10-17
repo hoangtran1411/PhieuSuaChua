@@ -12,7 +12,7 @@ async function Dangky() {
     var hoten = $('#Hoten').val();
     var donvi = $('#Donvi').val();
     var chucdanh = $('#Chucdanh').val();
-    var checkNV = await CheckNV();
+    var checkNV =  CheckNV();
     var checkSDT = CheckSdt();
     var trangThaiPhieu = "Chờ tiếp nhận";
     var loaiSuaChua = "==============";
@@ -22,13 +22,18 @@ async function Dangky() {
                 type: 'POST',
                 url: '/DangKySuaChua/DangKySuaChua',
                 dataType: 'json',
+                async: false,
                 data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
                 success: function (response) {
                     if (response.mesage == "OK") {
                         //console.log(response.model)
-                        Swal.fire(
-                            'Số phiếu là: ' + response.model,
-                            'Chúc mừng đăng ký thành công',);
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Số phiếu là ' + response.model,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                         ResetForm();
                     }
 
@@ -37,43 +42,84 @@ async function Dangky() {
         }
         
      else {
-            Swal.fire(
-                'Vui lòng nhập đủ thông tin',
-                'Xin nhập lại');           
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Vui lòng nhập đủ thông tin',
+            showConfirmButton: true,
+            timer: 1500
+        });          
         }
     }
-   
-async function CheckNV() {
 
-    //successCallback, errorCallback
+function CheckNV() {
     var manv = $("#MaNV").val();
-    //var result;
-    var response =  await $.ajax({
-
+    var result = false;
+    $.ajax({
         url: '/DangKySuaChua/KiemtraMaNV',
         type: 'POST',
-        dataType: 'json',
-        data: { manv }
-      
+        data: { manv },
+        async: false,
+        success: function (response) {
+            console.log(response.model);
+            if (response.mesage == "OK") {
+                var item = response.model;
+                $("#Hoten").val(item.tenNv);
+                $("#Donvi").val(item.donVi);
+                $("#Chucdanh").val(item.chucDanh);
+                result = true;
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Mã nhân viên chưa chính xác',
+                    showConfirmButton: true,
+                    timer: 1500
+                }); 
+                //errorCallback();
+                ResetForm();
+                result = false;
+            }
         }
-    );
-  
-        if (response.mesage == "OK") {
-            var item = response.model;
-            $("#Hoten").val(item.tenNv);
-            $("#Donvi").val(item.donVi);
-            $("#Chucdanh").val(item.chucDanh);
-            return true;
-          
-        }
-        else {
-          
-            return false;
-        
-            ResetForm();
-        }
-    //return result;
+    });
+    console.log(result);
+    return result;
+
 }
+
+
+// function CheckNV() {
+
+//    //successCallback, errorCallback
+//    var manv = $("#MaNV").val();
+//    //var result;
+//    var response =  $.ajax({
+
+//        url: '/DangKySuaChua/KiemtraMaNV',
+//        type: 'POST',
+//        dataType: 'json',
+//        data: { manv }
+      
+//        }
+//    );
+  
+//        if (response.mesage == "OK") {
+//            var item = response.model;
+//            $("#Hoten").val(item.tenNv);
+//            $("#Donvi").val(item.donVi);
+//            $("#Chucdanh").val(item.chucDanh);
+//            return true;
+          
+//        }
+//        else {
+          
+//            return false;
+        
+//            ResetForm();
+//        }
+//    //return result;
+//}
 function ResetForm() {
     $("#MaNV").val("");
     $("#Hoten").val("");
