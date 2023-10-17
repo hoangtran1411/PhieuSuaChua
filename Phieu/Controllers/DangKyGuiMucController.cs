@@ -72,7 +72,7 @@ namespace PhieuSuaChua.Controllers
         [HttpPost]
         public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
         {
-            var result = await context.Nhanviens.FirstOrDefaultAsync(x => x.MaNv == nv.MaNv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x => x.MaNv.Equals(nv.MaNv));
             string message;
             if (result != null)
             {
