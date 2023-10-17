@@ -63,13 +63,19 @@
                                 <div class="col-12">
                                     <b>Ghi chú:</b> <span id="Ghichu">@item.GHI_CHU </span>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <b>Trạng thái phiếu:</b> <span id="Trangthaiphieu">@item.TRANG_THAI_PHIEU </span>
                                 </div>
-                                <div class="col-4">
-                                    <b>Ngày nhận:</b> <span id="Ngaynhan">@item.NGAY_TAO </span>
+                                <div class="col-3">
+                                    <b>Ngày đăng ký:</b> <span id="Ngaynhan">@item.NGAY_TAO </span>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
+                                    <b>Ngày tiếp nhận:</b> <span id="Ngaynhan">@item.NGAY_TIEP_NHAN </span>
+                                </div>
+                                <div class="col-3">
+                                    <b>Ngày sửa xong:</b> <span id="Ngaynhan">@item.NGAY_SUA_XONG </span>
+                                </div>
+                                <div class="col-3">
                                     <b>Ngày trả:</b> <span id="Ngaytra">@item.NGAY_TRA </span>
                                 </div>
                                 <div class="col-12">
@@ -190,60 +196,55 @@
 </script>
 <script>
     
-    //function InPhieu(id){
-        
-    //    $.ajax({
-    //        url: "/Print/PrintPhieu",
-    //        type: "POST",
-    //        datatype:"json",
-    //        data:{id},
-    //        success: function(reponse){
-
-    //        }
-    //    });
-    //}
-
+  
 
         function XacnhanPhieu(id){
         var loaisuachua = $('#cbolistprint option:selected').text();
         var trangthai = $('#Trangthaiphieu').text().trim();
             if (loaisuachua == "=============="){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi',
-                    text: 'Chưa chọn loại sửa chữa!',
-                
-                });
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Chưa chọn loại sửa chữa!',
+                showConfirmButton: false,
+                timer: 1500
+            });
             }
             else{
                 switch (trangthai) {
                     case "Chờ tiếp nhận":
                         UpdateTrangThai(id, 'Đang sửa');
                         LoaiSuaChua(id);
-                        window.location.reload();
+                    
                         break;
 
                     case "Đang sửa":
                         UpdateTrangThai(id, 'Đã sửa xong');
+                   
                         break;
                     case "Đã sửa xong":
                         UpdateTrangThai(id, 'Đã trả máy');
+                   
                         break;
                     case "Chờ mua hàng":
                         UpdateTrangThai(id, 'Đã sửa xong');
+                   
                         break;
                 };
-            Thongbao();
+            window.location.reload();
+   
             }
-     
+       
         };
 
     function Thongbao(){
-            Swal.fire(
-                'Xong!',
-                'Xác nhận xong!',
-                'success'
-            )
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Xác nhận thành công',
+            showConfirmButton: true,
+            timer: 1500
+        });
     }
 
     function XacnhanMuaHang(id){
@@ -259,10 +260,12 @@
                     url: '/TraCuuPhieu/XacNhanPhieu',
                     type:'POST',
                     dataType: 'json',
+                    async:false,
                     data:{id,trangthai},
                     success: function (response) {
                         if(response.model >0){
-                        window.location.reload();
+
+                       
                         }
                   
                     }
@@ -274,6 +277,7 @@
             url: '/TraCuuPhieu/UpdateGhiChu',
             type: 'POST',
             dataType:'json',
+            async: false,
             data: {id,ghichu},
             success: function (response) {
                 if (response.model > 0) {
@@ -286,47 +290,14 @@
     function LoaiSuaChua(id){
         var idloai = parseInt($('#cbolistprint').val());
         var loaisuachua = $('#cbolistprint option:selected').text();
-        switch (idloai) {
-            case 1:
-                UpdateLoaiSuaChua(id, loaisuachua);
-                
-                break;
-            case 2:
-                UpdateLoaiSuaChua(id, loaisuachua);
-               
-                break;
-            case 3:
-                UpdateLoaiSuaChua(id, loaisuachua);
-                
-                break;
-            case 4:
-                UpdateLoaiSuaChua(id, loaisuachua);
-               
-                break;
-            case 5:
-                UpdateLoaiSuaChua(id, loaisuachua);
-                
-                break;
-            case 6:
-                UpdateLoaiSuaChua(id, loaisuachua);
-               
-                break;
-            case 7:
-                UpdateLoaiSuaChua(id, loaisuachua);
-               
-                break;
-            case 8:
-                UpdateLoaiSuaChua(id, loaisuachua);
-               
-                break;
-        }
-        window.location.reload();
+        UpdateLoaiSuaChua(id, loaisuachua);            
     }
     function UpdateLoaiSuaChua(id, loaisuachua) {
         $.ajax({
             url: '/TraCuuPhieu/UpdateLoaiSuaChua',
             type: 'POST',
             dataType: 'json',
+            async: false,
             data: { id, loaisuachua },
             success: function (response) {
                 if (response.model > 0) {

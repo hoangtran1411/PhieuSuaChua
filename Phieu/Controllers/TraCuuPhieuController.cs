@@ -86,7 +86,7 @@ namespace PhieuSuaChua.Controllers
         {
             string message ="NOT";
             int i = 0;
-            var update = await context.Phieusuas.FindAsync(id);
+            var update = await context.Phieusuas.FirstOrDefaultAsync(i=>i.IdPhieu.Equals(id));
             if (update != null)
             {
                 if (trangthai == "Đã trả máy")
@@ -94,9 +94,20 @@ namespace PhieuSuaChua.Controllers
                     update.TrangThaiPhieu = trangthai;
                     update.NgayTra = DateTime.Now;
                 }
+                else if (trangthai == "Đang sửa")
+                {
+                    update.TrangThaiPhieu=trangthai;
+                    update.NgayTiepNhan = DateTime.Now;
+                }
+                else if(trangthai == "Đã sửa xong")
+                {
+                   
+                    update.TrangThaiPhieu = trangthai;
+                    update.NgaySuaXong = DateTime.Now;
+                }
                 else
                 {
-                    update.TrangThaiPhieu = trangthai;                    
+                    update.TrangThaiPhieu = trangthai;
                 }
                 i = await context.SaveChangesAsync();
                 message = "OK";
