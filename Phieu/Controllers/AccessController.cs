@@ -46,25 +46,27 @@ namespace PhieuSuaChua.Controllers
                     List<Claim> claims = new()
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.MaNv),
+                        new Claim(ClaimTypes.Name, user.TenNv!),
                         new Claim("Other","Role")
                     };
                     
                     ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
+                    ClaimsPrincipal principal = new ClaimsPrincipal(claimsIdentity);
                     AuthenticationProperties properties = new()
                     {
                         AllowRefresh = true,
                         //IsPersistent = true,
                     };
-                    if (claimsIdentity != null)
-                    {
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
-                        if (user.TenNv != null)
-                        {
-                            HttpContext.Session.SetString("Login", user.TenNv);
-                        }
+                    await HttpContext.SignInAsync(principal, properties);
+                    //if (claimsIdentity != null)
+                    //{
                        
-                    }
+                    //    if (user.TenNv != null)
+                    //    {
+                    //        HttpContext.Session.SetString("Login", user.TenNv);
+                    //    }
+                       
+                    //}
                   
                     return RedirectToAction("Index", "Home");
                 }
