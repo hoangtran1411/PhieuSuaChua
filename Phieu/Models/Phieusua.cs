@@ -15,6 +15,12 @@ public partial class Phieusua
 
     public string? TrangThaiPhieu { get; set; }
 
+    public DateTime? NgayTiepNhan { get; set; }
+
+    public DateTime? NgaySuaXong { get; set; }
+
+    public string? KtvNhan { get; set; }
+
     public virtual ICollection<Chitietsua> Chitietsuas { get; set; } = new List<Chitietsua>();
 
     public virtual Nhanvien? MaNvNavigation { get; set; }

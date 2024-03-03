@@ -2,7 +2,8 @@
     ViewData["Title"] = "Dang Ky Sua Chua";
     Layout = "_Layout";
 }
-@*@ViewBag.Title*@
+@model PhieuSuaChua.Domain_Model.ModelDangKySua
+
 <div class="card">
     <div class="card-body">
         <div class="pagetitle">
@@ -23,14 +24,16 @@
 
 
                     <!-- Vertical Form -->
-                    <form class="row g-3" id="DangKySuaChua">
+                    <form class="row g-3 needs-validation" id="DangKySuaChua" novalidate>
+                        @* novalidate asp-controller="DangKySuaChua" asp-action="DangKySuaChua" method="post" *@
                         <div class="col-3">
                             <label for="inputNanme4" class="form-label">MÃ NHÂN VIÊN</label>
-                            <input type="text" class="form-control" id="MaNV" placeholder="MÃ NHÂN VIÊN"  onblur="CheckNV()" required>
+                            <input name="MaNv" type="text" class="form-control" id="MaNV" placeholder="MÃ NHÂN VIÊN" onblur="CheckNV()" required>
+                            <div class="invalid-feedback">Mời nhập mã nhân viên!</div>
                         </div>
                         <div class="col-6">
                             <label for="inputEmail4" class="form-label">HỌ VÀ TÊN</label>
-                            <input type="email" class="form-control" id="Hoten" placeholder="HỌ VÀ TÊN" disabled>
+                            <input  type="text" class="form-control" id="Hoten" placeholder="HỌ VÀ TÊN" disabled>
                         </div>
                         <div class="col-3">
                             <label for="inputPassword4" class="form-label">ĐƠN VỊ</label>
@@ -42,41 +45,43 @@
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">SỐ ĐIỆN THOẠI</label>
-                            <input type="text" class="form-control" id="Sdt" placeholder="SỐ ĐIỆN THOẠI NỘI BỘ " required>
+                            <input name="Sdt" type="text" class="form-control" id="Sdt" placeholder="SỐ ĐIỆN THOẠI NỘI BỘ" required>
+                            <div class="invalid-feedback">Mời nhập số điện thoại!</div>
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">TÊN MÁY TÍNH</label>
-                            <input type="text" class="form-control" id="Tenmaytinh" placeholder="TÊN MÁY TÍNH" onblur="CheckThietBi()" required>
+                            <input name="TenPC" type="text" class="form-control" id="Tenmaytinh" placeholder="TÊN MÁY TÍNH" onblur="CheckThietBi()" >
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">USER NAME</label>
-                            <input type="text" class="form-control" id="Username" placeholder="TÊN ĐĂNG NHẬP MÁY TÍNH" required>
+                            <input name="User" type="text" class="form-control" id="Username" placeholder="TÊN ĐĂNG NHẬP MÁY TÍNH" >
                         </div>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">PASSWORD</label>
-                            <input type="text" class="form-control" id="Password" placeholder="NHẬP PASSWORD" required>
+                            <input name="Pass" type="text" class="form-control" id="Password" placeholder="NHẬP PASSWORD" >
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">THIẾT BỊ KHÁC</label>
-                            <input type="text" class="form-control" id="Thietbikhac" placeholder="VD: MÁY IN, SCAN...." onblur="CheckThietBi()">
+                            <input name="Thietbikhac" type="text" class="form-control" id="Thietbikhac" placeholder="VD: MÁY IN, SCAN...." onblur="CheckThietBi()">
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">MÔ TẢ TÌNH TRẠNG</label>
-                            <input type="text" class="form-control" id="Tinhtrang" placeholder="KHÔNG MỞ NGUỒN ĐƯỢC" required>
+                            <input name="Tinhtrang" type="text" class="form-control" id="Tinhtrang" placeholder="KHÔNG MỞ NGUỒN ĐƯỢC" required>
+                            <div class="invalid-feedback">Mời nhập tình trạng!</div>
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">GHI CHÚ</label>
-                            <input type="text" class="form-control" id="Ghichu" placeholder="CẦN HỖ TRỢ THÊM..." >
+                            <input name="Ghichu" type="text" class="form-control" id="Ghichu" placeholder="CẦN HỖ TRỢ THÊM...">
                         </div>
-
+                        <p>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</button>
+                                <button type="reset"  class="btn btn-danger">CANCEL</button>
+                            </div>
+                        </p>
                     </form><!-- Vertical Form -->
 
-                    <p>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary" onclick="Dangky()">ĐĂNG KÝ</button>
-                            <button type="reset" onclick="ResetForm()" class="btn btn-danger">CANCEL</button>
-                        </div>
-                    </p>
+                   
 
                    
 
@@ -88,5 +93,146 @@
 </div>
 
 @section Scripts {
-    <script src="~/modelscript/modelscript.js"></script>
+    <script>
+   @*  <script src="~/modelscript/modelscript.js"></script> *@
+   async function Dangky() {
+   /* var i = 0;*/
+    var manv = $('#MaNV').val();
+    var sdt = $('#Sdt').val();
+    var tenpc = $('#Tenmaytinh').val();
+    var user = $('#Username').val();
+    var pass = $('#Password').val();
+    var thietbikhac = $('#Thietbikhac').val();
+    var tinhtrang = $('#Tinhtrang').val();
+    var ghichu = $('#Ghichu').val();
+    var hoten = $('#Hoten').val();
+    var donvi = $('#Donvi').val();
+    var chucdanh = $('#Chucdanh').val();
+    var checkNV =  CheckNV();
+    var checkSDT = CheckSdt();
+    var trangThaiPhieu = "Chờ tiếp nhận";
+    var loaiSuaChua = "==============";
+    if (checkNV == true && checkSDT == true)
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/DangKySuaChua/DangKySuaChua',
+                dataType: 'json',
+                async: false,
+                data: { manv, sdt, tenpc, user, pass, thietbikhac, tinhtrang, ghichu, trangThaiPhieu, loaiSuaChua },
+                success: function (response) {
+                    if (response.mesage == "OK") {
+                        //console.log(response.model)
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Số phiếu là ' + response.model,
+                            showConfirmButton: true,
+                            timer: 5500
+                        });
+                        ResetForm();
+                    }
+
+                }
+            });
+        }
+
+     else {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Vui lòng nhập đủ thông tin',
+            showConfirmButton: true,
+            timer: 5500
+        });
+        }
+    }
+
+function CheckNV() {
+    var manv = $("#MaNV").val();
+    var result = false;
+    $.ajax({
+        url: '/DangKySuaChua/KiemtraMaNV',
+        type: 'POST',
+        data: { manv },
+        async: false,
+        success: function (response) {
+            console.log(response.model);
+            if (response.mesage == "OK") {
+                var item = response.model;
+                $("#Hoten").val(item.tenNv);
+                $("#Donvi").val(item.donVi);
+                $("#Chucdanh").val(item.chucDanh);
+                result = true;
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Mã nhân viên chưa chính xác',
+                    showConfirmButton: true,
+                    timer: 5500
+                });
+                //errorCallback();
+                ResetForm();
+                result = false;
+            }
+        }
+    });
+    console.log(result);
+    return result;
+
+}
+        function ResetForm() {
+            $("#MaNV").val("");
+            $("#Hoten").val("");
+            $("#Donvi").val("");
+            $("#Chucdanh").val("");
+            $("#Sdt").val("");
+            $("#Tenmaytinh").val("");
+            $("#Username").val("");
+            $("#Password").val("");
+            $("#Thietbikhac").val("");
+            $("#Tinhtrang").val("");
+            $("#Ghichu").val("");
+            // enable form disble
+            $("#Thietbikhac").attr("disabled", false);
+            $("#Tenmaytinh").attr("disabled", false);
+            $("#Username").attr("disabled", false);
+            $("#Password").attr("disabled", false);
+
+        }
+        function CheckSdt() {
+            var sdt = $('#Sdt').val();
+            if (sdt == "") {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function CheckUserPass() {
+            var user = $('#Username').val();
+            var pass = $('#Password').val();
+            if (user == "" || pass == "") {
+                Swal.fire(
+                    'Chưa nhập UserName hoặc Password',
+                    'Vui lòng nhập đủ thông tin');
+            }
+        }
+        function CheckThietBi() {
+            var kt = $("#Tenmaytinh").val();
+            var tb = $("#Thietbikhac").val();
+            if (kt != "" && tb == "") {
+                $("#Thietbikhac").attr("disabled", true);
+
+            }
+            else {
+                $("#Tenmaytinh").attr("disabled", true);
+                $("#Username").attr("disabled", true);
+                $("#Password").attr("disabled", true);
+            }
+
+        }
+    </script>
 }

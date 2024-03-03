@@ -15,8 +15,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 });
 
-builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Server=10.90.39.62,1333;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True")));
-builder.Services.AddDistributedMemoryCache();
+
+
+builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Data")));
+//builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession(options =>
 {

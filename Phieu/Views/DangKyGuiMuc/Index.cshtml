@@ -20,22 +20,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Vertical Form -->
-                    <form class="row g-4">
+                    <form class="row g-4 needs-validation" novalidate>
                         <div class="col-3">
                             <label class="form-label">MÃ NHÂN VIÊN</label>
-                            <input type="text" class="form-control" id="manvmuc" onblur="CheckNV()" placeholder="MÃ NHÂN VIÊN">
+                            <input type="text" class="form-control" id="manvmuc" onblur="CheckNV1()" placeholder="MÃ NHÂN VIÊN" required>
+                            <div class="invalid-feedback">Mời nhập mã nhân viên!</div>
                         </div>
                         <div class="col-6">
                             <label  class="form-label">HỌ VÀ TÊN</label>
-                            <input type="email" class="form-control" id="hotenmuc" placeholder="HỌ VÀ TÊN" disabled>
+                            <input type="text" class="form-control" id="hotenmuc" placeholder="HỌ VÀ TÊN" disabled>
                         </div>
                         <div class="col-3">
                             <label  class="form-label">ĐƠN VỊ</label>
                             <input type="text" class="form-control" id="donvimuc" placeholder="ĐƠN VỊ" disabled>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <label class="form-label">Chọn máy in:</label>
-                            <select id="cbolistprint" class="form-select" se="">
+                            <label class="form-label">Chọn loại hộp mực máy in:</label>
+                            <select id="cbolistprint" class="form-select" se="" required>
                                 <option selected="" value="">=========</option>
                                 <option value="1">Canon 3300 (49A)</option>
                                 <option value="2">Canon 251DW (05A)</option>
@@ -47,23 +48,26 @@
                                 <option value="8">HP 706</option>
                                 <option value="9">Ruy băng máy in kim 2190</option>
                             </select>
+                            <div class="invalid-feedback">Mời chọn loại hộp mực máy in!</div>
                         </div>
                         <div class="col-4">
                             <label  class="form-label">TÊN HỘP MỰC</label>
-                            <input type="text" class="form-control" id="tenhopmuc" placeholder="TÊN HỘP MỰC...">
+                            <input type="text" class="form-control" id="tenhopmuc" placeholder="TÊN HỘP MỰC..." required>
+                            <div class="invalid-feedback">Mời nhập tên hộp mực!</div>
                         </div>
                         <div class="col-4">
                             <label  class="form-label">MÔ TẢ TÌNH TRẠNG</label>
-                            <input type="text" class="form-control" id="tinhtrangmuc" placeholder="HẾT MỰC,...">
+                            <input type="text" class="form-control" id="tinhtrangmuc" placeholder="HẾT MỰC,..." required>
+                            <div class="invalid-feedback">Mời nhập tình trạng hộp mực!</div>
                         </div>
-
+                        <p>
+                            <div class="text-center">
+                                <button class="btn btn-primary" onclick="DangKy()"  type="submit">ĐĂNG KÝ</button>
+                                <button class="btn btn-danger" type="reset">CANCEL</button>
+                            </div>
+                        </p>
                     </form><!-- Vertical Form -->
-                    <p>
-                        <div class="text-center">
-                            <a class="btn btn-primary" onclick="DangKy()">ĐĂNG KÝ</a>
-                            <a class="btn btn-danger" onclick="ResetForm()">CANCEL</a>
-                        </div>
-                    </p>
+                    
                 </div>
 
             </div>
@@ -77,74 +81,129 @@
 @section Scripts {
    <script>
 
-        function DangKy() {
-            var MA_NV = $('#manvmuc').val();
-          
-          CheckNV(
-                function (MA_NV) {
-                    var TEN_HOP_MUC = $('#tenhopmuc').val();
-                    var TINH_TRANG = $('#tinhtrangmuc').val();
-                    var TRANG_THAI_PHIEU ="Đang sửa"
-                    
-                    //var IDLoaiHopMuc = parseInt($('#cbolistprint').val());
-                    var MAY_IN = $('#cbolistprint option:selected').text();
+async function DangKy() {
+    var MA_NV = $('#manvmuc').val();          
+    var TEN_HOP_MUC = $('#tenhopmuc').val();
+    var TINH_TRANG = $('#tinhtrangmuc').val();
+    var TRANG_THAI_PHIEU = "Đang sửa";
+    var MAY_IN = $('#cbolistprint option:selected').text();
+    //var checkNV = await CheckNV();
+    var checkNV =  CheckNV1();
+    var checkHopMuc = CheckHopMuc();
+    if (checkHopMuc) {
+            if (checkNV) {
                     $.ajax({
                         url: '/DangKyGuiMuc/DangKyGuiMuc',
-                        type:'POST',
+                        type: 'POST',
                         data: { MA_NV, MAY_IN, TEN_HOP_MUC, TINH_TRANG, TRANG_THAI_PHIEU },
-                        success: function(response){
+                        async:false,
+                        success: function (response) {
                             if (response.mesage == "OK") {
-                                Swal.fire(
-                                    'Số phiếu là: ' + response.model,
-                                    'Chúc mừng đăng ký thành công',);
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Số phiếu là ' + response.model,
+                                    showConfirmButton: true,
+                                    timer: 1500
+                                })
                                 ResetForm();
                             }
                         }
                     });
-              },
-                function () {
-                    console.log("Mã nhân viên không chính xác");
-
                 }
-          );
-       }
+    }  
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            title: 'Bạn chưa chọn loại hộp mực máy in!',
+            showConfirmButton: false,
+            timer: 1500
+           
+        })
+    }
+          
+    }
 
 
-       //Kiem Tra Ma Nhan Vien xem co ton tai
-        function CheckNV(successCallback, errorCallback) {
-
+ function CheckNV1() {
             var manv = $("#manvmuc").val();
-            $.ajax({
-
+            var result = false;
+             $.ajax({
                 url: '/DangKyGuiMuc/KiemtraMaNV',
                 type: 'POST',
                 data: { manv },
+                async : false,
                 success: function (response) {
+                    console.log(response.model);
                     if (response.mesage == "OK") {
-                        var item = response.model;
-                        $("#hotenmuc").val(item.tenNv);
-                        $("#donvimuc").val(item.donVi);
-                        successCallback(item.maNv);
+                        $("#hotenmuc").val(response.model.tenNv);
+                        $("#donvimuc").val(response.model.donVi);
+                        result = true;
                     }
-                    else {
+                    else 
+                    {
                         Swal.fire(
                             'Mã nhân viên chưa chính xác',
                             'Xin nhập lại');
-                        errorCallback();
+                        //errorCallback();
                         ResetForm();
-
+                        result = false;
                     }
                 }
             });
-        }
+            console.log(result);
+            return result;
+            
+}
+
+
+//Kiem Tra Ma Nhan Vien xem co ton tai
+        //successCallback, errorCallback
+//async  function CheckNV() {
+
+//    var manv = $("#manvmuc").val();
+//    var response  = await  $.ajax({
+
+//        url: '/DangKyGuiMuc/KiemtraMaNV',
+//        type: 'POST',
+//        data: { manv }
+//            });
+//            if (response.mesage == "OK") {
+//        var item = response.model;
+//        $("#hotenmuc").val(item.tenNv);
+//        $("#donvimuc").val(item.donVi);
+//        return true;
+//        //successCallback(item.maNv);
+//    }
+//    else {
+//        Swal.fire(
+//            'Mã nhân viên chưa chính xác',
+//            'Xin nhập lại');
+//        //errorCallback();
+//        return false;
+//        ResetForm();
+
+//    }
+
+//}
 
         // Reset form da nhap
-        function ResetForm() {
-            $("#manvmuc").val("");
-            $("#hotenmuc").val("");
-            $("#donvimuc").val("");
-            $("#tenhopmuc").val("");
-            $("#tinhtrangmuc").val("");
-        }
+function ResetForm() {
+    $("#manvmuc").val("");
+    $("#hotenmuc").val("");
+    $("#donvimuc").val("");
+    $("#tenhopmuc").val("");
+    $("#tinhtrangmuc").val("");
+}
+       function CheckHopMuc() {
+            var hopmuc = $('#cbolistprint option:selected').text();
+           if (hopmuc == '=========') {
+               return false;
+           }
+           else{
+               return true;
+           }
+       }
    </script>
 }
