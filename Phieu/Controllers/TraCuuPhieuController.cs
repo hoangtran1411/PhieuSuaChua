@@ -16,7 +16,7 @@ namespace PhieuSuaChua.Controllers
             this.context = context;
         }
 
-        public  IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
             // Phuong phap LinQ
             //var listPhieu = (from Chitietsua in context.Chitietsuas
@@ -37,13 +37,11 @@ namespace PhieuSuaChua.Controllers
             //                 }).ToList();
 
             //Phuong phap Procedure
-            var listPhieu =  context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToList();
-            var listMuc =  context.ModelTraCuuPhieuMucs.FromSqlRaw("EXEC GetTraCuuPhieuMuc").ToList();
-
-            var list = new ModelTraCuu()
+                     
+            ModelTraCuu list = new ModelTraCuu()
             {
-                TraCuuPhieus = listPhieu,
-                TraCuuPhieuMucs = listMuc
+                TraCuuPhieus = await context.Database.SqlQuery<ModelTraCuuPhieu>($"EXEC GetTraCuuPhieuSua").ToListAsync(),
+                TraCuuPhieuMucs = await context.Database.SqlQuery<ModelTraCuuPhieuMuc>($"EXEC GetTraCuuPhieuMuc").ToListAsync()
             };
 
             return View(list);
