@@ -16,7 +16,7 @@ namespace PhieuSuaChua.Controllers
             this.context = context;
         }
 
-        public  IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
             // Phuong phap LinQ
             //var listPhieu = (from Chitietsua in context.Chitietsuas
@@ -37,13 +37,11 @@ namespace PhieuSuaChua.Controllers
             //                 }).ToList();
 
             //Phuong phap Procedure
-            var listPhieu =  context.ModelTraCuuPhieus.FromSqlRaw("EXEC GetTraCuuPhieuSua").ToList();
-            var listMuc =  context.ModelTraCuuPhieuMucs.FromSqlRaw("EXEC GetTraCuuPhieuMuc").ToList();
-
-            var list = new ModelTraCuu()
+                     
+            ModelTraCuu list = new ModelTraCuu()
             {
-                TraCuuPhieus = listPhieu,
-                TraCuuPhieuMucs = listMuc
+                TraCuuPhieus = await context.Database.SqlQuery<ModelTraCuuPhieu>($"EXEC GetTraCuuPhieuSua").ToListAsync(),
+                TraCuuPhieuMucs = await context.Database.SqlQuery<ModelTraCuuPhieuMuc>($"EXEC GetTraCuuPhieuMuc").ToListAsync()
             };
 
             return View(list);
@@ -76,7 +74,7 @@ namespace PhieuSuaChua.Controllers
             //                    }).Where(x => x.Id == id).ToList();
 
             //Phuong phap Procedure
-            var chitietphieu = await context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToListAsync();
+            var chitietphieu = await context.Database.SqlQuery<ModelChiTietPhieuSua>($"EXEC GetChiTietPhieuSua {id}").ToListAsync();
 
             return View(chitietphieu);
         }
@@ -137,7 +135,7 @@ namespace PhieuSuaChua.Controllers
         [Authorize]
         public  async Task<IActionResult> ChiTietPhieuMuc(int id)
         {
-            var  chitietmuc = await context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToListAsync();
+            var  chitietmuc = await context.Database.SqlQuery<ModelChiTietPhieuMuc>($"EXEC GetChiTietPhieuMuc {id}").ToListAsync();
 
             return  View(chitietmuc);
         }
