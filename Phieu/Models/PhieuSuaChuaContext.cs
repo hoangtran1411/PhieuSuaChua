@@ -25,14 +25,16 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<Phieumuc> Phieumucs { get; set; }
 
     public virtual DbSet<Phieusua> Phieusuas { get; set; }
-    public virtual DbSet<ModelTraCuuPhieu> ModelTraCuuPhieus { get; set; }
-    public virtual DbSet<ModelChiTietPhieuSua> ModelChiTietPhieuSuas { get; set; }
-    public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
-    public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
-    public virtual DbSet<ModelPrintPhieu> ModelPrintPhieus { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=10.14.12.253,1433;Initial Catalog=PHIEUSUACHUA;Persist Security Info=False;User ID=sasa;Password=Bitis@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True");
+
+   
+    //public virtual DbSet<ModelTraCuuPhieu> ModelTraCuuPhieus { get; set; }
+    //public virtual DbSet<ModelChiTietPhieuSua> ModelChiTietPhieuSuas { get; set; }
+    //public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
+    //public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
+
+
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
