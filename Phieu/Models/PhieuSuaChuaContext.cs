@@ -31,6 +31,8 @@ public partial class PhieusuachuaContext : DbContext
     //public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
 
 
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Chitietmuc>(entity =>
