@@ -20,6 +20,8 @@ namespace PhieuSuaChua.Domain_Model
         public string? LOAI_SUA_CHUA { get; set; }
         public DateTime? NGAY_TAO { get; set; }
         public DateTime? NGAY_TRA { get; set; }
+        public DateTime? NGAY_TIEP_NHAN { get; set; }
+        public DateTime? NGAY_SUA_XONG { get; set; }
         public ModelChiTietPhieuSua()
         {
 
