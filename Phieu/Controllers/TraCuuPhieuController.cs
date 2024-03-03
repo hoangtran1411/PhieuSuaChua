@@ -74,7 +74,7 @@ namespace PhieuSuaChua.Controllers
             //                    }).Where(x => x.Id == id).ToList();
 
             //Phuong phap Procedure
-            var chitietphieu = await context.ModelChiTietPhieuSuas.FromSqlRaw("EXEC GetChiTietPhieuSua {0}", id).ToListAsync();
+            var chitietphieu = await context.Database.SqlQuery<ModelChiTietPhieuSua>($"EXEC GetChiTietPhieuSua {id}").ToListAsync();
 
             return View(chitietphieu);
         }
@@ -135,7 +135,7 @@ namespace PhieuSuaChua.Controllers
         [Authorize]
         public  async Task<IActionResult> ChiTietPhieuMuc(int id)
         {
-            var  chitietmuc = await context.ModelChiTietPhieuMucs.FromSqlRaw("EXEC GetChiTietPhieuMuc {0}",id).ToListAsync();
+            var  chitietmuc = await context.Database.SqlQuery<ModelChiTietPhieuMuc>($"EXEC GetChiTietPhieuMuc {id}").ToListAsync();
 
             return  View(chitietmuc);
         }
