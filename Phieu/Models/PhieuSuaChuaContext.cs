@@ -25,10 +25,10 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<Phieumuc> Phieumucs { get; set; }
 
     public virtual DbSet<Phieusua> Phieusuas { get; set; }
-    public virtual DbSet<ModelTraCuuPhieu> ModelTraCuuPhieus { get; set; }
-    public virtual DbSet<ModelChiTietPhieuSua> ModelChiTietPhieuSuas { get; set; }
-    public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
-    public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
+    //public virtual DbSet<ModelTraCuuPhieu> ModelTraCuuPhieus { get; set; }
+    //public virtual DbSet<ModelChiTietPhieuSua> ModelChiTietPhieuSuas { get; set; }
+    //public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
+    //public virtual DbSet<ModelChiTietPhieuMuc> ModelChiTietPhieuMucs { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

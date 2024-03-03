@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhieuSuaChua.Models;
 
@@ -11,9 +12,11 @@ using PhieuSuaChua.Models;
 namespace PhieuSuaChua.Migrations
 {
     [DbContext(typeof(PhieusuachuaContext))]
-    partial class PhieusuachuaContextModelSnapshot : ModelSnapshot
+    [Migration("20240303020758_removeTable")]
+    partial class removeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
