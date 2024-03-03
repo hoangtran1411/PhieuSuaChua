@@ -23,50 +23,56 @@ namespace PhieuSuaChua.Controllers
             return View();
         }
           
-        [HttpPost]
+       
         public async Task<IActionResult> DangKySuaChua(ModelDangKySua model)
         {
-            Phieusua sua = new()
+            string message = "";
+            if (model != null)
             {
-                MaNv = model.MaNv,
-                TrangThaiPhieu = model.TrangThaiPhieu
-            };
-            await context.Phieusuas.AddAsync(sua);
-            await context.SaveChangesAsync();
+                Phieusua sua = new()
+                {
+                    MaNv = model.MaNv,
+                    TrangThaiPhieu = model.TrangThaiPhieu
+                };
+                await context.Phieusuas.AddAsync(sua);
+                await context.SaveChangesAsync();
 
-            Chitietsua ct = new()
-            {
-                IdPhieu = Convert.ToInt32(sua.IdPhieu),
-                TenPc = model.TenPC,
-                AccountNames = model.User,
-                AccountPass = model.Pass,
-                ThietBiKhac = model.Thietbikhac,
-                TinhTrang = model.Tinhtrang,
-                Sdt = model.Sdt,
-                LoaiSuaChua = model.LoaiSuaChua,
-                GhiChu = model.Ghichu
-                
-            };
-            await context.Chitietsuas.AddAsync(ct);
-            int number = await context.SaveChangesAsync();
+                Chitietsua ct = new()
+                {
+                    IdPhieu = Convert.ToInt32(sua.IdPhieu),
+                    TenPc = model.TenPC,
+                    AccountNames = model.User,
+                    AccountPass = model.Pass,
+                    ThietBiKhac = model.Thietbikhac,
+                    TinhTrang = model.Tinhtrang,
+                    Sdt = model.Sdt,
+                    LoaiSuaChua = model.LoaiSuaChua,
+                    GhiChu = model.Ghichu
 
-            string message;
+                };
+                await context.Chitietsuas.AddAsync(ct);
+                int number = await context.SaveChangesAsync();
 
-            if (number > 0)
-            {
-                message = "OK";
+              
+
+                if (number > 0)
+                {
+                    message = "OK";
+                }
+                else
+                {
+                    message = "Wrong";
+                }
+                int sophieu = Convert.ToInt32(sua.IdPhieu);
+                return Json(new { mesage = message, model = sophieu });
             }
-            else
-            {
-                message = "Wrong";
-            }
-            int sophieu = Convert.ToInt32(sua.IdPhieu);
-            return Json(new { mesage = message, model =  sophieu});
+            return Json(new { mesage = message });
+
         }
         [HttpPost]
-        public async Task<IActionResult> KiemtraMaNV(string maNv)
+        public async Task<JsonResult> KiemtraMaNV(Nhanvien nv)
         {
-            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv == maNv);
+            var result = await context.Nhanviens.FirstOrDefaultAsync(x=>x.MaNv.Equals(nv.MaNv) );
             string message;
             if( result != null)
             {

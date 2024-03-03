@@ -4,8 +4,9 @@ namespace PhieuSuaChua.Domain_Model
 {
     public class ModelDangKySua
     {
-        [Required]
+        //[Required]
         public string? MaNv { get; set; }
+       // [Required(ErrorMessage = "Bạn chưa nhập số điện thoại")]
         public string? Sdt { get; set; }
         public string? TenPC { get; set; }
         public string? User { get; set; }
