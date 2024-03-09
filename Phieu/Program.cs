@@ -11,11 +11,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
 {
     option.LoginPath = "/Access/Login";
-    option.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+    option.AccessDeniedPath = "/Error";
+    option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 });
+
+
 
 builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Data")));
 //builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession(options =>
 {
