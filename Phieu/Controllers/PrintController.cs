@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Reporting.NETCore;
+using PhieuSuaChua.Domain_Model;
 using PhieuSuaChua.Models;
 
 namespace PhieuSuaChua.Controllers
@@ -20,7 +21,7 @@ namespace PhieuSuaChua.Controllers
         //[HttpPost]
         public IActionResult PrintPhieu(string id)
         {
-            var dataPrint = _context.ModelPrintPhieus.FromSqlRaw($"EXEC Proc_In_PhieuSua {id}").ToList();
+            var dataPrint = _context.Database.SqlQuery<ModelPrintPhieu>($"EXEC Proc_In_PhieuSua {id}").ToList();
             string filePath = Path.Join(@"\\10.90.39.62\Report$\", "rpt_Phieu_Sua.rdl");
             using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
