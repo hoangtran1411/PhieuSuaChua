@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Phieu.Models;
+using PhieuSuaChua.MyMapEndpoints;
 using PhieuSuaChua.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -52,5 +52,7 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapEmployee();
 
 app.Run();

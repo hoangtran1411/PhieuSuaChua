@@ -56,8 +56,8 @@ function CheckNV() {
     var manv = $("#MaNV").val();
     var result = false;
     $.ajax({
-        url: '/DangKySuaChua/KiemtraMaNV',
-        type: 'POST',
+        url: '/Employee/' + manv,
+        type: 'GET',
         data: { manv },
         async: false,
         success: function (response) {

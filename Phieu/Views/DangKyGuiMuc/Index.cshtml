@@ -130,8 +130,8 @@ async function DangKy() {
             var manv = $("#manvmuc").val();
             var result = false;
              $.ajax({
-                url: '/DangKyGuiMuc/KiemtraMaNV',
-                type: 'POST',
+                url: '/Employee/' + manv,
+                type: 'GET',
                 data: { manv },
                 async : false,
                 success: function (response) {
