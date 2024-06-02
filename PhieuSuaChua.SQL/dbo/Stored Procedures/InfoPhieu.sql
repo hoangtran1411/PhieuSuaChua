@@ -1,0 +1,9 @@
+﻿CREATE PROC [dbo].[InfoPhieu]  
+AS  
+BEGIN  
+SET NOCOUNT ON;  
+ SELECT ps.ID_PHIEU,ps.MA_NV,ps.NGAY_TAO, nv.TEN_NV, nv.DON_VI,ct.TEN_PC, ct.THIET_BI_KHAC,    ps.TRANG_THAI_PHIEU  
+        FROM dbo.NHANVIEN nv INNER JOIN dbo.PHIEUSUA ps ON ps.MA_NV = nv.MA_NV   
+        INNER JOIN dbo.CHITIETSUA ct ON ct.ID_PHIEU = ps.ID_PHIEU 
+		
+END 
