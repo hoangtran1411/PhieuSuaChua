@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[PHIEUSUA] (
+    [ID_PHIEU]         INT           IDENTITY (100, 1) NOT NULL,
+    [MA_NV]            VARCHAR (15)  NULL,
+    [NGAY_TAO]         DATETIME      DEFAULT (getdate()) NULL,
+    [NGAY_TRA]         DATETIME      DEFAULT (NULL) NULL,
+    [TRANG_THAI_PHIEU] NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([ID_PHIEU] ASC),
+    FOREIGN KEY ([MA_NV]) REFERENCES [dbo].[NHANVIEN] ([MA_NV])
+);
+

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Phieu.Models;
+using PhieuSuaChua.MyMapEndpoints;
 using PhieuSuaChua.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -14,6 +14,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     option.AccessDeniedPath = "/Error";
     option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 });
+
 
 
 builder.Services.AddDbContext<PhieusuachuaContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Data")));
@@ -51,5 +52,7 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapEmployee();
 
 app.Run();

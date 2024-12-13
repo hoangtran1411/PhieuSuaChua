@@ -25,6 +25,8 @@ public partial class PhieusuachuaContext : DbContext
     public virtual DbSet<Phieumuc> Phieumucs { get; set; }
 
     public virtual DbSet<Phieusua> Phieusuas { get; set; }
+
+
     //public virtual DbSet<ModelTraCuuPhieu> ModelTraCuuPhieus { get; set; }
     //public virtual DbSet<ModelChiTietPhieuSua> ModelChiTietPhieuSuas { get; set; }
     //public virtual DbSet<ModelTraCuuPhieuMuc> ModelTraCuuPhieuMucs { get; set; }
@@ -33,8 +35,11 @@ public partial class PhieusuachuaContext : DbContext
 
 
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("Chinese_PRC_CI_AS");
+
         modelBuilder.Entity<Chitietmuc>(entity =>
         {
             entity.HasKey(e => e.IdChitiet).HasName("PK__CHITIETM__727EE30841992857");
@@ -168,14 +173,23 @@ public partial class PhieusuachuaContext : DbContext
             entity.ToTable("PHIEUSUA");
 
             entity.Property(e => e.IdPhieu).HasColumnName("ID_PHIEU");
+            entity.Property(e => e.KtvNhan)
+                .HasMaxLength(50)
+                .HasColumnName("KTV_NHAN");
             entity.Property(e => e.MaNv)
                 .HasMaxLength(15)
                 .IsUnicode(false)
                 .HasColumnName("MA_NV");
+            entity.Property(e => e.NgaySuaXong)
+                .HasColumnType("datetime")
+                .HasColumnName("NGAY_SUA_XONG");
             entity.Property(e => e.NgayTao)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_TAO");
+            entity.Property(e => e.NgayTiepNhan)
+                .HasColumnType("datetime")
+                .HasColumnName("NGAY_TIEP_NHAN");
             entity.Property(e => e.NgayTra)
                 .HasColumnType("datetime")
                 .HasColumnName("NGAY_TRA");
